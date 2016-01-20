@@ -19,11 +19,11 @@ namespace boost { namespace clipp {
 struct member_constructor_id {};
 
 template<typename Signature>
-class member_constructor : public static_with_arguments<detail::signature_arity<Signature>::value>::inner<Signature,member_constructor<Signature> > {
+class member_constructor : public static_with_arguments<Signature,member_constructor<Signature> > {
 public:
-    typedef typename static_with_arguments<detail::signature_arity<Signature>::value>::inner<Signature,member_constructor<Signature> > base_type;
+    typedef typename static_with_arguments<Signature,member_constructor> base_type;
     BOOST_STATIC_CONSTANT(int, arity = detail::signature_arity<Signature>::value);
-    typedef typename detail::signature_type<Signature>::type value_type;
+    typedef detail::signature_type<Signature> value_type;
     member_constructor(const char* name,value_type constructor) 
     :   base_type(name)
     ,   constructor_(constructor) 
@@ -38,23 +38,23 @@ public:
 
     virtual type_detail type() {return typeid(member_constructor_id);}
 
-    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent=NULL) {
+    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent = nullptr) {
         return method&(method_) &&
                invoke(static_argument_list<member_constructor>(*this,arguments,parent),detail::argument_validator());
     }
-    virtual valueP construct(Params& arguments,valueP parent=NULL){
-        if(!(method_&construct_method)) return NULL;
+    virtual valueP construct(Params& arguments,valueP parent = nullptr){
+        if(!(method_&construct_method)) return nullptr;
         return invoke(static_argument_list<member_constructor>(*this,arguments,parent),detail::constructor_generator<value_type>(constructor_));
     }
-    virtual valueP call(Params& arguments,valueP parent=NULL){
-        if(!(method_&call_method)) return NULL;
+    virtual valueP call(Params& arguments,valueP parent = nullptr){
+        if(!(method_&call_method)) return nullptr;
         return invoke(static_argument_list<member_constructor>(*this,arguments,parent),detail::constructor_generator<value_type>(constructor_));
     }
     virtual bool is_free() const {
         return true;
     }
     virtual std::ostream& store(std::ostream& stream) {
-        typedef typename detail::return_type<Signature>::type return_type;
+        typedef detail::return_type<Signature> return_type;
         stream << get_context()->type_name(type_id<return_type>());
         return stream << "(" << format_argument_list() << ");" << std::endl;
     }

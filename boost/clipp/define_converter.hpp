@@ -236,21 +236,21 @@ private:
 
     template<typename U,typename Signature>
     void internal_define_converter(U u,Signature s) {
-        typename detail::data_type<Signature>::type* dummy=NULL;
+        detail::data_type<Signature> * dummy = nullptr;
         internal_define_converter(u,dummy,s);
     }
     template<typename U,typename Signature> 
     void internal_define_converter(U u,detail::member_function_tag*,Signature s) {
         BOOST_STATIC_ASSERT(detail::signature_arity<Signature>::value==1);
         typedef typename DerivedT::storage_type from_type;
-        typedef typename detail::return_type<Signature>::type to_type;
+        typedef detail::return_type<Signature> to_type;
         define_function_call_converter(u,BOOST_CLIPP_UNWRAP_TYPE(from_type),BOOST_CLIPP_UNWRAP_TYPE(to_type));
     }
     template<typename U,typename Signature> 
     void internal_define_converter(U u,detail::constructor_tag*,Signature s) {
         BOOST_STATIC_ASSERT(detail::signature_arity<Signature>::value==1);
         typedef typename detail::argument<Signature,0>::result_type from_type;
-        typedef typename detail::return_type<Signature>::type to_type;
+        typedef detail::return_type<Signature> to_type;
         define_constructor_converter(BOOST_CLIPP_UNWRAP_TYPE(from_type),BOOST_CLIPP_UNWRAP_TYPE(to_type));
     }
     template<typename Fn,typename FromTraits,typename ToTraits>

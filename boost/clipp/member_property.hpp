@@ -32,24 +32,25 @@ struct property_write_id {};
 struct property_id {};
 
 template<typename Signature>
-class member_property_read : public member_with_arguments<0>::inner<Signature,member_property_read<Signature> > 
+class member_property_read : public member_with_arguments<Signature, member_property_read<Signature> >
 {
 public:
-    typedef typename member_with_arguments<0>::inner<Signature,member_property_read<Signature> > base_type;
-    typedef typename detail::signature_type<Signature>::type value_type;
+    static_assert(0 == detail::signature_arity<Signature>::value - 1, "wrong arity ");
+    typedef member_with_arguments<Signature, member_property_read> base_type;
+    typedef detail::signature_type<Signature> value_type;
     member_property_read(const char* name,value_type data) 
-    :   member_with_arguments<0>::inner<Signature,member_property_read>(name)
+    :   member_with_arguments<Signature,member_property_read>(name)
     ,   data_(data) {}
     virtual ~member_property_read() {}
 
-    virtual valueP duplicate(valueP parent=NULL) {
+    virtual valueP duplicate(valueP parent = nullptr) {
         Params arguments;
         return call(arguments,parent);
     }
-    virtual valueP call(Params& arguments,valueP parent=NULL){
+    virtual valueP call(Params& arguments,valueP parent = nullptr){
         return invoke(member_argument_list<member_property_read>(*this,arguments,parent),detail::read_generator<value_type>(data_));
     }
-    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent=NULL) {
+    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent = nullptr) {
         return method&(duplicate_method|call_method) && 
                invoke(member_argument_list<member_property_read>(*this,arguments,parent),detail::argument_validator());
     }
@@ -57,7 +58,7 @@ public:
     {
         valueP result = duplicate(parent);
         if(result) return result->lookup(identifier,parent);
-        else return NULL;
+        else return nullptr;
     }
     virtual bool is_free() const {
         return false;
@@ -83,23 +84,23 @@ private:
 };
 
 template<typename Signature>
-class static_property_read : public static_with_arguments<0>::inner<Signature,static_property_read<Signature> > 
+class static_property_read : public static_with_arguments<Signature,static_property_read<Signature> > 
 {
 public:
-    typedef typename static_with_arguments<0>::inner<Signature,static_property_read<Signature> > base_type;
-    typedef typename detail::signature_type<Signature>::type value_type;
+    typedef typename static_with_arguments<Signature,static_property_read> base_type;
+    typedef detail::signature_type<Signature> value_type;
     static_property_read(const char* name,value_type data) 
     :   base_type(name)
     ,   data_(data) {}
 
-    virtual valueP duplicate(valueP parent=NULL) {
+    virtual valueP duplicate(valueP parent = nullptr) {
         Params arguments;
         return call(arguments,parent);
     }
-    virtual valueP call(Params& arguments,valueP parent=NULL){
+    virtual valueP call(Params& arguments,valueP parent = nullptr){
         return invoke(static_argument_list<static_property_read>(*this,arguments,parent),detail::read_generator<value_type>(data_,&backup_));
     }
-    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent=NULL) {
+    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent = nullptr) {
         return method&(duplicate_method|call_method) && 
                invoke(static_argument_list<static_property_read>(*this,arguments,parent),detail::argument_validator());
     }
@@ -107,7 +108,7 @@ public:
     {
         valueP result = duplicate(parent);
         if(result) return result->lookup(identifier,parent);
-        else return NULL;
+        else return nullptr;
     }
     virtual detail::converterP get_converter_from_this(const type_detail& to,precedence p,valueP& wrapped) {
         valueP direct = duplicate();
@@ -132,24 +133,25 @@ private:
 };
 
 template<typename Signature>
-class member_property_write : public member_with_arguments<1>::inner<Signature,member_property_write<Signature> > 
+class member_property_write : public member_with_arguments<Signature,member_property_write<Signature> >
 {
 public:
-    typedef typename member_with_arguments<1>::inner<Signature,member_property_write<Signature> > base_type;
-    typedef typename detail::signature_type<Signature>::type value_type;
+    static_assert(1 == detail::signature_arity<Signature>::value - 1, "wrong arity ");
+    typedef member_with_arguments<Signature,member_property_write> base_type;
+    typedef detail::signature_type<Signature> value_type;
     member_property_write(const char* name,value_type data) 
     :   base_type(name)
     ,   data_(data) {}
     virtual ~member_property_write() {}    
-    virtual valueP assign(valueP rhs,valueP parent=NULL) {
+    virtual valueP assign(valueP rhs,valueP parent = nullptr) {
         Params arguments;
         arguments.push_back(rhs);
         return call(arguments,parent);
     }
-    virtual valueP call(Params& arguments,valueP parent=NULL){
+    virtual valueP call(Params& arguments,valueP parent = nullptr){
         return invoke(member_argument_list<member_property_write>(*this,arguments,parent),detail::write_generator<value_type>(data_));
     }
-    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent=NULL) {
+    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent = nullptr) {
         return method&(assign_method|call_method) && 
                invoke(member_argument_list<member_property_write>(*this,arguments,parent),detail::argument_validator());
     }
@@ -166,24 +168,24 @@ private:
 };
 
 template<typename Signature>
-class static_property_write : public static_with_arguments<1>::inner<Signature,static_property_write<Signature> > 
+class static_property_write : public static_with_arguments<Signature,static_property_write<Signature> > 
 {
 public:
-    typedef typename static_with_arguments<1>::inner<Signature,static_property_write<Signature> > base_type;
-    typedef typename detail::signature_type<Signature>::type value_type;
+    typedef typename static_with_arguments<Signature,static_property_write<Signature> > base_type;
+    typedef detail::signature_type<Signature> value_type;
     static_property_write(const char* name,value_type data) 
-    :   static_with_arguments<1>::inner<Signature,static_property_write>(name)
+    :   base_type(name)
     ,   data_(data) {}
     virtual ~static_property_write() {}    
-    virtual valueP assign(valueP rhs,valueP parent=NULL) {
+    virtual valueP assign(valueP rhs,valueP parent = nullptr) {
         Params arguments;
         arguments.push_back(rhs);
         return call(arguments,parent);
     }
-    virtual valueP call(Params& arguments,valueP parent=NULL){
+    virtual valueP call(Params& arguments,valueP parent = nullptr){
         return invoke(static_argument_list<static_property_write>(*this,arguments,parent),detail::write_generator<value_type>(data_));
     }
-    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent=NULL) {
+    virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent = nullptr) {
         return method&(assign_method|call_method) && 
                invoke(static_argument_list<static_property_write>(*this,arguments,parent),detail::argument_validator());
     }
