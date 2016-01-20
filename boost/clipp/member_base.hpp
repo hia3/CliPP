@@ -17,7 +17,7 @@ template<typename DerivedT>
 class member_base : public member
 {
 public:
-    member_base(const char* name) : member(name) {}
+    explicit member_base(const char* name) : member(name) {}
     DerivedT& derived() {return static_cast<DerivedT&>(*this);}
 };
 
