@@ -14,8 +14,6 @@ namespace boost { namespace clipp {
 template<typename T>
 struct unwrap;
 
-#pragma warning (disable:4275)
-
 template<class T>
 class container_wrapper : public container_base  
 {

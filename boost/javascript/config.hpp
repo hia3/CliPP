@@ -17,6 +17,8 @@
 
 
 #   ifdef BOOST_MSVC 
+//non-DLL-interface classkey 'identifier' used as base for DLL-interface classkey 'identifier'
+#       pragma warning (disable:4275)
 //'identifier' : identifier was truncated to 'number' characters in the debug information
 #       pragma warning (disable:4786)
 //'type' : forcing value to bool 'true' or 'false' (performance warning)
