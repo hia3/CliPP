@@ -13,51 +13,6 @@
 
 namespace boost { namespace clipp {
 
-#if BOOST_WORKAROUND( BOOST_MSVC, <= 1300)
-
-namespace detail {
-template<typename T>
-struct is_pair_helper {
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);
-    template<class FirstT,typename SecondT>
-    static type_traits::yes_type BOOST_TT_DECL _m_check(std::pair<FirstT,SecondT> const& (*)());    
-    template<class FirstT,typename SecondT>
-    static type_traits::yes_type BOOST_TT_DECL _m_check(std::pair<FirstT,SecondT> const* (*)());    
-    template<class FirstT,typename SecondT>
-    static type_traits::yes_type BOOST_TT_DECL _m_check(std::pair<FirstT,SecondT> & (*)());    
-    template<class FirstT,typename SecondT>
-    static type_traits::yes_type BOOST_TT_DECL _m_check(std::pair<FirstT,SecondT> * (*)());    
-
-    typedef typename call_traits<T>::const_reference (*fn)();                                                          
-
-    BOOST_STATIC_CONSTANT(bool, value = 
-        sizeof(_m_check(((fn)0)) ) == sizeof(type_traits::yes_type)
-    );
-};
-
-template<typename T>
-struct is_iterator_helper {
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);
-    template<class A0,typename A1,typename A2>
-    static type_traits::yes_type BOOST_TT_DECL _m_check(std::iterator<A0,A1,A2> const&);    
-
-    BOOST_STATIC_CONSTANT(bool, value = 
-        sizeof(_m_check( *( (T const*)(nullptr) ) )) == sizeof(type_traits::yes_type)
-    );
-};
-
-} //namespace detail
-
-template<typename T>
-struct is_pair : public
-    mpl::bool_<detail::is_pair_helper<T>::value>
-{};
-
-template<typename T>
-struct is_iterator : public
-    mpl::bool_<detail::is_iterator_helper<T>::value>
-{};
-#else
 template<typename T>struct is_pair : mpl::false_ {};
 template<typename T,typename U>struct is_pair<std::pair<T,U> > : mpl::true_ {};
 template<typename T,typename U>struct is_pair<std::pair<T,U>& > : mpl::true_ {};
@@ -72,7 +27,6 @@ template<typename T>
 struct is_iterator<T, typename std::enable_if<!std::is_same<typename std::iterator_traits<T>::value_type, void>::value>::type> : mpl::true_ {};
 /*template<typename T>struct is_iterator : mpl::false_ {};
 template<typename T,typename U,typename V> struct is_iterator<std::iterator<T,U,V> > : mpl::true_ {};*/
-#endif
 
 namespace detail {
 

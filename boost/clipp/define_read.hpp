@@ -12,9 +12,6 @@
 #include <boost/clipp/detail/signature_extracter.hpp>
 #include <boost/clipp/detail/cv_category.hpp>
 #include <boost/clipp/member_property.hpp>
-#if BOOST_WORKAROUND( BOOST_MSVC, == 1300)
-#include <complex>
-#endif
 
 namespace boost { namespace clipp {
 

@@ -13,10 +13,6 @@
 #include <boost/clipp/detail/cv_category.hpp>
 #include <boost/clipp/detail/operators.hpp>
 
-#if BOOST_WORKAROUND(BOOST_MSVC, <= 1300)
-#include <boost/clipp/detail/operators_msvc.hpp>
-#endif
-
 #include <boost/clipp/member_function.hpp>
 
 namespace boost { namespace clipp {
@@ -37,16 +33,6 @@ template<typename C,typename DerivedT>
 class define_operator {
 public:
 
-#if BOOST_WORKAROUND(BOOST_MSVC, <= 1300)
-    template <operator_id id,class L, class R>
-    member_operator<typename msvc_operator_selector<id,L,R,C>::signature_type>&
-    def_operator(operator_<id,L,R> const& op)
-    {
-        typedef detail::operator_<id,L,R> op_t;
-        typedef typename member_operator<BOOST_DEDUCED_TYPENAME msvc_operator_selector<id,L,R,C>::signature_type> member_type;
-        return derived().define_member(op.name(),op_t::template apply<C>::execute,type<member_type>());
-    }
-#else
     template <operator_id id,class L, class R>
     member_operator<typename operator_<id,L,R>::template apply<C>::signature_type>&
     def_operator(operator_<id,L,R> const& op)
@@ -55,7 +41,6 @@ public:
         typedef member_operator<typename op_t::template apply<C>::signature_type> member_type;
         return derived().define_member(op.name(),&op_t::template apply<C>::execute,type<member_type>());
     }
-#endif
 
 private:
     DerivedT& derived() {return static_cast<DerivedT&>(*this);}

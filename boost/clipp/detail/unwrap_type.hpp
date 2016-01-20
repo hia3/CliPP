@@ -24,118 +24,18 @@
 
 
 namespace boost { namespace clipp { namespace detail {
-/*
-#define BOOST_CLIPP_IS_EXPRESSION(wrapped,check_if,expression)                  \
-template <typename T>                                                           \
-struct BOOST_PP_CAT(is_,wrapped)_helper                                         \
-{                                                                               \
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);                    \
-    template<typename T>                                                        \
-    static type_traits::yes_type BOOST_TT_DECL _m_check(expression (*)());      \
-                                                                                \
-    typedef T (*fn)();                                                          \
-                                                                                \
-    BOOST_STATIC_CONSTANT(bool, value =                                         \
-        sizeof(_m_check(((fn)0)) ) == sizeof(type_traits::yes_type)             \
-    );                                                                          \
-};                                                                              \
-template<bool b>                                                                \
-struct BOOST_PP_CAT(check_,wrapped)                                             \
-{                                                                               \
-    template<typename T>                                                        \
-    struct inner : mpl::bool_<BOOST_PP_CAT(is_,wrapped)_helper<T>::value> {};   \
-};                                                                              \
-                                                                                \
-template<>                                                                      \
-struct BOOST_PP_CAT(check_,wrapped)<false> {                                    \
-    template<typename T>                                                        \
-    struct inner : mpl::false_ {};                                              \
-};                                                                              \
-                                                                                \
-template<typename T>                                                            \
-struct BOOST_PP_CAT(is_,wrapped) : BOOST_PP_CAT(check_,wrapped)<check_if<expression>::value>::inner<T>\
-{};
 
-BOOST_CLIPP_IS_EXPRESSION(const_pointer,is_pointer,T const*);
-BOOST_CLIPP_IS_EXPRESSION(const_reference,is_reference,T const&);
-*/
-
-#if BOOST_WORKAROUND( BOOST_MSVC, <= 1300)
-
-template <typename T>
-struct is_const_pointer_helper
-{
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);
-    template<typename U>
-    static type_traits::yes_type BOOST_TT_DECL _m_check(U const*& (*)());
-
-    typedef typename add_reference<T>::type (*fn)();
-
-    BOOST_STATIC_CONSTANT(bool, value =
-        sizeof(_m_check(((fn)0)) ) == sizeof(type_traits::yes_type)
-    );
-};                    
-
-template<typename T>
-struct is_const_pointer_base {
-    template<bool value>
-    struct inner : mpl::bool_<is_const_pointer_helper<T>::value>
-    {};
-    template<>
-    struct inner<false> : mpl::false_
-    {};
-};
-
-template<typename T>
-struct is_const_pointer :
-is_const_pointer_base<T>::inner<is_pointer<T>::value>
-{};
-#else 
 template<typename T>
 struct is_const_pointer : mpl::false_ {};
 
 template<typename T>
 struct is_const_pointer<T const*> : mpl::true_ {};
-#endif
 
-#if BOOST_WORKAROUND( BOOST_MSVC, <= 1300)
-template <typename T>
-struct is_const_reference_helper
-{
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);
-    template<typename T>
-    static type_traits::yes_type BOOST_TT_DECL _m_check(T const& (*)());
-
-    typedef typename add_reference<T>::type (*fn)();
-
-    BOOST_STATIC_CONSTANT(bool, value =
-        sizeof(_m_check(((fn)0)) ) == sizeof(type_traits::yes_type)
-    );
-};                    
-
-template<typename T>
-struct is_const_reference_base {
-    template<bool value>
-    struct inner : mpl::bool_<is_const_reference_helper<T>::value>
-    {};
-    template<>
-    struct inner<false> : mpl::false_
-    {};
-};
-
-template<typename T>
-struct is_const_reference :
-is_const_reference_base<T>::inner<is_reference<T>::value>
-{};
-#else
 template<typename T>
 struct is_const_reference : mpl::false_ {};
 
 template<typename T>
 struct is_const_reference<T const&> : mpl::true_ {};
-#endif
-
-#undef BOOST_CLIPP_IS_EXPRESSION
 
 template<typename Traits>
 struct unwrap_indirection : mpl::at<Traits,mpl::int_<1> > {};
@@ -155,7 +55,6 @@ struct unwrap_decoration {
                                 2*trait_indirection::is_reference +
                                 trait_cv::is_const
                          );
-
 };
 
 template<typename T>
@@ -297,39 +196,6 @@ template<typename T>
 struct is_plain : mpl::not_<
 mpl::or_<is_pointer<T>,is_reference<T>,is_const<T> > > {};
 
-#if BOOST_WORKAROUND( BOOST_MSVC, <= 1300)
-/*
-template<typename T>
-struct unwrap_type : unwrap_type_selector<T>::type
-{};
-*/
-template<typename T>
-struct unwrap_type {
-	typedef typename remove_pointer<T>::type type_no_pointer;
-	typedef typename remove_reference<type_no_pointer>::type type_no_reference;
-	typedef typename remove_cv<type_no_reference>::type type;
-	typedef typename mpl::if_<
-		is_const<type_no_reference>,
-		const_,
-		cv_unqualified
-	>::type cv;
-	typedef typename mpl::if_<
-		is_pointer<T>,
-		pointer_,
-		typename mpl::if_<
-			is_reference<T>,
-			reference_,
-			direct_
-		>::type
-	>::type indirection;
-    typedef mpl::list<type,indirection,cv> traits;
-};
-
-#define BOOST_CLIPP_UNWRAP_TYPE(T) \
-boost::clipp::detail::unwrap_type<T>::traits()
-
-#else
-
 template<typename T>
 struct unwrap_type
 {
@@ -386,8 +252,6 @@ struct unwrap_type<T const&>
 
 #define BOOST_CLIPP_UNWRAP_TYPE(T) \
 boost::clipp::detail::unwrap_type<T>::traits()
-
-#endif
 
 template<typename indirection_tagT,typename cv_tagT>
 struct wrap_decoration {
@@ -469,15 +333,6 @@ struct result_traits
     typedef typename unwrap_cv<traits>::type cv;
 };  
 
-#if BOOST_WORKAROUND( BOOST_MSVC, <= 1300)
-template<typename Traits>
-struct wrap_type : wrap_decoration<
-           typename unwrap_indirection<Traits>::type,
-           typename unwrap_cv<Traits>::type
-       >::inner<typename unwrap_value_type<Traits>::type> {
-    
-};
-#else
 template<typename Traits>
 struct wrap_type {
     typedef typename unwrap_indirection<Traits>::type indirection;
@@ -498,7 +353,6 @@ struct wrap_type {
         >::type
     >::type type;
 };
-#endif
 
 }}} //namespace boost::clipp::detail
 

@@ -27,13 +27,13 @@ class function_adder
 public:
     function_adder(Class* cls,const std::string& name) : cls_(cls) , name_(name) {}
     function_adder(const function_adder& adder) : cls_(adder.cls_), name_(adder.name_) {}
-#if !BOOST_WORKAROUND( BOOST_MSVC, == 1300)
+
     function_adder& operator=(const function_adder& rhs) {
         name_=rhs.name_;
         cls_=rhs.cls_;
         return *this;
     }
-#endif
+
     template<typename T>
     valueP operator=(T t) {
         return valueP(&cls_->function(name_.c_str(),t));
@@ -67,11 +67,8 @@ public:
     }
 
     template <operator_id id, class L, class R>
-#if BOOST_WORKAROUND(BOOST_MSVC, <= 1300)
-    member_operator<typename detail::msvc_operator_selector<id,L,R,C>::signature_type>&
-#else
+
     member_operator<typename detail::operator_<id,L,R>::template apply<C>::signature_type>&
-#endif
     operator[](detail::operator_<id,L,R> const& op)
     {
         return def_operator(op);
@@ -81,11 +78,8 @@ public:
     }
 
     template <operator_id id, class L, class R>
-#if BOOST_WORKAROUND(BOOST_MSVC, <= 1300)
-    member_operator<typename detail::msvc_operator_selector<id,L,R,C>::signature_type>&
-#else
+
     member_operator<typename detail::operator_<id,L,R>::template apply<C>::signature_type>&
-#endif
     operator_(detail::operator_<id,L,R> const& op)
     {
         return def_operator(op);
@@ -110,9 +104,7 @@ public:
 
 }} // namespace boost::clipp
 
-#if! BOOST_WORKAROUND( BOOST_MSVC, == 1300)
 #include <boost/clipp/container_wrapper.ipp>
-#endif
 
 #endif //BOOST_CLIPP_CLASS_HPP_HOLT_07082003
 

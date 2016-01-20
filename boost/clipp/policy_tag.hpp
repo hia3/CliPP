@@ -11,33 +11,12 @@
 
 namespace boost { namespace clipp {
 
-#if BOOST_WORKAROUND(BOOST_MSVC, <= 1300)
-
-namespace aux {
-
-#define AUX778076_MSVC_DTW_NAME msvc_apply
-#define AUX778076_MSVC_DTW_ORIGINAL_NAME apply
-#define AUX778076_MSVC_DTW_ARITY 1
-#include <boost/mpl/aux_/msvc_dtw.hpp>
-
-}
-
-template< typename PolicyT, typename T >
-struct policy_apply
-{
-    typedef typename aux::msvc_apply<PolicyT>
-        ::template result_<T>::type type;
-};
-
-#else
 template< typename policy, typename T > 
 struct policy_apply
 {
     typedef typename policy
         ::template apply<T>::type type;
 };
-
-#endif
 
 struct policy_tag {};
 struct storage_policy_tag : policy_tag {};

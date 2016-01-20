@@ -106,9 +106,6 @@
     <ClInclude Include="..\..\..\..\boost\clipp\detail\operators_base.hpp">
       <Filter>Header Files\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\boost\clipp\detail\operators_msvc.hpp">
-      <Filter>Header Files\detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\boost\clipp\detail\pre_wrap_value.hpp">
       <Filter>Header Files\detail</Filter>
     </ClInclude>

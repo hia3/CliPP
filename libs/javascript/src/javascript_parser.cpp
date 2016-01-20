@@ -33,12 +33,6 @@ using namespace boost::clipp;
 using namespace boost::spirit;
 
 //#define SPIRIT_DUMP_PARSETREE_AS_XML
-#if BOOST_WORKAROUND( BOOST_MSVC, == 1300)
-//'void boost::clipp::container_wrapper<T>::init(boost::clipp::context *)' : 
-//no suitable definition provided for explicit template instantiation request
-//since init is a static function, this is the intent.
-#pragma warning (disable:4661)
-#endif
 
 typedef tree_match<javascript_parser::iterator_t,javascript_parser::factory_t, nil_t> parse_tree_match_t;
 typedef parse_tree_match_t::tree_iterator iter_t;

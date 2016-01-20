@@ -298,19 +298,11 @@ public:
    typedef typename bound_type::type type;
 };
 
-#if BOOST_WORKAROUND( BOOST_MSVC, < 1300)
-template<typename T>
-valueP wrap(typename wrap_traits<T>::type input,context* c)
-{
-    return wrap_struct<BOOST_DEDUCED_TYPENAME wrap_traits<T>::type>::wrap(input,c);
-}
-#else
 template<typename T>
 inline valueP wrap(T input,context* c)
 {
     return wrap_struct<BOOST_DEDUCED_TYPENAME wrap_traits<T>::type>::wrap(input,c);
 }
-#endif
 
 //Since the compiler does not distinguish between reference types and non-reference types properly, we 
 //need to do things the hard way

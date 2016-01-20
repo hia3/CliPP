@@ -227,7 +227,6 @@
     <ClInclude Include="..\..\..\..\boost\clipp\detail\not_specified.hpp" />
     <ClInclude Include="..\..\..\..\boost\clipp\detail\operators.hpp" />
     <ClInclude Include="..\..\..\..\boost\clipp\detail\operators_base.hpp" />
-    <ClInclude Include="..\..\..\..\boost\clipp\detail\operators_msvc.hpp" />
     <ClInclude Include="..\..\..\..\boost\clipp\detail\operator_id.hpp" />
     <ClInclude Include="..\..\..\..\boost\clipp\detail\operator_invoker.hpp" />
     <ClInclude Include="..\..\..\..\boost\clipp\detail\pre_wrap_value.hpp" />

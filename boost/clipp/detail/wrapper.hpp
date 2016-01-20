@@ -34,24 +34,7 @@ T const*
 */
 
 template<typename indirection,typename cv>
-struct wrapper_base_selector {
-#if BOOST_WORKAROUND( BOOST_MSVC, == 1300)
-    template<typename Wrapper,typename T>
-    struct inner {
-        typedef typename T result_type;
-    };
-#endif
-};
-
-#if BOOST_WORKAROUND( BOOST_MSVC, == 1200)
-template<>
-struct wrapper_base_selector<int,int> {
-    template<typename Wrapper,typename T>
-    struct inner {
-        typedef typename T result_type;
-    };
-};
-#endif
+struct wrapper_base_selector;
 
 template<typename Wrapper,typename T>
 struct decorated_wrapper_base : wrapper<T> 

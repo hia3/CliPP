@@ -166,19 +166,6 @@ struct argument_selector<true>
     };
 };
 
-#if BOOST_WORKAROUND( BOOST_MSVC, <= 1300)
-
-//Argument extraction
-template<typename Signature,int IArg>
-struct argument : argument_selector<signature_arity<Signature>::value == IArg+1>::inner<Signature,IArg>
-{
-    typedef typename argument_selector<signature_arity<Signature>::value == IArg+1>::inner<Signature,IArg> base_type;
-    template<typename ArgumentListT>
-    argument(const ArgumentListT& params) : base_type(params) {}
-};
-
-#else
-
 template<typename Signature,int IArg>
 struct select_argument_selector {
     typedef typename mpl::if_<
@@ -197,8 +184,6 @@ struct argument : select_argument_selector<Signature,IArg>::type//argument_selec
     template<typename ArgumentListT>
     argument(const ArgumentListT& params) : base_type(params) {}
 };
-
-#endif
 
 }}} //namespace boost::clipp::detail
 

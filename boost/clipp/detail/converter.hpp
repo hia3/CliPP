@@ -115,24 +115,7 @@ T const* ->
 */
 
 template<typename indirection,typename cv>
-struct converter_base_selector {
-#if BOOST_WORKAROUND( BOOST_MSVC, == 1300)
-    template<typename Wrapper,typename T>
-    struct inner {
-        typedef typename T result_type;
-    };
-#endif
-};
-
-#if BOOST_WORKAROUND( BOOST_MSVC, == 1200)
-template<>
-struct converter_base_selector<int,int> {
-    template<typename Converter,typename T>
-    struct inner {
-        typedef typename T result_type;
-    };
-};
-#endif
+struct converter_base_selector;
 
 template<typename Converter,typename T>
 struct decorated_converter_base : converter<T> 

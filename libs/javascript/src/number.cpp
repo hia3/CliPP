@@ -1,8 +1,5 @@
 #include <boost/config.hpp>
 #include <boost/detail/workaround.hpp>
-#if BOOST_WORKAROUND( BOOST_MSVC, >= 1300)
- #pragma warning (disable:4244)
-#endif
 
 #include <boost/javascript/number.hpp>
 #include <boost/javascript/math.hpp>

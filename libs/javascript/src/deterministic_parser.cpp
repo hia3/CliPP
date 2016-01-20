@@ -1,10 +1,5 @@
 #include <boost/javascript/javascript_grammar.hpp>
-/*#if BOOST_WORKAROUND( BOOST_MSVC, == 1300)
-    #define BOOST_SPIRIT_SWITCH_CASE_LIMIT 13
-#else 
-    #define BOOST_SPIRIT_SWITCH_CASE_LIMIT 16
-#endif
-*/
+
 //#define compound_case_parser ccp
 //#include <boost/spirit/dynamic/switch.hpp>
 #include <boost/spirit/error_handling.hpp>
@@ -56,11 +51,9 @@ void javascript_grammar::definition<javascript_grammar::scanner_t>::define_detgr
                         *case_clause >>
                     no_node_d[ch_p('}')]
             ),
-#if! BOOST_WORKAROUND( BOOST_MSVC, == 1300)
             case_p<throw_statementID>(expression_statement),
             case_p<try_statementID>(inner_node_d["{">> statement_list >> "}"] >> (catch_clause || finally_clause)),
             case_p<function_declarationID>(function_declaration_error(nothing_p)),
-#endif
             default_p(expression_statement)
         ];
     statement_keywords.add
