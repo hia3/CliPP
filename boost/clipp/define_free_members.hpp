@@ -1,13 +1,10 @@
-#if !defined (BOOST_PP_IS_ITERATING)
-
 // Copyright Peder Holt 2003-2004. Permission to copy, use,
 // modify, sell and distribute this software is granted provided this
 // copyright notice appears in all copies. This software is provided
 // "as is" without express or implied warranty, and with no claim as
 // to its suitability for any purpose.
 
-#ifndef BOOST_CLIPP_DEFINE_FREE_MEMBERS_HPP_HOLT_07032004
-#define BOOST_CLIPP_DEFINE_FREE_MEMBERS_HPP_HOLT_07032004
+#pragma once
 
 #include <boost/clipp/config.hpp>
 #include <boost/clipp/detail/list.hpp>
@@ -15,14 +12,20 @@
 #include <boost/clipp/detail/signature.hpp>
 #include <boost/clipp/member_function.hpp>
 
-#include <boost/preprocessor/iteration/iterate.hpp>
-#include <boost/preprocessor/repetition/enum_trailing_params.hpp>
-#include <boost/preprocessor/repetition/enum_trailing.hpp>
-
 namespace boost { namespace clipp {
 
-#define BOOST_PP_ITERATION_PARAMS_1 (3, (0, BOOST_CLIPP_MAX_ARITY, "boost/clipp/define_free_members.hpp"))
-#include BOOST_PP_ITERATE()
+//static Free function
+template<typename R, typename... A>
+member_static_function<mpl::list<R(*)(A...), R, detail::free_function_tag, detail::cv_unqualified, A...> >&
+function(context* c, const char* name, R(*fn)(A...))
+{
+    typedef member_static_function<mpl::list<R(*)(A...), R, detail::free_function_tag, detail::cv_unqualified, A...> > member_type;
+
+    member_type* m = new member_type(name, fn);
+    m->create(c);
+    c->global()->insert(name, m);
+    return *m;
+}
 
 template<typename Fn,typename Signature>
 member* inner_define_function(Fn fn,Signature const&) {
@@ -146,69 +149,3 @@ member& read_write(context* c,const char* name,Read r,Write w) {
 }
 
 }} //namespace boost::clipp
-
-#endif //BOOST_CLIPP_DEFINE_FREE_MEMBERS_HPP_HOLT_07032004
-
-#else //BOOST_PP_IS_ITERATING
-
-#define N BOOST_PP_ITERATION()
-
-    //static Free function
-    template<typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-    member_static_function<mpl::list<R (*)(BOOST_PP_ENUM_PARAMS(N, A)),R,detail::free_function_tag,detail::cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(N, A)> >&
-    function(context* c,const char* name,R (*fn)(BOOST_PP_ENUM_PARAMS(N, A))) 
-    {
-        typedef member_static_function<mpl::list<R (*)(BOOST_PP_ENUM_PARAMS(N, A)),R,detail::free_function_tag,detail::cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(N, A)> > member_type;
-
-        member_type* m = new member_type(name,fn);
-        m->create(c);
-        c->global()->insert(name,m);
-        return *m;
-    }
-
-/*    template<typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-    member* function(R (*fn)(BOOST_PP_ENUM_PARAMS(N, A))) 
-    {
-        typedef member_static_function<mpl::list<R (*)(BOOST_PP_ENUM_PARAMS(N, A)),R,detail::free_function_tag,detail::cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(N, A)> > member_type;
-        return new member_type(name,fn);
-    }
-
-    template<typename CT,typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-    member* function(R (CT::*fn)(BOOST_PP_ENUM_PARAMS(N, A))) 
-    {
-        typedef member_function<mpl::list<R (CT::*)(BOOST_PP_ENUM_PARAMS(N, A)),R,detail::member_function_tag,detail::cv_unqualified,CT& BOOST_PP_ENUM_TRAILING_PARAMS(N, A)> > member_type;
-        return new member_type("",fn);
-    }
-
-    template<typename CT,typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-    member* function(R (CT::*fn)(BOOST_PP_ENUM_PARAMS(N, A)) const) 
-    {
-        typedef member_function<mpl::list<R (CT::*)(BOOST_PP_ENUM_PARAMS(N, A)) const ,R,detail::member_function_tag,detail::const_,CT& BOOST_PP_ENUM_TRAILING_PARAMS(N, A)> > member_type;
-        return new member_type("",fn);
-    }
-
-    template<typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-    member* static_function(R (*fn)(BOOST_PP_ENUM_PARAMS(N, A))) 
-    {
-        typedef member_static_function<mpl::list<R (*)(BOOST_PP_ENUM_PARAMS(N, A)),R,detail::free_function_tag,detail::cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(N, A)> > member_type;
-        return new member_type("",fn);
-    }
-
-    template<typename CT,typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-    member* static_function(R (CT::*fn)(BOOST_PP_ENUM_PARAMS(N, A))) 
-    {
-        typedef member_static_function<mpl::list<R (CT::*)(BOOST_PP_ENUM_PARAMS(N, A)),R,detail::member_function_tag,detail::cv_unqualified,CT& BOOST_PP_ENUM_TRAILING_PARAMS(N, A)> > member_type;
-        return new member_type("",fn);
-    }
-
-    template<typename CT,typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-    member* static_function(R (CT::*fn)(BOOST_PP_ENUM_PARAMS(N, A)) const) 
-    {
-        typedef member_static_function<mpl::list<R (CT::*)(BOOST_PP_ENUM_PARAMS(N, A)) const,R,detail::member_function_tag,detail::const_,CT& BOOST_PP_ENUM_TRAILING_PARAMS(N, A)> > member_type;
-        return new member_type("",fn);
-    }
-*/
-#undef N
-
-#endif //BOOST_PP_IS_ITERATING
-

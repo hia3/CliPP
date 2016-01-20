@@ -1,19 +1,12 @@
-#if !defined (BOOST_PP_IS_ITERATING)
-
 // Copyright Peder Holt 2003. Permission to copy, use,
 // modify, sell and distribute this software is granted provided this
 // copyright notice appears in all copies. This software is provided
 // "as is" without express or implied warranty, and with no claim as
 // to its suitability for any purpose.
 
-#ifndef BOOST_CLIPP_PTR_HPP_HOLT_19122003
-#define BOOST_CLIPP_PTR_HPP_HOLT_19122003
+#pragma once
 
 #include <boost/intrusive_ptr.hpp>
-#include <boost/preprocessor/iteration/iterate.hpp>
-#include <boost/preprocessor/repetition/enum_binary_params.hpp>
-#include <boost/preprocessor/repetition/enum_params.hpp>
-#include <boost/preprocessor/repetition/repeat.hpp>
 #include <boost/clipp/config.hpp>
 #include <vector>
 
@@ -62,35 +55,16 @@ public:
 
     clipp_ptr operator[](const std::string& identifier) 
     {
-        return get()->lookup(identifier);
+        return this->get()->lookup(identifier);
     }
 
-#define BOOST_PP_ITERATION_PARAMS_1 (3, (0, BOOST_CLIPP_MAX_ARITY, "boost/clipp/clipp_ptr.hpp"))
-#include BOOST_PP_ITERATE()
+    template<typename... A>
+    clipp_ptr operator()(A && ... a)
+    {
+        Params params{wrap(a, get()->get_context())...};
+        return this->get()->call(params);
+    }
 
 };
 
 }} //namespace boost::clipp
-
-#endif //BOOST_CLIPP_PTR_HPP_HOLT_19122003
-
-#else  //BOOST_PP_IS_ITERATING
-
-#define N BOOST_PP_ITERATION()
-
-#if N>0
-    template<BOOST_PP_ENUM_PARAMS(N,typename A)>
-#endif
-    clipp_ptr operator()(BOOST_PP_ENUM_BINARY_PARAMS(N,A,const& a))
-    {
-        Params params(N);
-        #define BOOST_CLIPP_TEXT(z,n,text) params[n]=wrap(BOOST_PP_CAT(a,n),get()->get_context());
-        BOOST_PP_REPEAT(N, BOOST_CLIPP_TEXT, BOOST_PP_EMPTY) 
-        #undef BOOST_CLIPP_TEXT
-        return get()->call(params);
-    }
-
-#undef N
-
-#endif //BOOST_PP_IS_ITERATING
-

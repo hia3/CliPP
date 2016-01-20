@@ -1,15 +1,11 @@
-#if !defined (BOOST_PP_IS_ITERATING)
-
 // Copyright Peder Holt 2003. Permission to copy, use,
 // modify, sell and distribute this software is granted provided this
 // copyright notice appears in all copies. This software is provided
 // "as is" without express or implied warranty, and with no claim as
 // to its suitability for any purpose.
 
-#ifndef BOOST_CLIPP_SIGNATURE_HPP_HOLT_25082003
-#define BOOST_CLIPP_SIGNATURE_HPP_HOLT_25082003
+#pragma once
 
-#include <boost/clipp/detail/file_iteration_helper.hpp>
 #include <boost/clipp/detail/cv_category.hpp>
 #include <boost/clipp/detail/list.hpp>
 #include <boost/clipp/detail/pre_wrap_value.hpp>
@@ -51,10 +47,47 @@ struct is_member_tag
     >
 {};
 
+//free function
+template<typename R, typename... A>
+mpl::list<R(*)(A...), R, free_function_tag, cv_unqualified, A...>
+get_signature(R(*fn)(A...), ...)
+{
+    return mpl::list<R(*)(A...), R, free_function_tag, cv_unqualified, A...>();
+}
 
+template<typename R, typename... A>
+free_function_tag get_data_tag(R(*fn)(A...), ...)
+{
+    return free_function_tag();
+}
 
-#define BOOST_PP_ITERATION_PARAMS_1 (3, (0, BOOST_CLIPP_MAX_ARITY, "boost/clipp/detail/signature.hpp"))
-#include BOOST_PP_ITERATE()
+//member function
+template<typename R, typename CT, typename... A>
+mpl::list<R(CT::*)(A...), R, member_function_tag, cv_unqualified, CT&, A...>
+get_signature(R(CT::*fn)(A...), ...)
+{
+    return mpl::list<R(CT::*)(A...), R, member_function_tag, cv_unqualified, CT&, A...>();
+}
+
+template<typename R, typename CT, typename... A>
+member_function_tag get_data_tag(R(CT::*fn)(A...), ...)
+{
+    return member_function_tag();
+}
+
+//const member function
+template<typename R, typename CT, typename... A>
+mpl::list<R(CT::*)(A...) const, R, member_function_tag, const_, CT const&, A...>
+get_signature(R(CT::*fn)(A...) const, ...)
+{
+    return mpl::list<R(CT::*)(A...) const, R, member_function_tag, const_, CT const&, A...>();
+}
+
+template<typename R, typename CT, typename... A>
+member_function_tag get_data_tag(R(CT::*fn)(A...) const, ...)
+{
+    return member_function_tag();
+}
 
 inline mpl::list<pre_wrap_value,pre_wrap_value,free_data_tag,cv_unqualified> 
 get_signature(...) 
@@ -80,15 +113,15 @@ inline reference_wrapper_tag get_data_tag(const reference_wrapper<T>&)
     return reference_wrapper_tag();
 }
 
-template<typename R BOOST_PP_ENUM_TRAILING_PARAMS(BOOST_CLIPP_MAX_ARITY, typename A)>
-mpl::list<arguments<BOOST_PP_ENUM_PARAMS(BOOST_CLIPP_MAX_ARITY, A)>,R,constructor_tag,cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(BOOST_CLIPP_MAX_ARITY, A)>
-get_signature(arguments<BOOST_PP_ENUM_PARAMS(BOOST_CLIPP_MAX_ARITY, A)>,boost::type<R>)
+template<typename R, typename... A>
+mpl::list<arguments<A...>,R,constructor_tag,cv_unqualified, A...>
+get_signature(arguments<A...>,boost::type<R>)
 {
-    return mpl::list<arguments<BOOST_PP_ENUM_PARAMS(BOOST_CLIPP_MAX_ARITY, A)>,R,constructor_tag,cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(BOOST_CLIPP_MAX_ARITY, A)>();
+    return mpl::list<arguments<A...>,R,constructor_tag,cv_unqualified, A...>();
 }
 
-template<typename R BOOST_PP_ENUM_TRAILING_PARAMS(BOOST_CLIPP_MAX_ARITY, typename A)>
-constructor_tag get_data_tag(arguments<BOOST_PP_ENUM_PARAMS(BOOST_CLIPP_MAX_ARITY, A)>,boost::type<R>)
+template<typename R, typename... A>
+constructor_tag get_data_tag(arguments<A...>,boost::type<R>)
 {
     return constructor_tag();
 }
@@ -121,56 +154,3 @@ inline implicit_conversion_tag<CT> get_data_tag(type<T>,type<T>,type<CT>)
 }
 
 }}} //namespace boost::clipp::detail
-
-#endif //BOOST_CLIPP_SIGNATURE_HPP_HOLT_25082003
-
-#else  //BOOST_PP_IS_ITERATING
-
-#define N BOOST_PP_ITERATION()
-
-//free function
-template<typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-mpl::list<R (*)(BOOST_PP_ENUM_PARAMS(N, A)),R,free_function_tag,cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(N, A)>
-get_signature(R (*fn)(BOOST_PP_ENUM_PARAMS(N, A)),...)
-{
-    return mpl::list<R (*)(BOOST_PP_ENUM_PARAMS(N, A)),R,free_function_tag,cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(N, A)>();
-}
-
-template<typename R BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-free_function_tag get_data_tag(R (*fn)(BOOST_PP_ENUM_PARAMS(N, A)),...)
-{
-    return free_function_tag();
-}
-
-//member function
-template<typename R,typename CT BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-mpl::list<R (CT::*)(BOOST_PP_ENUM_PARAMS(N, A)),R,member_function_tag,cv_unqualified,CT& BOOST_PP_ENUM_TRAILING_PARAMS(N, A)>
-get_signature(R (CT::*fn)(BOOST_PP_ENUM_PARAMS(N, A)),...)
-{
-    return mpl::list<R (CT::*)(BOOST_PP_ENUM_PARAMS(N, A)),R,member_function_tag,cv_unqualified,CT& BOOST_PP_ENUM_TRAILING_PARAMS(N, A)>();
-}
-
-template<typename R,typename CT BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-member_function_tag get_data_tag(R (CT::*fn)(BOOST_PP_ENUM_PARAMS(N, A)),...)
-{
-    return member_function_tag();
-}
-
-//const member function
-template<typename R,typename CT BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-mpl::list<R (CT::*)(BOOST_PP_ENUM_PARAMS(N, A)) const,R,member_function_tag,const_,CT const& BOOST_PP_ENUM_TRAILING_PARAMS(N, A)>
-get_signature(R (CT::*fn)(BOOST_PP_ENUM_PARAMS(N, A)) const,...)
-{
-    return mpl::list<R (CT::*)(BOOST_PP_ENUM_PARAMS(N, A)) const,R,member_function_tag,const_,CT const& BOOST_PP_ENUM_TRAILING_PARAMS(N, A)>();
-}
-
-template<typename R,typename CT BOOST_PP_ENUM_TRAILING_PARAMS(N, typename A)>
-member_function_tag get_data_tag(R (CT::*fn)(BOOST_PP_ENUM_PARAMS(N, A)) const,...)
-{
-    return member_function_tag();
-}
-
-#undef N
-
-#endif //BOOST_PP_IS_ITERATING
-
