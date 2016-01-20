@@ -15,7 +15,7 @@
 using namespace boost::clipp;
 
 value::value()
-:   context_(NULL)
+:   context_(nullptr)
 {
 }
 
@@ -27,17 +27,17 @@ value::~value()
 valueP value::lookup(const std::string& identifier,valueP parent)
 {
     if(prototype()) return prototype()->lookup(identifier,parent);
-    return NULL;
+    return nullptr;
 }
 
 valueP value::call(Params& args,valueP parent)
 {
-    return NULL;
+    return nullptr;
 }
 
 valueP value::construct(Params& args,valueP parent)
 {
-    return NULL;
+    return nullptr;
 }
 
 valueP value::duplicate(valueP parent)
@@ -47,12 +47,12 @@ valueP value::duplicate(valueP parent)
 
 valueP value::assign(valueP rhs,valueP parent)
 {
-    return NULL;
+    return nullptr;
 }
 
 valueP value::prototype()
 {
-    return NULL;
+    return nullptr;
 }
 
 type_detail value::type()
@@ -60,14 +60,14 @@ type_detail value::type()
     return typeid(*this);
 }
 
-bool value::validate_arguments(value_method method,Params& arguments,valueP parent)
+bool value::validate_arguments(value_method /*method*/,Params& arguments,valueP parent)
 {
     return false;
 }
 
 valueP value::join(valueP rhs)
 {
-    return NULL;
+    return nullptr;
 }
 
 valueP value::join_client(valueP rhs)
@@ -77,7 +77,7 @@ valueP value::join_client(valueP rhs)
 
 detail::converterP value::get_converter_from_this(const type_detail& to,precedence p,valueP& wrapped)
 {
-    return NULL;
+    return nullptr;
 }
 
 valueP value::insert(const std::string& identifier,valueP value)

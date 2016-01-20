@@ -49,7 +49,7 @@ void eval_params(javascript_parser* parser_,iter_t const& i,value::Params& param
 class lookup_scope_class : public boost::clipp::value {
 public:
     lookup_scope_class(std::list<boost::clipp::valueP>& stack) : stack_(stack) {}
-    virtual valueP lookup(const std::string& identifier,valueP parent=NULL);
+    virtual valueP lookup(const std::string& identifier,valueP parent = nullptr);
 private:
     std::list<boost::clipp::valueP>& stack_;
 };
@@ -61,7 +61,7 @@ valueP lookup_scope_class::lookup(const std::string& identifier,valueP parent)
         valueP value=stack_object->lookup(identifier,parent);
         if(value) return value;
     }
-    return NULL;
+    return nullptr;
 }
 
 void javascript_parser::top_stack_only(bool status)
@@ -75,7 +75,7 @@ bool javascript_parser::top_stack_only() const
 }
 
 javascript_parser::javascript_parser()
-:   m_handler(0)
+    : m_handler(0)
 {
     top_stack_only_=false;
     lookup_scope_ = new lookup_scope_class(lookup_scope_stack_);
@@ -110,7 +110,7 @@ valueP javascript_parser::parse(std::ifstream& file,callback_handler const& hand
 {
     if(!file) {
         handler.report_error("Could not open input file: \n");
-        return NULL;
+        return nullptr;
     }
 
     file.unsetf(std::ios::skipws); //  Turn of white space skipping on the stream
@@ -206,25 +206,25 @@ void javascript_parser::dump(tree_parse_t & info)
 valueP javascript_parser::evaluate(tree_parse_t & info,callback_handler const& handler)
 {
     try {
-        if(!info.full) return NULL;
+        if(!info.full) return nullptr;
         return eval_expression(this,info.trees.begin(), handler);
     }
     catch(js_exit_return&) {
         throw;
     }
-    catch(positional_runtime_error& e) {
-        handler.parser_pos()=e.parser_pos();
-        if(handler.is_exception_handler()) throw;
+    catch (positional_runtime_error& e) {
+        handler.parser_pos() = e.parser_pos();
+        if (handler.is_exception_handler()) throw;
         else {
             handler.report_error(e.what());
             return 0;
         }
-    }    
+    }
     catch(std::exception& e) {
         if(handler.is_exception_handler()) throw;
         else {
             handler.report_error(e.what());
-            return NULL;
+            return nullptr;
         }
     }
 }
@@ -425,15 +425,15 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
                 break;
             case 't'://typeof
                {
-					     valueP object = eval_expression(parser_,i->children.begin(),handler).get()->duplicate();
-					     std::string rc = "undefined";
-					     if (object)
-					     {
-						      rc = parser_->get_context()->type_name(object->type());
-						      std::transform(rc.begin(), rc.end(), rc.begin(), tolower);
-						      if (rc=="null") rc = "object";
-					     }
-					     return wrap(rc, parser_->get_context());				
+                         valueP object = eval_expression(parser_,i->children.begin(),handler).get()->duplicate();
+                         std::string rc = "undefined";
+                         if (object)
+                         {
+                              rc = parser_->get_context()->type_name(object->type());
+                              std::transform(rc.begin(), rc.end(), rc.begin(), tolower);
+                              if (rc=="null") rc = "object";
+                         }
+                         return wrap(rc, parser_->get_context());				
                 }
                 break;
             case '+'://++ or +
@@ -770,7 +770,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
             for(iter_t it = i->children.begin(); it!=i->children.end(); ++it) {
                 eval_expression(parser_,it,handler);
             }
-            return NULL;
+            return nullptr;
         }
     case statement_listID:
         {
@@ -895,8 +895,8 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
             iter_t istart=it->children.begin();
             iter_t iend=boost::prior(it->children.end());
             std::string program(istart->value.begin()+1,iend->value.begin());
-            handler.parser_pos().set_current(istart->value.begin()+1);
-            valueP function = wrap(new js_function(arguments,program,handler),parser_->get_context());           
+            handler.parser_pos().set_current(istart->value.begin() + 1);
+            valueP function = wrap(new js_function(arguments, program, handler), parser_->get_context());
             invoke_operator<'='>(eval_expression(parser_,i->children.begin(),handler),function);
             break;
         }
@@ -971,7 +971,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
         break;
     case empty_statementID:
         {
-            return NULL;
+            return nullptr;
         }
     case with_statementID:
         {

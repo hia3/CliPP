@@ -70,7 +70,7 @@ valueP global::eval(const std::string& x)
     catch(js_break& e) {
         throw std::runtime_error(e.what());
     }
-    return NULL;
+    return nullptr;
 }
 
 static int static_sign;

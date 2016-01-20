@@ -54,8 +54,8 @@ double boost::javascript::convertStringToDate(const char* date)
 
     DATE dateOut;
     
-    HRESULT res = VarDateFromStr(strIn, NULL, LOCALE_NOUSEROVERRIDE, &dateOut);
-    if(res!=S_OK) res=VarDateFromStr(strIn, NULL, 0, &dateOut);
+    HRESULT res = VarDateFromStr(strIn, nullptr, LOCALE_NOUSEROVERRIDE, &dateOut);
+    if(res!=S_OK) res=VarDateFromStr(strIn, nullptr, 0, &dateOut);
     if(res!=S_OK) return boost::javascript::math::NaN();
 
     double days;

@@ -11,7 +11,7 @@ namespace boost { namespace clipp { namespace detail {
 
 template<typename T>
 struct read_generator {
-    read_generator(T t,valueP* stored=NULL) : t_(t), stored_(stored) {}
+    read_generator(T t,valueP* stored=nullptr) : t_(t), stored_(stored) {}
     typedef valueP result_type;
 
     template<typename cv_tagT>
@@ -43,7 +43,7 @@ struct read_generator {
     {
         return wrap_struct<R>::wrap(a0().*t_,c);
     }
-    mutable T t_;
+    T t_;
     mutable valueP* stored_;
 };
 

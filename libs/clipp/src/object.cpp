@@ -15,7 +15,7 @@
 using namespace boost::clipp;
 
 object::object()
-:   member_table_(NULL)
+:   member_table_(nullptr)
 {
 }
 

@@ -18,7 +18,7 @@ context::~context()
 
 detail::wrapperP context::get_wrapper(const type_detail& from)
 {
-    detail::wrapperP result=NULL;
+    detail::wrapperP result = nullptr;
     DecoratedWrappers::iterator it=wrappers_.find(from);
     if(it!=wrappers_.end()) result=it->second.get_wrapper(from.get_decoration());
     return result;
@@ -55,7 +55,7 @@ member_table* context::get_prototype(const type_detail& info)
 {
     MemberTables::iterator it=member_tables_.find(info);
     if(it!=member_tables_.end()) return it->second.get();
-    return NULL;
+    return nullptr;
 }
 
 void context::set_prototype(const type_detail& info,member_table* prototype)

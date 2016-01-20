@@ -21,14 +21,14 @@ class member_property_base;
 member_table::member_table(const type_detail& info,const std::string& name)
 :   info_(info)
 ,   name_(name)
-,   base_(NULL)
+,   base_(nullptr)
 {
 
 }
 
 member_table::member_table(const type_detail& info)
 :   info_(info)
-,   base_(NULL)
+,   base_(nullptr)
 {
 
 }
@@ -111,7 +111,7 @@ detail::converterP member_table::get_converter_to_this(const type_detail& from)
                 }
             }
         }
-        return NULL;
+        return nullptr;
     }
     return it->second;
 }
@@ -119,13 +119,13 @@ detail::converterP member_table::get_converter_to_this(const type_detail& from)
 detail::converterP member_table::get_converter_from_this(const type_detail& to,precedence p,valueP& wrapped)
 {
     detail::converterP result=find_converter_from_this(to,p);
-    if(!result && p==p_create) return create_converter_from_this(to,p);
+    if(!result && p== precedence::create) return create_converter_from_this(to,p);
     return result;
 }
 
 detail::converterP member_table::find_converter_from_this(const type_detail& to,precedence p)
 {
-    detail::converterP result=NULL;
+    detail::converterP result = nullptr;
     DecoratedConverters::iterator it=converters_from_this_.find(to);
     if(it!=converters_from_this_.end()) result=it->second.get_converter(to.get_decoration());
     if(!result && bases()) result=bases()->find_converter_from_this(to,p);
@@ -134,7 +134,7 @@ detail::converterP member_table::find_converter_from_this(const type_detail& to,
 
 detail::converterP member_table::create_converter_from_this(const type_detail& to,precedence p)
 {
-    detail::converterP result=NULL;
+    detail::converterP result = nullptr;
     member_table* to_table=get_context()->get_prototype(to);
     if(to_table) {
         detail::converterP c=to_table->get_converter_to_this(info_);

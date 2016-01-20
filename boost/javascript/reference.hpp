@@ -38,15 +38,15 @@ public:
     reference& operator++();
     valueP operator--(int);
     valueP operator++(int);
-    virtual valueP duplicate(valueP parent=NULL);
-    virtual valueP assign(valueP rhs,valueP parent=NULL);
-    virtual valueP call(Params& args,valueP parent=NULL);
-    virtual valueP construct(Params& args,valueP parent=NULL);
+    virtual valueP duplicate(valueP parent = nullptr);
+    virtual valueP assign(valueP rhs,valueP parent = nullptr);
+    virtual valueP call(Params& args,valueP parent = nullptr);
+    virtual valueP construct(Params& args,valueP parent = nullptr);
     virtual clipp::value_iterator begin() const;
     virtual clipp::value_iterator end() const;
     virtual size_t         size() const;
 
-    virtual valueP lookup(const std::string& identifier,valueP parent=NULL);
+    virtual valueP lookup(const std::string& identifier,valueP parent = nullptr);
     virtual valueP wrap_value(valueP parent);
     
     static void init(context* c);
@@ -63,11 +63,11 @@ class BOOST_JAVASCRIPT_EXPORT_IMPORT reference_wrapper : public clipp::object
 public:
     reference_wrapper(valueP value,valueP parent);
     virtual ~reference_wrapper();
-    virtual valueP duplicate(valueP parent=NULL);
-    virtual valueP assign(valueP rhs,valueP parent=NULL);
-    virtual valueP call(Params& args,valueP parent=NULL);
-    virtual valueP construct(Params& args,valueP parent=NULL);
-    virtual valueP lookup(const std::string& identifier,valueP parent=NULL);
+    virtual valueP duplicate(valueP parent = nullptr);
+    virtual valueP assign(valueP rhs,valueP parent = nullptr);
+    virtual valueP call(Params& args,valueP parent = nullptr);
+    virtual valueP construct(Params& args,valueP parent = nullptr);
+    virtual valueP lookup(const std::string& identifier,valueP parent = nullptr);
     virtual clipp::detail::converterP get_converter_from_this(const clipp::type_detail& to,clipp::precedence p,valueP& wrapped);
     virtual clipp::value_iterator begin() const;
     virtual clipp::value_iterator end() const;
