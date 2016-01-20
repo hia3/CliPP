@@ -202,7 +202,7 @@ double math::random()
 {
     static bool seeded=false;
     if(!seeded) {
-        srand( (unsigned)time( NULL )*347889213 );
+        srand( (unsigned)time(nullptr)*347889213 );
         seeded=true;
     }
     return double(rand())/double(RAND_MAX);
