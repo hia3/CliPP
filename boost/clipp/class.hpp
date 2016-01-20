@@ -59,9 +59,9 @@ public:
     class_(const std::string& name,context* c) : base(name,c){}
     class_(context* c) : base(c) {}
     
-    template<BOOST_PP_ENUM_PARAMS(BOOST_CLIPP_MAX_ARITY, typename A)>
-    member_constructor<mpl::list<arguments<BOOST_PP_ENUM_PARAMS(BOOST_CLIPP_MAX_ARITY, A)>,C,typename base::storage_policy::create_tag,detail::cv_unqualified BOOST_PP_ENUM_TRAILING_PARAMS(BOOST_CLIPP_MAX_ARITY, A)> >&
-    operator[](const boost::clipp::constructor<BOOST_PP_ENUM_PARAMS(BOOST_CLIPP_MAX_ARITY, A)>& t)
+    template<typename... A>
+    member_constructor<mpl::list<arguments<A...>,C,typename base::storage_policy::create_tag,detail::cv_unqualified, A...> >&
+    operator[](const boost::clipp::constructor<A...>& t)
     {
         return base::constructor(t);
     }

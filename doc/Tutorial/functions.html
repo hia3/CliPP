@@ -115,21 +115,6 @@ some operations. We will extend our point class:</p>
 <span class="identifier"><code><font color="#008000">
     </font></code></span><font color="#008000"><span class="identifier"><code>//</code></span>member-functions as <span class="identifier"><code>static</code></span></font>
     project(point1,line1);</pre>
-<table width="80%" border="0" align="center">
-  <tr> 
-    <td class="note_box"><img src="../theme/lens.gif" width="15" height="16"> <b>
-    Limitations to number of arguments</b><br>
-      <br>
-      By default, Clipp is restricted to handle free functions with 10 arguments 
-    and member functions with 9 arguments. If you need more than 10 arguments 
-    for a function or a constructor, you can set a new value for the 
-    BOOST_CLIPP_MAX_ARITY macro. This should be done in the cpp file where you 
-    expose the function with more than 10 arguments, and it should be set before 
-    the first include statement.<br>
-    BOOST_CLIPP_MAX_ARITY can not be greater that 47 because of limitations in 
-    boost::mpl.</td>
-  </tr>
-</table>
 <p>&nbsp;</p>
 <table border="0">
   <tr> 

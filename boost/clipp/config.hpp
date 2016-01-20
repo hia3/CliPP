@@ -13,12 +13,7 @@
 
 #   define BOOST_CLIPP_VERSION 500
 
-#   ifndef BOOST_CLIPP_MAX_ARITY 
-#       define BOOST_CLIPP_MAX_ARITY 10
-#   endif
-
 #   ifdef BOOST_MSVC 
-#       pragma warning (disable:4275)
 //'identifier' : identifier was truncated to 'number' characters in the debug information
 #       pragma warning (disable:4786)
 //'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2'
