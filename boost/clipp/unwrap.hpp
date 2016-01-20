@@ -72,10 +72,10 @@ struct unwrap
         precedence_(rhs.precedence_),
         converter_(rhs.converter_)
     {}
-    unwrap(const valueP& wrapped,precedence p=p_create) : wrapped_(wrapped) , precedence_(p) {}
+    unwrap(const valueP& wrapped,precedence p = precedence::create) : wrapped_(wrapped) , precedence_(p) {}
     void set(const valueP& wrapped) {
         wrapped_=wrapped;
-        converter_=NULL;
+        converter_ = nullptr;
     }
     result_type operator()() const {
         return internal_unwrap(is_back_reference<result_type>());
@@ -117,7 +117,6 @@ private:
         typedef typename detail::unwrap_value_type<Traits>::type actual_type;
         return install_converter_internal_2(t,is_clipp_ptr<actual_type>());
     }
-
     template<typename Traits>
     bool install_converter_internal_2(Traits t,mpl::false_) const{
         converter_ = static_cast<converter_type*>(
@@ -130,7 +129,7 @@ private:
         typedef typename detail::unwrap_value_type<Traits>::type actual_type;
         typedef typename actual_type::element_type element_type;
         typedef detail::intrusive_ptr_conversion_converter<element_type> element_converter;
-        intrusive_ptr<element_converter> cvt=new element_converter();
+        intrusive_ptr<element_converter> cvt = new element_converter();
         detail::converterP decvt = cvt->get_converter(decoration(detail::unwrap_decoration<Traits>::value));
         converter_ = static_cast<converter_type*>(decvt.get());
         return converter_;
@@ -151,7 +150,7 @@ struct unwrap_value_base
     unwrap_value_base(valueP wrapped,precedence p) 
     :   wrapped_(wrapped) 
     ,   precedence_(precedence)
-    ,   converter_(NULL) {}
+    ,   converter_(nullptr) {}
 protected:
     bool install_converter() 
     {
@@ -175,7 +174,7 @@ private:
                         precedence_
                      );
         );
-        return converter_!=NULL;
+        return converter_! = nullptr;
     }
 };
 
@@ -250,7 +249,7 @@ template<typename T>
 struct unwrap : detail::unwrap_selector<T>::type
 {
     typedef detail::unwrap_selector<T>::type base;
-    unwrap(valueP wrapped,precedence p=p_create) : base(wrapped,p) {}
+    unwrap(valueP wrapped,precedence p=precedence::create) : base(wrapped,p) {}
 };
 */
 #endif //BOOST_CLIPP_UNWRAP_HPP_HOLT_03092003

@@ -15,7 +15,7 @@ class decorated_converter {
 public:
     decorated_converter() {}
     void       add_converter(converterP c);
-    converterP get_converter(decoration d) {return converters_[d];}
+    converterP get_converter(decoration d) {return converters_[static_cast<unsigned>(d)];}
 private:
     converterP converters_[6];
 };

@@ -27,7 +27,7 @@ void date::init(context* c)
 {
     if(is_type_defined<date>(c)) return;
     class_<date,object> cls("Date",c);
-    cls.constructor(create_date,call_method);
+    cls.constructor(create_date, call_method);
     cls.constructor(arguments<long,long,long,long,long,long,long>(),construct_method).signature(
         "year",
         "month",
@@ -54,7 +54,7 @@ void date::init(context* c)
         arg("ms")=0
     );
 
-    cls.function("defaultValue",&date::defaultValue).signature(arg("hint")=PreferredType::NoHint);
+    cls.function("defaultValue",&date::defaultValue).signature(arg("hint")=PreferredType::Hint::No);
     cls.function("toString",&date::toString);
     cls.function("toDateString",&date::toDateString);
     cls.function("toTimeString",&date::toTimeString);
@@ -120,7 +120,7 @@ date::date()
    _ftime( &timebuffer);
    time_=double(timebuffer.time)*msPerSecond+timebuffer.millitm;
 #else
-   time_=double(time(NULL)*msPerSecond);
+   time_=double(time(nullptr)*msPerSecond);
 #endif
 }
 
@@ -132,7 +132,7 @@ std::string date::create_date()
 valueP date::defaultValue(PreferredType::Hint hint)
 {
     valueP f1,f2;
-    if(hint==PreferredType::Number) {
+    if(hint==PreferredType::Hint::Number) {
         f1=lookup("valueOf");
         f2=lookup("toString");
     }

@@ -10,7 +10,7 @@ void js_object::init(context* c)
 {
     class_<js_object,scope> cls("Object",c);
     cls[constructor<>()];
-    cls.function("defaultValue",&js_object::defaultValue).signature(arg("hint")=PreferredType::NoHint);
+    cls.function("defaultValue",&js_object::defaultValue).signature(arg("hint")=PreferredType::Hint::No);
     cls[self+valueP()];
     cls[valueP()+self];
     cls[self-double()];
@@ -29,7 +29,7 @@ void js_object::init(context* c)
 valueP js_object::defaultValue(PreferredType::Hint hint)
 {
     valueP f1,f2;
-    if(hint==PreferredType::Number || hint==PreferredType::NoHint) {
+    if(hint==PreferredType::Hint::Number || hint==PreferredType::Hint::No) {
         f1=lookup("valueOf");
         f2=lookup("toString");
     }

@@ -31,12 +31,12 @@ public:
     array(const clipp::container_base& container);
     array(const container_type& container);
 
-    clipp::valueP defaultValue(PreferredType::Hint hint=PreferredType::NoHint);
+    clipp::valueP defaultValue(PreferredType::Hint hint=PreferredType::Hint::No);
 
     std::string toString() const;
     std::string toLocaleString() const;
 
-    virtual clipp::valueP lookup(const std::string& identifier,clipp::valueP parent=NULL);
+    virtual clipp::valueP lookup(const std::string& identifier,clipp::valueP parent = nullptr);
 
 
     static arrayP concat(std::valarray<clipp::valueP> const &items);
@@ -46,7 +46,7 @@ public:
     arrayP reverse();
     clipp::valueP shift();
     arrayP slice(int start,int end=std::numeric_limits<int>::max());
-    arrayP sort(clipp::valueP compareFn=NULL);
+    arrayP sort(clipp::valueP compareFn = nullptr);
     arrayP splice(int start,int deleteCount,std::valarray<clipp::valueP> const &items);
     int unshift(std::valarray<clipp::valueP> const &items);
 

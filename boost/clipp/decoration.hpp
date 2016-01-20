@@ -9,19 +9,19 @@
 
 namespace boost { namespace clipp {
     
-enum decoration {
-    d_direct            = 0,
-    d_const_direct      = 1,
-    d_reference         = 2,
-    d_const_reference   = 3,
-    d_pointer           = 4,
-    d_const_pointer     = 5,
+enum class decoration : unsigned {
+    direct            = 0,
+    const_direct      = 1,
+    reference         = 2,
+    const_reference   = 3,
+    pointer           = 4,
+    const_pointer     = 5,
 };
 
-enum precedence {
-    p_create=0,
-    p_function=1,
-    p_unwrap=2,
+enum class precedence {
+    create=0,
+    function=1,
+    unwrap=2,
 };
 
 }} //namespace boost::clipp

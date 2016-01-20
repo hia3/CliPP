@@ -19,7 +19,7 @@ public:
     js_object()  {}
     virtual ~js_object() {}
     static void init(clipp::context* c);
-    clipp::valueP defaultValue(PreferredType::Hint hint=PreferredType::NoHint);
+    clipp::valueP defaultValue(PreferredType::Hint hint=PreferredType::Hint::No);
     virtual clipp::detail::converterP get_converter_from_this(const clipp::type_detail& to,clipp::precedence p,clipp::valueP& wrapped);
 
     friend BOOST_JAVASCRIPT_EXPORT_IMPORT clipp::valueP operator+(const js_object& lhs,clipp::valueP rhs);

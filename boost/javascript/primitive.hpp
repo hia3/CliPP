@@ -19,18 +19,18 @@ namespace boost { namespace clipp {
 namespace boost { namespace javascript {
 
     struct BOOST_JAVASCRIPT_EXPORT_IMPORT PreferredType {
-        enum Hint {
-            NoHint,
+        enum class Hint {
+            No,
             String,
             Number,
         };
         static void init(clipp::context* c);
     };
 
-    clipp::valueP BOOST_JAVASCRIPT_EXPORT_IMPORT toPrimitive(clipp::valueP input,PreferredType::Hint hint=PreferredType::NoHint);
+    clipp::valueP BOOST_JAVASCRIPT_EXPORT_IMPORT toPrimitive(clipp::valueP input,PreferredType::Hint hint=PreferredType::Hint::No);
     
     template<typename T>
-    clipp::valueP toPrimitive(const T& input,PreferredType::Hint hint=PreferredType::NoHint)
+    clipp::valueP toPrimitive(const T& input,PreferredType::Hint hint=PreferredType::Hint::No)
     {
         return toPrimitive(wrap_struct<const T&>::wrap(input,input.get_context()),hint);
     }

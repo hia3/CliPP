@@ -18,7 +18,7 @@ namespace boost { namespace clipp {
 
 struct type_detail : private totally_ordered<type_detail>
 {
-    inline type_detail(std::type_info const& = typeid(void),decoration d=d_direct);
+    inline type_detail(std::type_info const& = typeid(void),decoration d = decoration::direct);
     
     inline bool operator<(type_detail const& rhs) const;
     inline bool operator==(type_detail const& rhs) const;
@@ -54,7 +54,7 @@ struct type_id_struct<void> {
 };
 
 template <class T>
-inline type_detail type_id(boost::type<T>* dummy = NULL)
+inline type_detail type_id(boost::type<T>* dummy = nullptr)
 {
     return type_id_struct<T>::do_();
 }

@@ -30,7 +30,7 @@ public:
     static double parse(const std::string& date);
     static std::string create_date();
 
-    clipp::valueP defaultValue(PreferredType::Hint hint=PreferredType::NoHint);
+    clipp::valueP defaultValue(PreferredType::Hint hint=PreferredType::Hint::No);
 
     std::string toString() const;
     std::string toDateString() const;

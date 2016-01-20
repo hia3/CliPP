@@ -16,9 +16,9 @@ using namespace boost::javascript;
 void PreferredType::init(context* c)
 {
     enum_<Hint> e("PreferredType",c);
-    e.value("String",PreferredType::String);
-    e.value("Number",PreferredType::Number);
-    e.value("NoHint",PreferredType::NoHint);
+    e.value("String",PreferredType::Hint::String);
+    e.value("Number",PreferredType::Hint::Number);
+    e.value("NoHint",PreferredType::Hint::No);
 }
 
 valueP boost::javascript::toPrimitive(valueP input,PreferredType::Hint hint)
@@ -36,7 +36,7 @@ double boost::javascript::toNumber(clipp::valueP input)
     try {
         if(isString(input)) return unwrap<double>(input["toNumber"]())();
         if(isObject(input)) {
-            valueP result=toPrimitive(input,PreferredType::Number);
+            valueP result=toPrimitive(input,PreferredType::Hint::Number);
             if(isObject(result)) return math::NaN();
             else return toNumber(result);
         }
@@ -52,7 +52,7 @@ std::string boost::javascript::toString(clipp::valueP input)
     try {
         if(isNumber(input)) return unwrap<std::string>(input["toString"]())();
         if(isObject(input)) {
-            valueP result=toPrimitive(input,PreferredType::String);
+            valueP result=toPrimitive(input,PreferredType::Hint::String);
             if(isObject(result)) return "Object";
             else return toString(result);
         }

@@ -41,7 +41,7 @@ array::array(std::valarray<valueP> const &rhs)
 valueP array::defaultValue(PreferredType::Hint hint)
 {
     valueP f1,f2;
-    if(hint==PreferredType::Number || hint==PreferredType::NoHint) {
+    if(hint==PreferredType::Hint::Number || hint==PreferredType::Hint::No) {
         f1=lookup("valueOf");
         f2=lookup("toString");
     }
@@ -64,7 +64,7 @@ valueP array::lookup(const std::string& identifier,valueP parent)
         return (*this)[index].duplicate();
     }
     catch(...) {
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -90,7 +90,7 @@ valueP array::operator[](const std::string& identifier)
         index = lexical_cast<unsigned>(identifier);
     }
     catch(...) {
-        return NULL;
+        return nullptr;
     }
     return wrap_struct<reference&>::wrap(operator[](index),get_context());
 }
@@ -128,7 +128,7 @@ void array::init(context* c)
     cls.function("splice",&array::splice);
     cls.function("unshift",&array::unshift);
 
-    cls.function("defaultValue",&array::defaultValue).signature(arg("hint")=PreferredType::NoHint);
+    cls.function("defaultValue",&array::defaultValue).signature(arg("hint")=PreferredType::Hint::No);
 }
 
 std::string array::toString() const
@@ -203,7 +203,7 @@ valueP array::shift()
     if(length()==0) return new undefined();
     valueP result=(*this)[0].duplicate();
     container_type& c=*this;
-    for(container_type::iterator it=next(c.begin());it!=c.end();++it) {
+    for(container_type::iterator it=boost::next(c.begin());it!=c.end();++it) {
         std::swap(*(it-1),*(it));
     }
     c.erase(prior(c.end()));
@@ -275,6 +275,7 @@ arrayP array::splice(int start,int deleteCount,std::valarray<valueP> const &item
     if(start<0) start = std::max(int(length()+start),0);
     deleteCount=std::min(std::max(deleteCount,0),int(length()-start));
     array* a=new array(deleteCount);
+    a->create(get_context());
     unsigned i;
     for(i=0;i<unsigned(deleteCount);++i) {
         if(unsigned(start+i)<=length()) (*a)[i]=(*this)[start+i].duplicate();

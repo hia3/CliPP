@@ -152,14 +152,14 @@ struct converter_base_selector<direct_,cv_unqualified>
             typedef Converter converter_type;
             typedef typename converter_type::to_type  to_type;
             switch(d) {
-            case d_direct:
+            case decoration::direct:
                 return this;
-            case d_const_direct:
+            case decoration::const_direct:
                 return new redecorate_converter<converter_type,to_type const>(&derived());
-            case d_const_reference:
+            case decoration::const_reference:
                 return new dereference_wrap_converter<converter_type,to_type const&>(&derived());
             default:
-                return NULL;
+                return nullptr;
             }
         }
     };
@@ -174,14 +174,14 @@ struct converter_base_selector<direct_,const_>
             typedef Converter converter_type;
             typedef typename converter_type::to_type  to_type;
             switch(d) {
-            case d_direct:
+            case decoration::direct:
                 return new redecorate_converter<converter_type,to_type>(&derived());
-            case d_const_direct:
+            case decoration::const_direct:
                 return this;
-            case d_const_reference:
+            case decoration::const_reference:
                 return new dereference_wrap_converter<converter_type,to_type const&>(&derived());
             default:
-                return NULL;
+                return nullptr;
             }
         }
     };
@@ -196,20 +196,20 @@ struct converter_base_selector<pointer_,cv_unqualified>
             typedef Converter converter_type;
             typedef typename converter_type::to_type  to_type;
             switch(d) {
-/*            case d_direct:
+/*            case decoration::direct:
                 return new dereference_converter<converter_type,to_type>(&derived());
-            case d_const_direct:
+            case decoration::const_direct:
                 return new dereference_converter<converter_type,to_type const>(&derived());*/
-            case d_pointer:
+            case decoration::pointer:
                 return this;
-            case d_const_pointer:
+            case decoration::const_pointer:
                 return new redecorate_converter<converter_type,to_type const*>(&derived());
-            case d_reference:
+            case decoration::reference:
                 return new dereference_converter<converter_type,to_type&>(&derived());
-            case d_const_reference:
+            case decoration::const_reference:
                 return new dereference_converter<converter_type,to_type const&>(&derived());
             default:
-                return NULL;
+                return nullptr;
             }
         }
     };
@@ -224,16 +224,16 @@ struct converter_base_selector<pointer_,const_>
             typedef Converter converter_type;
             typedef typename converter_type::to_type  to_type;
             switch(d) {
-            case d_direct:
+            case decoration::direct:
                 return new dereference_converter<converter_type,to_type>(&derived());
-            case d_const_direct:
+            case decoration::const_direct:
                 return new dereference_converter<converter_type,to_type const>(&derived());
-            case d_const_reference:
+            case decoration::const_reference:
                 return new dereference_converter<converter_type,to_type const&>(&derived());                
-            case d_const_pointer:
+            case decoration::const_pointer:
                 return this;
             default:
-                return NULL;
+                return nullptr;
             }
         }
     };
@@ -248,20 +248,20 @@ struct converter_base_selector<reference_,cv_unqualified>
             typedef Converter converter_type;
             typedef typename converter_type::to_type  to_type;
             switch(d) {
-            case d_direct:
+            case decoration::direct:
                 return new redecorate_converter<converter_type,to_type>(&derived());
-            case d_const_direct:
+            case decoration::const_direct:
                 return new redecorate_converter<converter_type,to_type const>(&derived());
-            case d_pointer:
+            case decoration::pointer:
                 return new address_of_converter<converter_type,to_type*>(&derived());
-            case d_const_pointer:
+            case decoration::const_pointer:
                 return new address_of_converter<converter_type,to_type const*>(&derived());
-            case d_reference:
+            case decoration::reference:
                 return this;
-            case d_const_reference:
+            case decoration::const_reference:
                 return new redecorate_converter<converter_type,to_type const&>(&derived());
             default:
-                return NULL;
+                return nullptr;
             }
         }
     };
@@ -276,16 +276,16 @@ struct converter_base_selector<reference_,const_>
             typedef Converter converter_type;
             typedef typename converter_type::to_type  to_type;
             switch(d) {
-            case d_direct:
+            case decoration::direct:
                 return new redecorate_converter<converter_type,to_type>(&derived());
-            case d_const_direct:
+            case decoration::const_direct:
                 return new redecorate_converter<converter_type,to_type const>(&derived());
-            case d_const_reference:
+            case decoration::const_reference:
                 return this;
-            case d_const_pointer:
+            case decoration::const_pointer:
                 return new address_of_converter<converter_type,to_type const*>(&derived());
             default:
-                return NULL;
+                return nullptr;
             }
         }
     };
@@ -296,7 +296,7 @@ struct function_call_converter
 :   converter_base_selector<
         typename unwrap_indirection<ToTraits>::type,
         typename unwrap_cv<ToTraits>::type
-    >::inner<function_call_converter<FromTraits,ToTraits,Fn>,typename wrap_type<ToTraits>::type>
+    >::template inner<function_call_converter<FromTraits,ToTraits,Fn>,typename wrap_type<ToTraits>::type>
 {
     typedef typename unwrap_value_type<ToTraits>::type       to_type;
     typedef typename unwrap_value_type<FromTraits>::type     from_type;
@@ -311,10 +311,10 @@ struct function_call_converter
 
     result_type operator()(const valueP& input,valueP& output)
     {
-        return (unwrap<input_type>(input,p_unwrap)().*fn_)();
+        return (unwrap<input_type>(input, precedence::unwrap)().*fn_)();
     }
 
-    virtual precedence get_precedence()                 {return p_function;}
+    virtual precedence get_precedence()                 {return precedence::function;}
     virtual type_detail from_type_info()    {return type_id<input_type>();}
 private:
     Fn fn_;
@@ -325,7 +325,7 @@ struct implicit_conversion_converter
 :   converter_base_selector<
         typename unwrap_indirection<ToTraits>::type,
         typename unwrap_cv<ToTraits>::type
-    >::inner<implicit_conversion_converter<FromTraits,ToTraits>,typename wrap_type<ToTraits>::type>
+    >::template inner<implicit_conversion_converter<FromTraits,ToTraits>,typename wrap_type<ToTraits>::type>
 {
     typedef typename unwrap_value_type<ToTraits>::type       to_type;
     typedef typename unwrap_value_type<FromTraits>::type     from_type;
@@ -340,11 +340,11 @@ struct implicit_conversion_converter
 
     result_type operator()(const valueP& input,valueP& output)
     {
-        return result_type(unwrap<input_type>(input,p_unwrap)());
+        return result_type(unwrap<input_type>(input, precedence::unwrap)());
     }
 
-    virtual precedence get_precedence()                 {return p_function;}
-    virtual type_detail from_type_info()    {return type_id<input_type>();}
+    virtual precedence get_precedence()  {return precedence::function;}
+    virtual type_detail from_type_info() {return type_id<input_type>();}
 };
 
 template<typename FromTraits,typename WrappedTraits,typename ToTraits>
@@ -352,7 +352,7 @@ struct implicit_conversion_wrapped_converter
 :   converter_base_selector<
         typename unwrap_indirection<ToTraits>::type,
         typename unwrap_cv<ToTraits>::type
-    >::inner<implicit_conversion_wrapped_converter<FromTraits,WrappedTraits,ToTraits>,typename wrap_type<ToTraits>::type>
+    >::template inner<implicit_conversion_wrapped_converter<FromTraits,WrappedTraits,ToTraits>,typename wrap_type<ToTraits>::type>
 {
     typedef typename unwrap_value_type<ToTraits>::type       to_type;
     typedef typename unwrap_value_type<FromTraits>::type     from_type;
@@ -368,11 +368,11 @@ struct implicit_conversion_wrapped_converter
 
     result_type operator()(const valueP& input,valueP& output)
     {
-        return wrapped_type(unwrap<input_type>(input,p_unwrap)());
+        return wrapped_type(unwrap<input_type>(input, precedence::unwrap)());
     }
 
-    virtual precedence get_precedence()                 {return p_function;}
-    virtual type_detail from_type_info()    {return type_id<input_type>();}
+    virtual precedence get_precedence()  {return precedence::function;}
+    virtual type_detail from_type_info() {return type_id<input_type>();}
 };
 
 template<typename FromTraits,typename ToTraits>
@@ -391,13 +391,13 @@ struct constructor_converter
     virtual ~constructor_converter() {}
     result_type operator()(const valueP& input,valueP& output)
     {
-        result_type result=new to_type(unwrap<input_type>(input,p_function)());
+        result_type result=new to_type(unwrap<input_type>(input, precedence::function)());
         output=wrap_struct<result_type>::wrap(result,input->get_context());
         return result;
     }
 
-    virtual precedence get_precedence()                 {return p_create;}
-    virtual type_detail from_type_info()    {return type_id<input_type>();}
+    virtual precedence get_precedence()  {return precedence::create;}
+    virtual type_detail from_type_info() {return type_id<input_type>();}
 };
 
 template<typename FromTraits,typename ToTraits>
@@ -405,7 +405,7 @@ struct unwrap_constructor_converter
 :   converter_base_selector<
         typename unwrap_indirection<ToTraits>::type,
         typename unwrap_cv<ToTraits>::type
-    >::inner<unwrap_constructor_converter<FromTraits,ToTraits>,typename wrap_type<ToTraits>::type>
+    >::template inner<unwrap_constructor_converter<FromTraits,ToTraits>,typename wrap_type<ToTraits>::type>
 
 {
     typedef typename unwrap_value_type<ToTraits>::type           to_type;
@@ -418,11 +418,11 @@ struct unwrap_constructor_converter
     result_type operator()(const valueP& input,valueP& output)
     {
         output = wrap_struct<input_type>::wrap(unwrap<input_type>(input)(),input->get_context());
-        return unwrap<result_type>(output,p_function)();
+        return unwrap<result_type>(output, precedence::function)();
     }
 
-    virtual precedence get_precedence()                 {return p_create;}
-    virtual type_detail from_type_info()    {return type_id<input_type>();}
+    virtual precedence get_precedence()  {return precedence::create;}
+    virtual type_detail from_type_info() {return type_id<input_type>();}
 };
 
 template<typename To>
@@ -441,7 +441,7 @@ struct cast_converter
         return static_cast<result_type>(input.get());
     }
 
-    virtual precedence get_precedence()                 {return p_unwrap;}
+    virtual precedence get_precedence() {return precedence::unwrap;}
 };
 
 template<typename Fn,typename Wrapper,typename ToTraits>
@@ -449,7 +449,7 @@ struct unwrap_converter
 :   converter_base_selector<
         typename unwrap_indirection<ToTraits>::type,
         typename unwrap_cv<ToTraits>::type
-    >::inner<unwrap_converter<Fn,Wrapper,ToTraits>,typename wrap_type<ToTraits>::type>        
+    >::template inner<unwrap_converter<Fn,Wrapper,ToTraits>,typename wrap_type<ToTraits>::type>        
 {
     typedef typename unwrap_value_type<ToTraits>::type       to_type;
     typedef Wrapper                                 wrapper_type;
@@ -463,7 +463,7 @@ struct unwrap_converter
     {
         return (static_cast<wrapper_type*>(input.get())->*fn_)();
     }
-    virtual precedence get_precedence()                 {return p_unwrap;}
+    virtual precedence get_precedence() {return precedence::unwrap;}
 private:
     Fn fn_;
 };
@@ -485,13 +485,13 @@ struct intrusive_ptr_conversion_converter
 
     result_type operator()(const valueP& input,valueP& output)
     {
-        result_type result = unwrap<input_type>(input,p_create)();
+        result_type result = unwrap<input_type>(input, precedence::create)();
         output=result;
         return result;
     }
 
-    virtual precedence get_precedence()                 {return p_unwrap;}
-    virtual type_detail from_type_info()    {return type_id<input_type>();}
+    virtual precedence get_precedence()  {return precedence::unwrap;}
+    virtual type_detail from_type_info() {return type_id<input_type>();}
 };
 
 }}} //namespace boost::clipp::detail

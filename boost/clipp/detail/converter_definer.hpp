@@ -90,21 +90,21 @@ private:
 
     template<typename U,typename Signature>
     void define_converter(U u,Signature s) {
-        detail::data_type<Signature>::type* dummy=NULL;
+        detail::data_type<Signature> * dummy= nullptr;
         define_converter(u,dummy,s);
     }
     template<typename U,typename Signature> 
     void define_converter(U u,detail::member_function_tag<T>*,Signature s) {
         BOOST_STATIC_ASSERT(detail::signature_arity<Signature>::value==0);
         typedef T from_type;
-        typedef detail::return_type<Signature>::type to_type;
+        typedef detail::return_type<Signature> to_type;
         define_function_call_converter(u,BOOST_CLIPP_UNWRAP_TYPE(from_type),BOOST_CLIPP_UNWRAP_TYPE(to_type));
     }
     template<typename U,typename Signature> 
     void define_converter(U u,detail::constructor_tag*,Signature s) {
         BOOST_STATIC_ASSERT(detail::signature_arity<Signature>::value==1);
         typedef detail::argument<Signature,0>::result_type from_type;
-        typedef detail::return_type<Signature>::type to_type;
+        typedef detail::return_type<Signature> to_type;
         define_constructor_converter(BOOST_CLIPP_UNWRAP_TYPE(from_type),BOOST_CLIPP_UNWRAP_TYPE(to_type));
     }
     template<typename Fn,typename FromTraits,typename ToTraits>
@@ -132,7 +132,7 @@ struct generic_converter {
     //Normal conversion
     result_type operator()(const valueP& input,valueP& output)
     {
-        return execute(input,output,return_type_selector<Signature>::type,data_type<Signature>::type(input));
+        return execute(input,output,return_type_selector<Signature>::type,data_type<Signature>(input));
     }
     result_type execute(valueP const& input,valueP& output,boost::type<result_type>,member_function_tag<input_type>& ct)
     {
@@ -140,7 +140,7 @@ struct generic_converter {
     }
     result_type execute(valueP const& input,valueP& output,boost::type<result_type>,free_function_tag&)
     {
-        return t_(unwrap<input_type,p_unwrap>(input,output));
+        return t_(unwrap<input_type, precedence::unwrap>(input,output));
     }
     result_type execute(valueP const& input,valueP& output,boost::type<result_type>,member_data_tag<input_type>& ct)
     {
@@ -148,28 +148,28 @@ struct generic_converter {
     }
     result_type execute(valueP const& input,valueP& output,boost::type<result_type>,constructor_tag&)
     {
-        result_type result=new to_type(unwrap<input_type>(input,p_function)());
+        result_type result=new to_type(unwrap<input_type>(input, precedence::function)());
         output=wrap_struct<result_type>::wrap(result,input->get_context());
         return result;
     }
     result_type execute(valueP const& input,valueP& output,boost::type<result_type>,implicit_conversion_tag<input_type>&)
     {
-        return unwrap<input_type>(input,p_unwrap)();
+        return unwrap<input_type>(input, precedence::unwrap)();
     }
     result_type execute(valueP const& input,valueP& output,boost::type<wrapped_type>,implicit_conversion_tag<input_type>&)
     {
-        output = wrap_struct<wrapped_type>::wrap(unwrap<wrapped_type>(input,p_function)(),input->get_context());
-        return unwrap<result_type>(output,p_unwrap);
+        output = wrap_struct<wrapped_type>::wrap(unwrap<wrapped_type>(input, precedence::function)(),input->get_context());
+        return unwrap<result_type>(output, precedence::unwrap);
     }
     virtual precedence get_precedence() {
-        return get_precedence_helper(type<data_type<Signature>::type>());
+        return get_precedence_helper(type<data_type<Signature> >());
     }
-    precedence get_precedence_helper(boost::type<member_function_tag<input_type> >) {return p_function;}
-    precedence get_precedence_helper(boost::type<free_function_tag>) {return p_function;}
-    precedence get_precedence_helper(boost::type<member_data_tag<input_type> >) {return p_unwrap;}
-    precedence get_precedence_helper(boost::type<constructor_tag>) {return p_create;}
-    precedence get_precedence_helper(boost::type<implicit_conversion_tag<input_type> >) {return p_unwrap;}
-    precedence get_precedence_helper(boost::type<implicit_conversion_tag<wrapped_type> >) {return p_unwrap;}
+    precedence get_precedence_helper(boost::type<member_function_tag<input_type> >)       {return precedence::function;}
+    precedence get_precedence_helper(boost::type<free_function_tag>)                      {return precedence::function;}
+    precedence get_precedence_helper(boost::type<member_data_tag<input_type> >)           {return precedence::unwrap;}
+    precedence get_precedence_helper(boost::type<constructor_tag>)                        {return precedence::create;}
+    precedence get_precedence_helper(boost::type<implicit_conversion_tag<input_type> >)   {return precedence::unwrap;}
+    precedence get_precedence_helper(boost::type<implicit_conversion_tag<wrapped_type> >) {return precedence::unwrap;}
 
     virtual type_detail from_type_info()    {return type_id<input_type>();}
 private:
@@ -196,10 +196,10 @@ struct function_call_converter
 
     result_type operator()(const valueP& input,valueP& output)
     {
-        return (unwrap<input_type>(input,p_unwrap)().*fn_)();
+        return (unwrap<input_type>(input, precedence::unwrap)().*fn_)();
     }
 
-    virtual precedence get_precedence()                 {return p_function;}
+    virtual precedence get_precedence()                 {return precedence::function;}
     virtual type_detail from_type_info()    {return type_id<input_type>();}
 private:
     Fn fn_;
@@ -225,10 +225,10 @@ struct implicit_conversion_converter
 
     result_type operator()(const valueP& input,valueP& output)
     {
-        return unwrap<input_type>(input,p_unwrap)();
+        return unwrap<input_type>(input, precedence::unwrap)();
     }
 
-    virtual precedence get_precedence()                 {return p_function;}
+    virtual precedence get_precedence()                 {return precedence::function;}
     virtual type_detail from_type_info()    {return type_id<input_type>();}
 };
 
@@ -253,10 +253,10 @@ struct implicit_conversion_wrapped_converter
 
     result_type operator()(const valueP& input,valueP& output)
     {
-        return wrapped_type(unwrap<input_type>(input,p_unwrap)());
+        return wrapped_type(unwrap<input_type>(input, precedence::unwrap)());
     }
 
-    virtual precedence get_precedence()                 {return p_function;}
+    virtual precedence get_precedence()                 {return precedence::function;}
     virtual type_detail from_type_info()    {return type_id<input_type>();}
 };
 
@@ -277,13 +277,13 @@ struct constructor_converter
     virtual ~constructor_converter() {}
     result_type operator()(const valueP& input,valueP& output)
     {
-        result_type result=new to_type(unwrap<input_type>(input,p_function)());
+        result_type result=new to_type(unwrap<input_type>(input, precedence::function)());
         output=wrap_struct<result_type>::wrap(result,input->get_context());
         return result;
     }
 
-    virtual precedence get_precedence()                 {return p_create;}
-    virtual type_detail from_type_info()    {return type_id<input_type>();}
+    virtual precedence get_precedence()  {return precedence::create;}
+    virtual type_detail from_type_info() {return type_id<input_type>();}
 };
 
 template<typename To>
@@ -302,7 +302,7 @@ struct cast_converter
         return static_cast<result_type>(input.get());
     }
 
-    virtual precedence get_precedence()                 {return p_unwrap;}
+    virtual precedence get_precedence()                 {return precedence::unwrap;}
 };
 
 template<typename Fn,typename Wrapper,typename ToTraits>
@@ -324,7 +324,7 @@ struct unwrap_converter
     {
         return (static_cast<wrapper_type*>(input.get())->*fn_)();
     }
-    virtual precedence get_precedence()                 {return p_unwrap;}
+    virtual precedence get_precedence()                 {return precedence::unwrap;}
 private:
     Fn fn_;
 };
@@ -341,7 +341,7 @@ struct converter_signature
 template<typename Signature,typename Class>
 {
     template<typename U>
-    converter* define(U u) {return NULL;}
+    converter* define(U u) {return nullptr;}
 }
 
 template<typename U,typename Signature,typename Class>

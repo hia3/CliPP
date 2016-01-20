@@ -102,7 +102,7 @@ struct wrap_derived {
         intrusive_ptr<intermediate_wrapper> icvt = static_cast<intermediate_wrapper*>(
             c->get_wrapper(type_id<T const&>()).get()
         );
-        if(!icvt) return NULL;
+        if(!icvt) return nullptr;
         cvt=new redecorate_wrapper<intermediate_wrapper,T>(icvt.get());
         c->add_wrapper(cvt);
         return cvt;
@@ -124,7 +124,7 @@ struct wrap_derived<pointer_,cv_unqualified>
         if(wrapper) return wrapper;
         else return static_cast<wrapper_type*>
             (
-                c->get_wrapper(type_detail(typeid(*input),d_pointer)).get()
+                c->get_wrapper(type_detail(typeid(*input), decoration::pointer)).get()
             );
     }
 };
@@ -144,7 +144,7 @@ struct wrap_derived<pointer_,const_>
         if(wrapper) return wrapper;
         else return static_cast<wrapper_type*>
             (
-                c->get_wrapper(type_detail(typeid(*input),d_const_pointer)).get()
+                c->get_wrapper(type_detail(typeid(*input), decoration::const_pointer)).get()
             );
     }
 };
@@ -164,7 +164,7 @@ struct wrap_derived<reference_,cv_unqualified>
         if(wrapper) return wrapper;
         else return static_cast<wrapper_type*>
             (
-                c->get_wrapper(type_detail(typeid(input),d_reference)).get()
+                c->get_wrapper(type_detail(typeid(input), decoration::reference)).get()
             );
     }
 };
@@ -184,7 +184,7 @@ struct wrap_derived<reference_,const_>
         if(wrapper) return wrapper;
         else return static_cast<wrapper_type*>
             (
-                c->get_wrapper(type_detail(typeid(input),d_const_reference)).get()
+                c->get_wrapper(type_detail(typeid(input),decoration::const_reference)).get()
             );
     }
 };
