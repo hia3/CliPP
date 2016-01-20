@@ -32,8 +32,8 @@ struct value_iterator;
 class BOOST_CLIPP_EXPORT_IMPORT value : public ref_base
 {
 public:
-	value();
-	virtual ~value();
+    value();
+    virtual ~value();
     
     typedef std::vector<valueP> Params;
     enum value_method {
@@ -48,16 +48,16 @@ public:
     virtual size_t         size() const;
 
     virtual type_detail type();
-    ///Lookup identifier. Returns NULL if none found
-    virtual valueP lookup(const std::string& identifier,valueP parent=NULL);
-    ///Treat value as a function and call it. Return NULL if not a function
-    virtual valueP call(Params& args,valueP parent=NULL);
-    ///Treat value as a constructor and call it. Return NULL if not a constructor
-    virtual valueP construct(Params& args,valueP parent=NULL);
+    ///Lookup identifier. Returns nullptr if none found
+    virtual valueP lookup(const std::string& identifier,valueP parent = nullptr);
+    ///Treat value as a function and call it. Return nullptr if not a function
+    virtual valueP call(Params& args,valueP parent = nullptr);
+    ///Treat value as a constructor and call it. Return nullptr if not a constructor
+    virtual valueP construct(Params& args,valueP parent = nullptr);
     ///Duplicate value
-    virtual valueP duplicate(valueP parent=NULL);
+    virtual valueP duplicate(valueP parent = nullptr);
     ///Assign a new value.
-    virtual valueP assign(valueP rhs,valueP parent=NULL);
+    virtual valueP assign(valueP rhs,valueP parent = nullptr);
     ///Wrap the value with a parent
     virtual valueP wrap_value(valueP parent);
 
@@ -70,9 +70,9 @@ public:
     virtual valueP prototype();
 
     ///Validates the input arguments. Used when function overloading in place
-    virtual bool   validate_arguments(value_method method,Params& arguments,valueP parent=NULL);
+    virtual bool   validate_arguments(value_method method,Params& arguments,valueP parent = nullptr);
 
-    ///Convert this value to the type given by type info. Returns NULL on failure.
+    ///Convert this value to the type given by type info. Returns nullptr on failure.
     virtual detail::converterP get_converter_from_this(const type_detail& to,precedence p,valueP& wrapped);
 
     virtual bool is_free() const;
@@ -80,7 +80,7 @@ public:
     virtual std::ostream& store(std::ostream& stream);
 
     virtual void create(context* c) {context_=c;}
-    bool created() const {return context_!=NULL;}
+    bool created() const {return context_ != nullptr;}
     context* get_context() const {return context_;}
 private:
     context* context_;

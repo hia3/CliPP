@@ -17,7 +17,7 @@ class empty_argument_list
 public:
     empty_argument_list()  {}
     size_t size() const {return 0;}
-    valueP operator[](size_t index) const {return NULL;}
+    valueP operator[](size_t index) const {return nullptr;}
 };
 
 template<typename MemberT>

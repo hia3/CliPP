@@ -23,7 +23,7 @@ public:
     virtual value_iterator end() const;
     virtual size_t         size() const;
 
-    virtual valueP lookup(const std::string& identifier,valueP parent=NULL);
+    virtual valueP lookup(const std::string& identifier,valueP parent = nullptr);
     virtual valueP insert(const std::string& identifier,valueP value);
     virtual void erase(valueP value);
     void clear();

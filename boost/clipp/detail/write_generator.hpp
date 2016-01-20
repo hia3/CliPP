@@ -28,7 +28,7 @@ struct write_generator {
     result_type execute(context* c,mpl::void_,free_function_tag&,cv_tagT,argument<Signature,0>& a0) const
     {
         t_(a0());
-        return NULL;
+        return nullptr;
     }
     template<typename R,typename cv_tagT,typename Signature>
     result_type execute(context* c,boost::type<R>,member_function_tag& ct,cv_tagT,argument<Signature,0>& a0,argument<Signature,1>& a1) const
@@ -39,7 +39,7 @@ struct write_generator {
     result_type execute(context* c,mpl::void_,member_function_tag& ct,cv_tagT,argument<Signature,0>& a0,argument<Signature,1>& a1) const
     {
         (a0().*t_)(a1());
-        return NULL;
+        return nullptr;
     }
     template<typename R,typename cv_tagT,typename Signature>
     result_type execute(context* c,boost::type<R>,member_data_tag& ct,cv_tagT,argument<Signature,0>& a0,argument<Signature,1>& a1) const

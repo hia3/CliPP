@@ -29,7 +29,7 @@ class operator_error : public std::runtime_error
 {
 public:
     static std::string get_expression(operator_id id,valueP lhs,valueP rhs) {
-        context* c=NULL;
+        context* c = nullptr;
         if(lhs && lhs->get_context()) c=lhs->get_context();
         else if(rhs && rhs->get_context()) c=rhs->get_context();
 
@@ -64,7 +64,7 @@ inline valueP call_operator(valueP const& method,valueP const& lhs,valueP const&
 }
 
 template<operator_id id>
-valueP get_binary_operator(valueP const& lhs,valueP const& rhs,value::Params& params,boost::mpl::int_<id>* dummy=NULL)
+valueP get_binary_operator(valueP const& lhs,valueP const& rhs,value::Params& params,boost::mpl::int_<id>* dummy = nullptr)
 {
     params[0]=lhs;
     params[1]=rhs;
@@ -79,11 +79,11 @@ valueP get_binary_operator(valueP const& lhs,valueP const& rhs,value::Params& pa
     }
     else if(method1) return method1;
     else if(method2) return method2;
-    else return NULL;
+    else return nullptr;
 }
 
 template<operator_id id>
-valueP get_binary_inplace_operator(valueP const& lhs,valueP const& rhs,boost::mpl::int_<id>* dummy=NULL)
+valueP get_binary_inplace_operator(valueP const& lhs,valueP const& rhs,boost::mpl::int_<id>* dummy = nullptr)
 {
     value::Params params(2);
     params[0]=lhs;
@@ -91,7 +91,7 @@ valueP get_binary_inplace_operator(valueP const& lhs,valueP const& rhs,boost::mp
 
     valueP method=lhs->lookup(detail::operator_l<id>::name(),lhs);
     if(method && method->validate_arguments(value::call_method,params)) return method;
-    return NULL;
+    return nullptr;
 }
 
 template<operator_id id>
@@ -219,14 +219,14 @@ struct binary_operator_invoker<'!='>
 };
 
 template<operator_id id>
-valueP invoke_operator(valueP const& lhs,valueP const& rhs,boost::mpl::int_<id>* dummy=NULL)
+valueP invoke_operator(valueP const& lhs,valueP const& rhs,boost::mpl::int_<id>* dummy = nullptr)
 {
     return binary_operator_invoker<id>::invoke(lhs,rhs);
 }
 
 //postfix ++,--
 template<operator_id id>
-valueP invoke_operator(valueP const& lhs,int rhs,boost::mpl::int_<id>* dummy=NULL)
+valueP invoke_operator(valueP const& lhs,int rhs,boost::mpl::int_<id>* dummy = nullptr)
 {
     value::Params params(1);
     params[0]=lhs;
@@ -241,7 +241,7 @@ valueP invoke_operator(valueP const& lhs,int rhs,boost::mpl::int_<id>* dummy=NUL
 }
 
 template<operator_id id>
-valueP invoke_operator(valueP const& lhs,boost::mpl::int_<id>* dummy=NULL)
+valueP invoke_operator(valueP const& lhs,boost::mpl::int_<id>* dummy = nullptr)
 {
     value::Params params(1);
     params[0]=lhs;

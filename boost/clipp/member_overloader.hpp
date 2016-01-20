@@ -19,12 +19,12 @@ public:
     member_overloader();
     virtual ~member_overloader() {}
 
-    virtual valueP call(Params& arguments,valueP parent=NULL);
-    virtual valueP construct(Params& arguments,valueP parent=NULL);
+    virtual valueP call(Params& arguments,valueP parent = nullptr);
+    virtual valueP construct(Params& arguments,valueP parent = nullptr);
     virtual valueP lookup(const std::string& identifier,valueP parent);
-    virtual valueP duplicate(valueP parent=NULL);
-    virtual valueP assign(valueP rhs,valueP parent=NULL);
-    virtual bool   validate_arguments(value_method method,Params& arguments,valueP parent=NULL);
+    virtual valueP duplicate(valueP parent = nullptr);
+    virtual valueP assign(valueP rhs,valueP parent = nullptr);
+    virtual bool   validate_arguments(value_method method,Params& arguments,valueP parent = nullptr);
     virtual valueP join(valueP rhs);
     virtual valueP join_client(valueP rhs);
     virtual type_detail type();

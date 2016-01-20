@@ -14,16 +14,16 @@ namespace boost { namespace clipp {
 class BOOST_CLIPP_EXPORT_IMPORT object : public value  
 {
 public:
-	object();
-	virtual ~object();
+    object();
+    virtual ~object();
 
     virtual void create(context* c);
 
     virtual detail::converterP get_converter_from_this(const type_detail& to,precedence p,valueP& wrapped);
 
     virtual valueP operator[](const std::string& identifier);
-    virtual valueP lookup(const std::string& identifier,valueP parent=NULL);
-    virtual valueP construct(Params& args,valueP parent=NULL);
+    virtual valueP lookup(const std::string& identifier,valueP parent = nullptr);
+    virtual valueP construct(Params& args,valueP parent = nullptr);
 
     virtual valueP prototype();
 

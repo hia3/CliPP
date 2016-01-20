@@ -16,14 +16,14 @@ namespace boost { namespace clipp {
 
 class arg {
 public:
-    arg(const char* name=NULL,const char* help_text=NULL) 
+    arg(const char* name = nullptr,const char* help_text = nullptr)
     {
         if(name) name_=name;
         if(help_text) help_text_=help_text;
     }
     template<typename T>
     arg& operator=(T const& arg) {
-    	default_value_.set(arg);
+        default_value_.set(arg);
         return *this;
     }
     valueP get_default_value(context* c) {
@@ -53,8 +53,8 @@ public:
     std::string format(context* c) {
         typedef typename unwrap<BOOST_DEDUCED_TYPENAME mpl::at<Signature,mpl::int_<Iarg+4> >::type>::result_type result_type;
         std::string format = c->type_name(type_id<result_type>());
-	    if(name().size()>0) format+= " " + name();
-        if(valueP default_value=get_default_value(c)) {		
+        if(name().size()>0) format+= " " + name();
+        if(valueP default_value=get_default_value(c)) {
             format +=" = " + unwrap<std::string const&>(default_value["toString"]())();
         }
         return format;

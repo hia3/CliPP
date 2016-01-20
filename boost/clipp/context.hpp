@@ -63,8 +63,8 @@ private:
 };
 
 template<typename T>
-bool is_type_defined(context* c,T* dummy=NULL) {
-    return c->get_prototype(type_id<T>())!=NULL;
+bool is_type_defined(context* c,T* dummy = nullptr) {
+    return c->get_prototype(type_id<T>()) != nullptr;
 }
 
 }} // namespace boost::clipp
