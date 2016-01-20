@@ -1,0 +1,153 @@
+<html>
+<head>
+<title>Properties</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Properties</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="constructors.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="functions.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>We are now ready to expand our <tt>point</tt> class to include access to <tt>
+x</tt>,<tt>y</tt> and <tt>z</tt>.</p>
+<pre><code><font color="#000000"><span class=identifier>    <b>class</b> point : <b>public</b> object {
+    <b>public</b>:
+</span></font><span class=identifier><font color="#008000">	//construction
+</font></span><font color="#000000"><span class=identifier>	point(<b>double</b> x,<b>double</b> y,<b>double</b> z);
+
+</span></font><span class=identifier><font color="#008000">	//access
+</font></span><font color="#000000"><span class=identifier>	<b>double</b> get_x() <b>const</b>;
+	<b>double</b> get_y() <b>const</b>;
+	<b>double</b> get_z() <b>const</b>;
+
+	<b>void</b> set_x(<b>double</b> x);
+	<b>void</b> set_y(<b>double</b> y);
+	<b>void</b> set_z(<b>double</b> z);
+    <b>private</b>:
+	<b>double</b> x_,y_,z_;
+    };</span></font></code></pre>
+<p>Above, we have implemented both read and write access to <tt>x</tt>,<tt>y</tt> 
+and <tt>z</tt>.<br>
+We'll examine read and write access in turn:</p>
+<h3>Read access</h3>
+<p>There are three ways to expose read-access to dynamic data in a class:</p>
+<ul>
+  <li>member-function</li>
+  <li>free functions threated as member functions (first argument interpreted as
+  <tt>this</tt>)</li>
+  <li>member-data</li>
+</ul>
+<p>in addition, there are three ways to expose read-access to global data in a 
+class:</p>
+<ul>
+  <li>free function threated as static function</li>
+  <li>constant values</li>
+  <li>references</li>
+</ul>
+<p>Here are some examples of the different forms for access:</p>
+<pre><span class="identifier"><code><font color="#008000">    //dynamic data access:
+</font>    <b>double</b> point::get_x();                   <font color="#008000">//member-functions
+</font></code></span><code><span class=identifier>    </span></code><span class="identifier"><code><b>double</b> point::y_;                        <font color="#008000">//member-data</font></code></span><code><span class=identifier>
+</span></code><span class="identifier"><code>    <b>double</b> point_get_z(<b>const</b> point&amp; p);      </code></span><font color="#008000"><span class="identifier"><code>//f</code></span>ree functions as member</font><span class="identifier"><code><font color="#008000">
+    //static data access:
+</font></code></span><code><span class=identifier>    <b>double</b> get_earth_gravity();<font color="#008000">              //free function
+    </font>3.14<font color="#008000">                                     //constant value
+    </font><b>static</b> <b>int</b> global_var;                   <font color="#008000">//Global value</font></span></code></pre>
+<p>And this is how to expose the above to CliPP:</p>
+<pre><span class="identifier"><code><font color="#008000">    //dynamic data access:
+</font></code></span><code><span class=identifier><font color="#000000">    cls.read(&quot;x&quot;,get_x);                     </font></span></code><span class="identifier"><code><font color="#008000">//member-functions
+</font></code></span><code><span class=identifier><font color="#000000">    cls.read(&quot;y&quot;,&amp;</font></span></code><span class="identifier"><code>y_</code></span><code><span class=identifier><font color="#000000">);                       </font></span></code><span class="identifier"><code><font color="#008000">//member-data</font></code></span><code><span class=identifier>
+<font color="#000000">    cls.read(&quot;z&quot;,</font></span></code><span class="identifier"><code>point_get_z</code></span><code><span class=identifier><font color="#000000">);               </font></span></code><font color="#008000"><span class="identifier"><code>//f</code></span>ree functions as member</font><span class="identifier"><code><font color="#008000">
+    //static data access:
+</font></code></span><code><span class=identifier><font color="#000000">    cls.read(&quot;gravity&quot;,</font>get_earth_gravity<font color="#000000">);   </font></span></code><span class="identifier"><code><font color="#008000">//</font></code></span><code><span class=identifier><font color="#008000">free function
+</font><font color="#000000">    cls.read(&quot;PI&quot;,3.14);                     </font></span></code><span class="identifier"><code><font color="#008000">//</font></code></span><code><span class=identifier><font color="#008000">constant value
+    </font><font color="#000000">cls.read(&quot;ref&quot;,boost::ref(global_var));</font><font color="#008000">  //reference to value</font></span></code></pre>
+<p>static data read access can also be made available globally:</p>
+<pre><span class="identifier"><code>    context* c=parser.get_context();
+<font color="#008000">    //static data access:</font>
+</code></span><code><span class=identifier>    read(c,&quot;gravity&quot;,get_earth_gravity);     <font color="#008000">//free function</font>
+    read(c,&quot;PI&quot;,3.141);                      <font color="#008000">//constant value
+    </font><font color="#000000">read(c,&quot;ref&quot;,boost::ref(global_var));</font><font color="#008000">    //reference to value</font></span></code></pre>
+<h3>Write access</h3>
+<p>There are three ways to expose write-access to dynamic data in a class:</p>
+<ul>
+  <li>member-function</li>
+  <li>free functions threated as member functions (first argument interpreted as
+  <tt>this</tt>)</li>
+  <li>member-data</li>
+</ul>
+<p>in addition, there is two way to expose write-access to global data in a 
+class:</p>
+<ul>
+  <li>free function</li>
+  <li>reference</li>
+</ul>
+<pre><span class="identifier"><code><font color="#008000">    //dynamic data access:
+</font>    <b>void</b> point::set_x(<b>double</b> x);<font color="#008000">                   //member-functions
+</font></code></span><code><span class=identifier>    </span></code><span class="identifier"><code><b>double</b> point::y_;<font color="#008000">                              //member-data</font></code></span><code><span class=identifier>
+</span></code><span class="identifier"><code>    <b>void</b> point_set_z(<b>const</b> point&amp; p,<b>double</b> z);</code></span><font color="#008000"><span class="identifier"><code>     //f</code></span>ree functions as member</font><span class="identifier"><code><font color="#008000">
+    //static data access:
+</font></code></span><code><span class=identifier>    <b>void</b> set_earth_gravity(<b>double</b> g);<font color="#008000">              //free function
+    </font><b>static</b> <b>int</b> global_var;<font color="#008000">                         //Global value</font></span></code></pre>
+<p>And this is how to expose the above to CliPP:</p>
+<pre><span class="identifier"><code><font color="#008000">    //dynamic data access:
+</font></code></span><code><span class=identifier><font color="#000000">    cls.write(&quot;x&quot;,</font></span></code><span class="identifier"><code>set_x</code></span><code><span class=identifier><font color="#000000">);</font></span></code><span class="identifier"><code><font color="#008000">                    //member-functions
+</font></code></span><code><span class=identifier><font color="#000000">    cls.write(&quot;y&quot;,&amp;</font></span></code><span class="identifier"><code>y_</code></span><code><span class=identifier><font color="#000000">);</font></span></code><span class="identifier"><code><font color="#008000">                      //member-data</font></code></span><code><span class=identifier>
+<font color="#000000">    cls.write(&quot;z&quot;,</font></span></code><span class="identifier"><code>point_set_z</code></span><code><span class=identifier><font color="#000000">);</font></span></code><font color="#008000"><span class="identifier"><code>              //f</code></span>ree functions as member</font><span class="identifier"><code><font color="#008000">
+    //static data access:
+</font></code></span><code><span class=identifier><font color="#000000">    cls.write(&quot;gravity&quot;,</font>set_earth_gravity<font color="#000000">);</font></span></code><span class="identifier"><code><font color="#008000">  //</font></code></span><code><span class=identifier><font color="#008000">free function
+</font><font color="#000000">    cls.write(&quot;ref&quot;,boost::ref(global_var));</font></span></code><span class="identifier"><code><font color="#008000"> //</font></code></span><code><span class=identifier><font color="#008000">reference to value</font></span></code></pre>
+<p>static data write access can also be made available globally:</p>
+<pre><span class="identifier"><code>    context* c=parser.get_context();
+<font color="#008000">    //static data access:</font>
+</code></span><code><span class=identifier>    write(c,&quot;gravity&quot;,set_earth_gravity);    <font color="#008000">//free function
+</font>    write(<font color="#000000">&quot;ref&quot;,boost::ref(global_var)</font>);    <font color="#008000"> //reference to value</font></span></code></pre>
+<h3>Read/Write access</h3>
+<p>If you want to create both read and write access, you can use the <tt>
+read_write</tt> function with the same restrictions as above:</p>
+<pre><code><font color="#000000"><span class=identifier>    cls.read_write(&quot;x&quot;,get_x,set_x);
+</span></font><span class=identifier><font color="#000000">    cls.read_write(&quot;y&quot;,&amp;y_,set_y);
+    cls.read_write(&quot;y&quot;,&amp;z_,&amp;z);</font></span></code></pre>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="constructors.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="functions.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

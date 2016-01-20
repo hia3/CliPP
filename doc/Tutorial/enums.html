@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Properties</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Enums</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="conversion.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="variable_arguments.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>Exposing c++ enumerations can be done as shown below:</p>
+<pre><font color="#008000">    //Defining enumeration</font>
+    <b>enum</b> colors {
+	red,
+	green,
+	blue
+    };
+    enum global_values {
+	fixed
+    };
+
+<font color="#008000">    //exposing enumeration</font>
+    enum_&lt;colors&gt; cls(&quot;colors&quot;,c);
+    cls.value(&quot;red&quot;,red);
+    cls.value(&quot;green&quot;,green);
+    cls.value(&quot;blue&quot;,blue);
+<font color="#008000">
+    //Exposing enumeration to the global namespace
+</font>    cls.global_value(&quot;fixed&quot;,fixed);</pre>
+<p>In javascript, you can use this in the following way:</p>
+<pre><font color="#008000">    //Using the enumerated values;</font>
+    <b>var</b> red = colors.red;
+    <b>var</b> green = colors.green;
+    <b>var</b> blue =colors.blue;
+    
+<font color="#008000">    //The global vaules are, as stated, global:</font>
+    <b>var</b> fixed_value = fixed;</pre>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="conversion.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="variable_arguments.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

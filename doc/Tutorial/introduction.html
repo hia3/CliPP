@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Introduction</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+<link rel="home" href="../index.html">
+<link rel="index" href="index.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="classes.html">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">
+      Introduction</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30">
+    <img src="../theme/l_arr_disabled.gif" border="0" width="20" height="19"></td>
+    <td width="20"><a href="classes.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>CliPP is an object-oriented is a common language interface (CLI) to make it 
+easy to integrate scripting facilities into a project by wrapping C++ classes 
+and functions. The CLI was designed with the javascript scripting language in 
+mind, and comes with a complete javascript parser. In theory, parsers for other 
+scripting languages could be added relatively simple.</p>
+<p>It is time for a simple example:</p>
+<p>We have a simple C++ function that we want to make accessible from the scripting 
+language</p>
+<pre><code><font color="#000000"><span class=identifier>    <b>double</b> square(<b>double</b> <b>const</b>&amp; x)
+    {
+	<b>return</b> x*x;
+    }</span></font></code></pre>
+<p>In order to wrap this function, we need to do the following:</p>
+<pre><span class="identifier"><code>    <b>#include</b> &lt;boost/javascript.hpp&gt;
+    <b>#include</b> &lt;boost/clipp.hpp&gt;
+</code></span><code><font color="#000000"><span class="identifier">
+    <b>using namespace</b> boost::clipp;
+    <b>using namespace</b> boost::javascript;
+
+    <b>double</b> square(<b>double</b> <b>const</b>&amp; x)
+    {
+	<b>return</b> x*x;
+    }
+</span><span class=special>
+    </span><span class="identifier"><b>void</b> main() 
+    {
+	</span></font><span class="identifier"><font color="#008000">//Create a javascript parser</font><font color="#000000">
+	javascript_parser parser;
+</font><font color="#008000">	//The context is a storage class that stores all exposed functions and class definitions</font><font color="#000000">
+	context* c=parser.get_context();
+
+	</font><font color="#008000">//This line exposes the square function to the javascript parser.</font><font color="#000000">
+	function(c,&quot;square&quot;,square);
+	
+	</font><font color="#008000">//Parse string</font><font color="#000000">
+	parser.parse(&quot;<b>var</b> a=square(Math.PI);&quot;);
+
+</font><font color="#008000">	//Extract data from javascript </font><font color="#000000">
+	<b>double</b> result=unwrap&lt;<b>double</b>&gt;(parser.parse(&quot;a;&quot;))();
+</font></span><span class="identifier"><font color="#000000">    }</font></span></code></pre>
+<p>The following few pages will explain in detail how to expose classes and some 
+finer details</p>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30">
+    <img src="../theme/l_arr_disabled.gif" border="0" width="20" height="19"></td>
+    <td width="20"><a href="classes.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright &copy; 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

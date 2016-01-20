@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Constructors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Automatic 
+      type registering</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="storage_policies.htm">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="back_calling.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<h3>What is automatic type registering?</h3>
+<p>CliPP supports automatic registration of types. This means, that when you 
+register eg. a function to CliPP, CliPP will parse the argument list of the 
+function, and try to register these types to CliPP eg. by calling the static <tt>
+init</tt> function on the class if applicable.</p>
+<pre><font color="#000000">    </font><code><span class=identifier><font color="#008000">//Some function</font></span></code><font color="#000000">
+<span class=identifier><code>    <b>int</b> test(<b>const</b> point3&amp; p1,<b>double</b> r,<b>const</b> vector3&amp; v);
+
+    </font><font color="#008000">//Register function</font><font color="#000000">
+    function(c,&quot;test&quot;,test);</font></code></span></pre>
+<p>In the above example, the following procedure is used when registering types:<br>
+Register return type:<br>
+<tt>int</tt>&nbsp; -&gt; native type. Have no means to register this type. Ignore.</p>
+<p>Register argument types:<br>
+<tt>point3</tt> -&gt; class type. Does it inherit from <tt>value</tt>? If so, call
+<tt>point3::init(c);<br>
+double</tt> -&gt; native type. Have no means to register this type. Ignore.<br>
+<tt>vector3</tt> -&gt; class type. Does it inherit from <tt>value</tt>? If so, call
+<tt>vector3::init(c);<br>
+</tt><br>
+Of course, the system also checks if the types have been registered already. If 
+so, no action is performed<br>
+&nbsp;</p>
+<h3>When does it occur?</h3>
+<p>Automatic type registering is performed in the following contexts:</p>
+<ul>
+  <li>When defining a class, the base class (if given) will be automatically 
+  registered</li>
+  <li>Whe registering functions (member/static), return type and all argument 
+  types will be automatically registered</li>
+  <li>When registering constructors, all argument types will be automatically 
+  registered</li>
+  <li>When registering read/write, the property type will be automatically 
+  registered</li>
+</ul>
+<h3>What types are considered?</h3>
+<ul>
+  <li>All decorations are ignored (<tt>const,&amp;,*</tt>)</li>
+  <li>All classes inheriting from <tt>value</tt> are considered.</li>
+  <li>stl containers (<tt>stl::vector&lt;T&gt;, stl::list&lt;T&gt;, stl::set&lt;T&gt;</tt>) are 
+  all wrapped using the <tt>container_wrapper</tt> class defined in clipp</li>
+  <li>The value type for stl containers are considered.</li>
+</ul>
+<p>Missing</p>
+<ul>
+  <li>When registering functions with a variable number of arguments (where the 
+  last argument is <tt>stl::valarray&lt;T&gt;</tt>) the value type <tt>T</tt> is not 
+  considered.</li>
+</ul>
+<h3>Improvements</h3>
+<p>This framework can be used to report programming errors, such as missing 
+initialization of types. Since it checks all relevant types exposed to the 
+scripting, it would be easy to generate a list of types that were not registered 
+during initialization of the parser. This list could then be displayed to the 
+programmer. Alas, this feature has not been implemented. </p>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="storage_policies.htm">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="back_calling.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

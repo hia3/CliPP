@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Constructors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">
+      Constructors</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="class_definition.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="properties.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>Clipp can use both c++ constructors and free functions as basis to create a 
+scripting constructor.</p>
+<p>If we go back to our <tt>point</tt> example:</p>
+<pre><code><span class=identifier>    <font color="#008000">//constructor</font><font color="#000000">
+    point::point(<b>double</b> x,<b>double</b> y,<b>double</b> z);
+
+</font><font color="#008000">    //function working like a constructor
+</font><font color="#000000">    point* create_point(<b>double</b> x,<b>double</b> y,<b>double</b> z);	</font></span></code></pre>
+<p>We can then expose these to the scripting in the following way:</p>
+<pre><code><span class="identifier"><font color="#008000">    //expose constructor</font><font color="#000000">
+    cls.constructor(arguments&lt;<b>double</b>,<b>double</b>,<b>double</b>&gt;());
+    </font><font color="#008000">//Optional syntax
+</font><font color="#000000">    cls[constructor&lt;<b>double</b>,<b>double</b>,<b>double</b>&gt;()];
+
+</font><font color="#008000">    //expose function working like a constructor</font><font color="#000000">
+    cls.constructor(create_point); </font></span></code></pre>
+<p>In javascript, a constructor can be used both in a new expression, and in a 
+call expression</p>
+<pre><span class="identifier"><code>    var a=new point(5,6,7);	<font color="#008000">//new expression
+</font>    var b=point(5,6,7);		<font color="#008000">//call expression</font></code></span></pre>
+<p>This is the default behaviour for constructor registering today. If you want 
+to change the constructor to be used only in new expressions, you have to add 
+the argument <tt>construct_method</tt>&nbsp; to the constructor exposing 
+function:</p>
+<pre><font color="#008000"><span class="identifier"><code>    //Ensure that the constructor can only be used in new expressions</code></span></font><code><span class="identifier"><font color="#000000">
+    cls.constructor(arguments&lt;double,double,double&gt;(),</font></span></code><tt>construct_method</tt><code><span class="identifier"><font color="#000000">);</font></span></code></pre>
+<p>We can also expose create_point as a global function that will only be 
+activated in call expressions:</p>
+<pre><code><span class="identifier"><font color="#008000">    //expose function working like a constructor</font><font color="#000000">
+    function(c,&quot;point&quot;,create_point); </font></span></code></pre>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="class_definition.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="properties.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Misc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+<link rel="home" href="../index.html">
+<link rel="index" href="index.html">
+<link rel="prev" href="variable_arguments.html">
+<link rel="next" href="acknowledgements.html">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Misc</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="back_calling.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20">
+    <a href="acknowledgements.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<h3>Automatic type registering</h3>
+<p>When you create a new class that has <tt>boost::clipp::object</tt> as a base 
+class, you get the advantage that it will automatically be registered if it is 
+used as argument or return type in a function or constructor that is exposed to 
+CliPP. It will also be automatically registered if you register a class 
+inheriting from that class.</p>
+<h3>STL containers</h3>
+<p>CliPP supports the use of the following stl containers:</p>
+<ul>
+  <li>std::list</li>
+  <li>std::vector</li>
+  <li>std::set</li>
+</ul>
+<p>In javascript, the <tt>Array</tt> object can be automatically converted to a
+<tt>list&lt;T&gt;</tt>, <tt>set&lt;T&gt;</tt> or <tt>vector&lt;T&gt;</tt> with any value for T.<br>
+All containers will be automatically registered with CliPP when used in a 
+function or constructor being exposed to CliPP.</p>
+<pre><span class="identifier"><code><font color="#008000">    </font></code></span><code><span class="identifier"><font color="#008000">//Define a function</font>
+    <b>void</b> polygon(<b>const </b>std::set&lt;point&gt;&amp; points);<font color="#008000">
+	
+    //Register function. This will register std::set&lt;point&gt; and point automatically to the scripting.
+</font>    function(c,&quot;polygon&quot;,polygon);<font color="#008000">
+	
+    //In javascript, you can now use this function:
+</font>    polygon(Array(point(0,0,0),point(5,6,0),point(8,5,1)));</span></code></pre>
+<h3>unwrap/wrap script values</h3>
+<p>If you want to extract the value produced from a script command, you can do 
+the following:</p>
+<pre><font color="#008000"><span class="identifier"><code>    //Extract value directly</code></span></font><code><span class="identifier"><b>
+    double</b> result = unwrap&lt;<b>double</b>&gt;(<font color="#000000">parser.parse(&quot;square(5.89);&quot;))();
+</font><font color="#008000">    //validate value before extraction
+</font>    unwrap&lt;<b>double</b>&gt; result=unwrap&lt;<b>double</b>&gt;(<font color="#000000">parser.parse(&quot;square(5.89);&quot;));
+    if(result.ok()) {
+	<b>double</b> a=result();
+    }
+
+</font><font color="#008000">    //Conversely, wrapping values is done in a similar manner</font><font color="#000000">	
+    valueP a1 = wrap(3);
+    valueP a2 = wrap(&quot;Hello&quot;);</font></span></code></pre>
+<h3>Remaining work</h3>
+<ul>
+  <li>support inheriting and using javascript objects from c++</li>
+  <li>Wrapping of COM objects</li>
+</ul>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="back_calling.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20">
+    <a href="acknowledgements.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

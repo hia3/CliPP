@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>Constructors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Storage 
+      policies</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="class_concept.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="type_registering.htm">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<h3>Storage poilcies</h3>
+<p>Classes that inherit from value are automatically garbage collected (using 
+the intrusive_ptr smart pointer). This is very convenient, as the user is 
+liberated<br>
+from the responsibility to think about memory management. When dealing with 
+other classes, the&nbsp; user must specify how CliPP should hande allocation and 
+deallocation for those classes. This is done by specifying a storage_policy to 
+the class. </p>
+<p>All storage policies needs to follow the pattern below:</p>
+<pre><code><span class=identifier><font color="#008000">    </font></span></code><b>struct</b> some_storage_policy : storage_policy_tag
+    {
+	<b>template</b>&lt;<b>typename</b> T&gt;
+	<b>struct</b> apply {
+	   <b>typedef</b> &lt;some_type&gt; type;
+	};
+	<b>typedef</b> &lt;some_tag&gt; create_tag;
+    };</pre>
+<ul>
+  <li><tt>type</tt> is the translation key between <tt>value_type</tt> and <tt>
+  storage_type</tt> (see <a href="class_concept.html">Class Concept</a>)</li>
+  <li><tt>create_tag</tt> specifies how the constructors of <tt>value_type</tt> 
+  will be called (with or without a <tt>new</tt> statement)</li>
+</ul>
+<p>CliPP has two storage policies today. <tt>default_storage_policy</tt> and <tt>
+direct_storage_policy.</tt></p>
+<p>1. <tt>default_storage_policy</tt> is the default storage policy for all 
+classes inheriting from value use.</p>
+<pre><code><span class=identifier><font color="#008000">    </font></span></code><b>struct</b> default_storage_policy : storage_policy_tag
+    {
+	<b>template</b>&lt;<b>typename</b> T&gt;
+	<b>struct</b> apply {
+	   <b>typedef</b> T type;
+	};
+	<b>typedef</b> detail::constructor_tag create_tag;
+    };</pre>
+<p>The main characteristics for this storage policy are:</p>
+<ul>
+  <li><tt>storage_type</tt> == <tt>value_type</tt></li>
+  <li>new objects are created on the heap (using <tt>new</tt>)</li>
+</ul>
+<p>
+<br>
+2. <tt>direct_storage_policy</tt> can be used when wrapping small objects on the 
+stack.</p>
+<pre><font color="#008000"><span class=identifier><code>    </code></span></font><b>struct</b> direct_storage_policy : storage_policy_tag
+    {
+	<b>template</b>&lt;<b>typename</b> T&gt;
+	<b>struct</b> apply {
+	   <b>typedef</b> class_wrapper&lt;T&gt; type;
+	};
+	<b>typedef</b> detail::constructor_no_new_tag create_tag;
+    };</pre>
+<p>The main characteristics for this storage policy are:</p>
+<ul>
+  <li><tt>storage_type</tt> == <tt>wrapped_type&lt;value_type&gt;</tt></li>
+  <li>new objects are created on the stack.</li>
+</ul>
+<p>This is a very simple storage policy. <tt>class_wrapper&lt;T&gt;</tt> stores 
+instances of <tt>T</tt> by value, making memory management as simple as possible.<br>
+Here is the source for class_wrapper:</p>
+<pre><font color="#008000"><span class=identifier><code>    </code></span></font><b>template</b>&lt;<b>typename</b> T&gt;
+    <b>class</b> class_wrapper : <b>public</b> object {
+	<b>public</b>:
+	class_wrapper(<b>const</b> T&amp; rhs) : object_(rhs) {}
+	<b>virtual</b> ~class_wrapper() {}
+	<b>operator</b> T&amp;() {<b>return</b> object_;}
+	<b>static</b> <b>void</b> init(context* c) {}
+	<b>private</b>:
+	T object_;
+    };</pre>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="class_concept.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="type_registering.htm">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<html>
+<head>
+<title>Operators</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Operators</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="functions.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="conversion.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>CliPP also allows you full operator support. You can overload almost all C++ 
+operators.<br>
+&nbsp;</p>
+<pre><code><span class="identifier"><font color="#000000">    <b>class</b> point : <b>public</b> object {
+    <b>public</b>:
+</font><font color="#008000">	//construction
+</font><font color="#000000">	point(<b>double</b> x,<b>double</b> y,<b>double</b> z);
+
+</font><font color="#008000">	//operators
+</font>	point&amp; <b>operator</b>=(<b>const</b> point&amp; point1);
+	<b>double</b> <b>operator</b>[](<b>int</b> index); <font color="#008000">//index=0,1,2 returns x_,y_ or z.
+</font>	vector <b>operator-</b>(<b>const</b> point&amp; point1); <font color="#008000">//Returns the distance between two points
+</font>	<b>bool</b> <b>operator</b>!() <font color="#008000">//Returns true if position lies in origo</font>
+<font color="#008000">	//operations
+</font><font color="#000000">	...
+</font><font color="#008000">	//access
+</font><font color="#000000">	...
+    <b>private</b>:
+	<b>double</b> x_,y_,z_;
+    };</font></span></code> </pre>
+<p>Some of the above operators might be rather artificial, but they are useful 
+in illustrating how to expose operators to CliPP:</p>
+<pre><code><span class=identifier><font color="#000000">    cls[self = self];	</font><font color="#008000">//assignment</font><font color="#000000">
+    cls[self[int()]];	</font><font color="#008000">//subscript access
+</font><font color="#000000">    cls[self - self); 	</font><font color="#008000">//subtraction
+</font><font color="#000000">    cls[!self]; 		</font><font color="#008000">//</font></span></code><font color="#008000"><span class="identifier"><code>not</code></span></font></pre>
+<p>In the example above, <tt>self</tt> is used to indicate the class you want to 
+expose. it is required that <tt>self</tt> is one of the arguments in the 
+expression.<br>
+There are four different types of operators:</p>
+<h3>binary operators</h3>
+<p>Operators with two arguments that do not change the content of any of its 
+arguments. </p>
+<ul>
+  <li>LHS argument will be transferred&nbsp; as <tt>const lhsT&amp;</tt></li>
+  <li>RHS argument will be transferred&nbsp; as <tt>const rhsT&amp;</tt></li>
+</ul>
+<p>Example of binary operators include</p>
+<ul>
+  <li>additive&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  (+,-)</li>
+  <li>multiplicative&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (*,/,%)</li>
+  <li>shift operations&nbsp;&nbsp;&nbsp;&nbsp; (&lt;&lt;,&gt;&gt;)</li>
+  <li>comparison&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  (==,!=,&gt;,&gt;=,&lt;,&lt;=)</li>
+  <li>bitwise&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  (&amp;,|,^)</li>
+</ul>
+<p>In C++ these operators can be written as</p>
+<pre><span class="identifier"><code>    friend operator op(</code></span><code><span class=identifier><font color="#000000">const point&amp; lhs,const point&amp; rhs);
+</font></span></code><span class="identifier"><code>    friend operator op(</code></span><code><span class=identifier><font color="#000000">const point&amp; lhs,const vector&amp; rhs);
+</font></span></code><span class="identifier"><code>    friend operator op(</code></span><code><span class=identifier><font color="#000000">const vector&amp; lhs,const point&amp; rhs);</font></span></code></pre>
+<p>where op is replaced with the correct operator from the list above.<br>
+In CliPP the above operators will be exposed to the class <tt>point</tt> as:</p>
+<pre><code><span class=identifier><font color="#000000">    cls[self op self];
+    cls[self op other&lt;vector&gt;()];
+    cls[other&lt;vector&gt;() op self];</font></span></code></pre>
+<p>&nbsp;</p>
+<table width="80%" border="0" align="center">
+  <tr> 
+    <td class="note_box"><img src="../theme/lens.gif" width="15" height="16"> <b>
+    The other&lt;T&gt; template</b><br>
+      <br>
+      When exposing an operator, you use <tt>self</tt> to indicate the class 
+    being exposed. If you have an operator involving another type, you need to 
+    give this type in as an argument. You can do this by constructing a 
+    dummy-variable of the correct type, as in the subscript example above: <tt>
+    self[int()]<br>
+    </tt>This is very handy if the type has a default constructor such as int, 
+    but breaks down for complex types with no default constructors. This is why 
+    the <tt>other&lt;T&gt;</tt> template exists. It is a helper template that 
+    propagates the type supplied to <tt>other </tt>without constructing an 
+    object of that type.</td>
+  </tr>
+</table>
+<h3>binary inplace operators and assignment</h3>
+<p>Operators with two arguments that changes the content of its first argument. </p>
+<ul>
+  <li>LHS argument will be transferred&nbsp; as <tt>lhsT&amp;</tt></li>
+  <li>RHS argument will be transferred&nbsp; as <tt>const rhsT&amp;</tt></li>
+</ul>
+<p>Example of binary inplace operators include</p>
+<ul>
+  <li>additive&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  (+=,-=)</li>
+  <li>multiplicative&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (*=,/=,%=)</li>
+  <li>shift operations&nbsp;&nbsp;&nbsp;&nbsp; (&lt;&lt;=,&gt;&gt;=)</li>
+  <li>bitwise&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  (&amp;=,|=,^=)</li>
+  <li>assignment&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  (=)</li>
+</ul>
+<p>In C++ these operators can be written as</p>
+<pre><span class="identifier"><code>    point&amp; point::operator op(</code></span><code><span class=identifier><font color="#000000">const point&amp; rhs);
+</font></span></code><span class="identifier"><code>    point&amp; point::operator op(</code></span><code><span class=identifier><font color="#000000">const vector&amp; rhs);</font></span></code></pre>
+<p>where op is replaced with the correct operator from the list above.<br>
+In CliPP the above operators will be exposed to the class <tt>point</tt> as:</p>
+<pre><code><span class=identifier><font color="#000000">    cls[self op self];
+    cls[self op other&lt;vector&gt;()];</font></span></code></pre>
+<h3>unary operators</h3>
+<p>Operators with one arguments. </p>
+<ul>
+  <li>LHS argument will be transferred&nbsp; as <tt>const lhsT&amp;</tt></li>
+</ul>
+<p>Example of binary inplace operators include</p>
+<ul>
+  <li>+,-,!,~,++,--</li>
+</ul>
+<p>In C++ these operators can be written as</p>
+<pre><span class="identifier"><code>    point&amp; point::operator op(</code></span><code><span class=identifier><font color="#000000">);</font></span></code></pre>
+<p>where op is replaced with the correct operator from the list above.<br>
+In CliPP the above operators will be exposed to the class <tt>point</tt> as:</p>
+<pre><code><span class=identifier><font color="#000000">    cls[op self];</font></span></code></pre>
+<h3>other operators</h3>
+<ul>
+  <li>postfix operators (++,--)</li>
+  <li>subscript operator( []) (only subscripts with 1 argument supported)</li>
+</ul>
+<p>In C++ these operators can be written as</p>
+<pre><span class="identifier"><code>    point&amp; point::operator ++(</code></span><code><span class=identifier><font color="#000000">int);
+</font></span></code><span class="identifier"><code>    point&amp; point::operator --(</code></span><code><span class=identifier><font color="#000000">int);
+</font></span></code><span class="identifier"><code>    double point::operator [](</code></span><code><span class=identifier><font color="#000000">int);</font></span></code></pre>
+<p>In CliPP the above operators will be exposed to the class <tt>point</tt> as:</p>
+<pre><code><span class=identifier><font color="#000000">    cls[self++];
+    cls[self--];
+    cls[self[int()]];</font></span></code></pre>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="functions.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="conversion.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

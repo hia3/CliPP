@@ -1,0 +1,162 @@
+<html>
+<head>
+<title>Constructors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Class 
+      Concept</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="variable_arguments.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="storage_policies.htm">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<h3>Introduction</h3>
+<p>The <tt>class_</tt> concept is a very versatile tool for exposing classes to 
+the scripting engine.</p>
+<p>These are the data that the <tt>class_</tt> concept needs to know about.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+  <tr>
+    <td width="10%"><tt>value_type</tt></td>
+    <td width="90%"><font face="Georgia">The class you want to register </font></td>
+  </tr>
+  <tr>
+    <td width="10%"><tt>base_type</tt></td>
+    <td width="90%"><font face="Georgia">The base class (optional)&nbsp; </font></td>
+  </tr>
+  <tr>
+    <td width="10%"><tt>wrapped_type</tt></td>
+    <td width="90%"><font face="Georgia">Described below (optional)</font></td>
+  </tr>
+  <tr>
+    <td width="10%"><tt>storage_policy</tt></td>
+    <td width="90%"><font face="Georgia">Information about how to store the 
+    registered class (</font><tt>value_type</tt><font face="Georgia">) 
+    internally (optional)</font></td>
+  </tr>
+  <tr>
+    <td width="10%"><tt>storage_type</tt></td>
+    <td width="90%"><font face="Georgia">A class representing value_type, but 
+    inheriting from value. (If value_type inherits from value, </font><tt>
+    storage_type</tt><font face="Georgia"> == </font><tt>value_type</tt><font face="Georgia">)
+    </font></td>
+  </tr>
+</table>
+<p><tt>wrapped_type</tt> can be used in two similar ways:</p>
+<ol>
+  <li>To allow a scripting class to represent a native type (<tt>double</tt> is 
+  the <tt>wrapped_type</tt> of class <tt>number</tt>)</li>
+  <li>If <tt>value_type</tt> is a class that does not inherit from value, <tt>
+  wrapped_type</tt> == <tt>value_type</tt></li>
+</ol>
+<p>This imposes the restriction that only classes inheriting from value can be 
+used to wrap native types (such as <tt>double</tt>)</p>
+<p>Example:</p>
+<pre>    <code><span class=identifier><font color="#008000">//Define some integer class</font></span></code>
+    <b>class</b> my_int {
+	my_int(<b>int</b> input);	
+	<b>operator</b> <b>int</b>&amp;() <b>const</b>;
+	<b>operator</b>+...
+    };
+
+<code><span class=identifier><font color="#008000">    //Expose the integer class, and let it represent int internally</font></span></code>
+    class_&lt;my_int,<b>int</b>&gt; cls(...); <font color="#008000"><span class=identifier><code>//Fails!
+
+    //Expose the std::string class, and let it represent const char* internally
+    </code></span></font>class_&lt;std::string,<b>const char</b>*&gt; cls(...);<code><span class=identifier><font color="#008000"> //Fails!</font></span></code></pre>
+<p>This restriction will disappear in future versions of CliPP.</p>
+<h3>Usages</h3>
+<p>Let us examine the most common usages of the <tt>class_</tt> concept.</p>
+<h4>Classes inheriting from value:</h4>
+<p>1. scripting class without (relevant) base classes</p>
+<pre>    <b>class</b> object : <b>public</b> value {
+	...
+    };
+
+    <code><span class=identifier><font color="#008000">//Simple class</font></span></code>
+<code><span class=identifier><font color="#008000">    </font><font color="#000000">class_&lt;object&gt; cls(...); 
+</font><font color="#008000">    //value_type   == object ( == storage_type)</font></span></code></pre>
+<p>2. scripting class with a base class</p>
+<pre>    <b>class</b> array : <b>public</b> object {
+	...
+    };
+
+    <code><span class=identifier><font color="#008000">//Make scripting functionality defined in the object class available to array</font></span></code>
+<code><span class=identifier><font color="#008000">    </font><font color="#000000">class_&lt;array,object&gt; cls(...);
+</font><font color="#008000">    //value_type   == array ( == storage_type)
+    //base_type    == object</font></span></code></pre>
+<p>3. Scripting class with a base class, wrapping a native value</p>
+<pre>    <b>class</b> number : <b>public</b> object {
+	number(<b>const</b> <b>double</b>&amp;);
+	<b>operator</b> <b>double</b>&amp;();
+	...
+    };
+
+    <code><span class=identifier><font color="#008000">//Class with a base, representing a native </font></span></code>
+<code><span class=identifier><font color="#008000">    </font><font color="#000000">class_&lt;number,object,<b>double</b>&gt; cls(...);
+</font><font color="#008000">    //value_type   == number ( == storage_type)
+    //base_type    == object
+    //wrapped_type == double
+</font><font color="#000000">
+    ...
+    context* c=...;
+    <b>double</b> value=5.0;
+    wrap(value,c); </font><font color="#008000">//Will create a new instance of the number class </font></span></code></pre>
+<h4>Classes NOT inheriting from value</h4>
+<p>1. class without (relevant) base classes. With a storage policy.</p>
+<pre>    <b>namespace</b> std {
+       <b>template</b>&lt;<b>typename</b> T&gt; <b>class</b> complex;
+    };
+    <code><span class=identifier><font color="#008000">//Class with a base, representing a native </font></span></code>
+<code><span class=identifier><font color="#008000">    </font><font color="#000000">class_&lt;std::complex&lt;<b>double</b>&gt;,direct_storage_policy&gt; cls(...);
+</font><font color="#008000">    //value_type   == std::complex&lt;double&gt;
+    //storage_type == wrapped_type&lt;value_type&gt;
+    //wrapped_type == std::complex&lt;double&gt;
+    //storage_policy == direct_storage_policy</font></span></code><span class=identifier><code><font color="#008000">
+</font><font color="#000000">
+    ...
+    context* c=...;
+    <b>std::complex&lt;double&gt;</b> value(5.0,1.0);
+    wrap(value,c); </font><font color="#008000">//Will create a new instance of </font></code></span><code><span class=identifier><font color="#008000">wrapped_type&lt;std::complex&lt;double&gt; &gt;</font></span></code></pre>
+<p>More on storage policies in the next chapter...</p>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="variable_arguments.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="storage_policies.htm">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

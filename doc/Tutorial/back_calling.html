@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>Calling Scripting functions from C++</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Calling 
+      Scripting functions from C++</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="type_registering.htm">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="misc.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>We now have a fairly good grasp on exposing C++ functions and objects to 
+CliPP (and the Javascript engine) In some cases we might want to go the other 
+way, calling for example javascript functions from C++. This is possible. Let's 
+examine how:</p>
+<pre><span class="identifier"><code>    context* c=parser.get_context();
+
+    <font color="#008000">//Create a new number object, using the Number constructor from the javascript language</font></code></span><code><span class=identifier><font color="#000000">
+    valueP result = c-&gt;global()[&quot;Number&quot;](86.97);
+
+    </font><font color="#008000">//Convert the number to a hexadecimal digit
+</font>    valueP hex    = result[&quot;toString&quot;](16);
+
+<font color="#008000">    //Convert the javascript string to const char*</font>
+    <b>const char</b>* text = unwrap&lt;<b>const char</b>*&gt;(hex)();  </span></code></pre>
+<h3>Calling a Javascript function from C++</h3>
+<p>If you write a function in javascript, it is easy to call it from C++:</p>
+<pre><span class="identifier"><code>      <font color="#008000">//Create a function in Javascript</font>	
+      parser.parse(
+	&quot;function faculty(input) {\n&quot;
+      &quot;   if(input&lt;=1) return 1;\n&quot;
+      &quot;   return input*faculty(input-1);\n&quot;
+      &quot;}&quot;);
+    
+    context* c=parser.get_context();
+
+    <font color="#008000">//Call function from C++</font>    
+    valueP result = c-&gt;global()[&quot;faculty&quot;](10);
+
+    <font color="#008000">//Extract answer (should be 3628800)</font>
+    <b>int</b> output = unwrap&lt;<b>int</b>&gt;(result)();
+</code></span><code><span class=identifier>  </span></code></pre>
+<h3>Shortcomings</h3>
+<p>Here is a list of all the aspects of using scripting functionallity from 
+inside C++</p>
+<p>This is a list of all the functionality that is complete and working.</p>
+<table width="90%" border="0" align="center">
+  <tr> 
+    <td class="table_title" colspan="2">Supported functionality</td>
+  </tr>
+  <tr> 
+    <td class="table_cells" width="30%"><b>constructors</b></td>
+    <td class="table_cells" width="70%"><font face="Courier New">valueP result = 
+    c-&gt;global()[&quot;Number&quot;](86.79);</font></td>
+  </tr>
+  <tr> 
+    <td class="table_cells" width="30%"><b>objects</b></td>
+    <td class="table_cells" width="70%">The result of the above expression</td>
+  </tr>
+  <tr> 
+    <td class="table_cells" width="30%"><b>functions</b></td>
+    <td class="table_cells" width="70%"><font face="Courier New">
+    result[&quot;toString&quot;](16);</font></td>
+  </tr>
+  <tr> 
+    <td class="table_cells" width="30%"><b>read properties</b></td>
+    <td class="table_cells" width="70%"><font face="Courier New">valueP pinf = 
+    result[&quot;POSITIVE_INFINITY&quot;];</font></td>
+  </tr>
+</table>
+<p>Here are some things that will currently not work. Both of the below 
+deficiencies arise because it is hard to implement non-intrusive general 
+templated operator overloadings.</p>
+  <table width="90%" border="0" align="center">
+  <tr> 
+    <td class="table_title" colspan="2">Unsupported functionality</td>
+  </tr>
+  <tr>
+    <td class="table_cells" width="30%"><b>write properties</b></td>
+    <td class="table_cells" width="70%"><font face="Courier New">
+    result1[&quot;x&quot;] = 8;</font></td>
+  </tr>  
+  <tr>
+    <td class="table_cells" width="30%"><b>operators</b></td>
+    <td class="table_cells" width="70%"><font face="Courier New">result2 = 
+    result1[&quot;x&quot;] + 98.1;</font></td>
+  </tr>  
+  </table>
+
+<p>You can still tweak this to make it work by applying the workarounds below:</p>
+  <table width="90%" border="0" align="center">
+  <tr> 
+    <td class="table_title" colspan="2">Workarounds</td>
+  </tr>
+  <tr>
+    <td class="table_cells" width="30%"><b>write properties as functions</b></td>
+    <td class="table_cells" width="70%"><font face="Courier New">
+    result1[&quot;x&quot;](8);</font></td>
+  </tr>  
+  <tr>
+    <td class="table_cells" width="30%"><b>operators using wrapping</b></td>
+    <td class="table_cells" width="70%"><font face="Courier New">result2 = 
+    invoke_binary_operator&lt;'+'&gt;(result1[&quot;x&quot;],wrap(98.1,c));</font></td>
+  </tr>  
+  </table>
+
+<p>Use especially the operator wrapping with care, as it may be replaced with a 
+better mechanism in the future.</p>
+
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="type_registering.htm">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="misc.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

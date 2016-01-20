@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>Variable number of arguments</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Variable 
+      number of arguments</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="enums.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="class_concept.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<h3>Function overloading</h3>
+<p>CliPP has several ways of handling the case where the user wants a function 
+with a given name to accept different number of arguments.<br>
+The simplest is overloading:</p>
+<pre><code><font color="#000000"><span class=identifier>    <b>void</b> foo_1(<b>int</b> a);
+    <b>void</b> foo_2(<b>int</b> a,<b>int</b> b);</span></font></code></pre>
+<p>Which when wrapped becomes:</p>
+<pre>    cls.function(&quot;foo&quot;,foo_1);
+    cls.function(&quot;foo&quot;,foo_2);</pre>
+<p>Note that in the above example, we need, in C++, the function names to be 
+unambiguous for the compiler to know which function pointer to use in the <tt>
+cls.function(...)</tt> function. When two functions share the same name in C++, 
+the only thing that distinguishes them are their function signatures. Given the 
+above example:</p>
+<pre><code><font color="#000000"><span class=identifier>    <b>void</b> foo(<b>int</b> a);
+    <b>void</b> foo(<b>int</b> a,<b>int</b> b);</span></font></code></pre>
+<p>If we want to expose either version of the <tt>foo</tt> function to CliPP, we 
+need to include the full function signature in order to make the choice of 
+function pointer unambiguous.</p>
+<pre><font color="#008000">//</font><font color="#008000">Preferred</font>
+    cls.function(&quot;foo&quot;,(<b>void </b>(*)(<b>int</b>))foo);
+    cls.function(&quot;foo&quot;,(<b>void </b>(*)(<b>int,int</b>))foo);
+
+<font color="#008000">//Or, for compatibility:</font>
+    cls[&quot;foo&quot;] = function&lt;<b>void</b> (*)(<b>int</b>)&gt;(foo);
+    cls[&quot;foo&quot;] = function&lt;<b>void</b> (*)(<b>int</b>,<b>int</b>)&gt;(foo);</pre>
+<p>For constructors, we need to explicitly specify all the arguments to be 
+passed to the constructor anyway, because constructors are not proper functions 
+(You can not access them via function pointers, hence you can not deduce the 
+arguments required for a constructor)</p>
+<p>To overload a constructor, simply expose two constructors with different 
+signature:</p>
+<pre><font color="#008000">//Define class:</font>
+<code><span class=identifier><font color="#000000">    <b>class</b> test {
+	test(<b>int</b> a);
+	test(<b>int</b> a,<b>int</b> b);
+    };
+</font><font color="#008000">//Expose constructors:</font><font color="#000000">
+    cls[constructor&lt;<b>int</b>&gt;()];
+    cls[constructor&lt;<b>int</b>,<b>int</b>&gt;()];</font></span></code></pre>
+<h3>Varargs (...)</h3>
+<p>CliPP supports variable number of arguments in functions and constructors. In 
+C++, you specify that you want to use this feature by letting the last argument 
+of your function be of type <tt>valarray&lt;T&gt;</tt>.&nbsp; Where T is the type you 
+want the additional arguments to have. The most general type is <tt>value*</tt> 
+(defined in boost::clipp) which will accept all CliPP types. An example of its 
+use is in the javascript function <tt>Math.max(...)</tt></p>
+<pre><code><span class="identifier"><font color="#008000">    //Define constructors	
+</font>    <font color="#000000"><b>double</b> math::max(<b>const</b> std::valarray&lt;<b>double</b>&gt;&amp; args);
+    ...
+    </font><font color="#008000">//Exposing to CliPP
+</font>    cls.function(&quot;max&quot;,max);
+    ...
+    <font color="#008000">//Using in Javascript
+</font>    <b>var</b> a=Math.max(5,6,9.81);
+<font color="#008000">    //This will produce an error message, because &quot;Hello&quot; can not be converted to double
+</font>    <b>var</b> b=Math.max(6,8,&quot;Hello&quot;);</span></code></pre>
+<h3>Default arguments</h3>
+<pre><code><font color="#000000"><span class=identifier>    </font><font color="#008000">//A function argument given a default value</font><font color="#000000">	
+    void foo(int a,int b=0);</font></span></code></pre>
+<p>All functions in CliPP are transferred using function pointers. Unfortunately, 
+C++ function pointers does not contain information about the default value 
+specified. There is no way to extract this information compile time from a 
+function pointer. There are two ways to solve this problem, either by creating 
+(in the above example) a dummy function with one argument that calls the 
+function with two arguments or you can explicitly specify the optional arguments when exposing the function to 
+CliPP:</p>
+<pre><code><span class=identifier><font color="#000000">    </font><font color="#008000">//A function argument given a default value</font><font color="#000000">	
+    </font></span></code><span class="identifier"><code>cls.function(&quot;foo&quot;,foo).signature(&quot;a&quot;,arg(&quot;b&quot;)=0);</code></span></pre>
+<p>The above method works for both functions and constructors.</p>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="enums.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="class_concept.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

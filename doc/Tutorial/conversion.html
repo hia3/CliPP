@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>Converters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Converters</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="operators.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="enums.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>In some cases, you want to supply a user-defined conversion. An example of 
+this is in the definition of the javascript string object:</p>
+<p>&nbsp;</p>
+<p>Say you want to expose a point class to javascript, you would define the 
+class as:</p>
+<pre>    <b>void</b> string::init(context* c)
+    {
+	class_&lt;string,object,std::string&gt; cls(&quot;String&quot;,c);
+	<font color="#008000">//Type conversion</font>
+	cls.converter(<b>operator const char*</b>);
+	cls.converter(arguments&lt;<b>const char*</b>&gt;());
+    }</pre>
+<p>We tell the system that string can be implicitly converted to <tt>const char*
+</tt>and equally important, that <tt>const char*</tt> can be used implicitly to 
+construct a new string object. (The syntax for specifying converters may change)</p>
+<h3>Wrapping</h3>
+<p>You have two sorts of conversion: One is the implicit conversion:</p>
+<pre>    <font color="#008000">//A function takes a length argument and displays it with the correct unit</font>
+    <b>void</b> print(<b>const</b> Length&amp; l);
+<font color="#008000">    //Given that Length has a constructor converter from double, the following is legal JavaScript
+</font>    print(5.5);</pre>
+<p>This is the form of conversion that the <tt>converter</tt> function is meant 
+for.<br>
+In the other case, you have the following:<br>
+&nbsp;</p>
+<pre>    <font color="#008000">//A function takes a length argument and displays it with the correct unit</font>
+    <b>double</b> square(<b>const double</b>&amp; arg);
+<font color="#008000">    //When exposing this to javascript, we need to use a wrapper type, as primitives can not be
+    //represented directly in CliPP.
+</font>    <b>var</b> a=square(5.6);</pre>
+<p>We do not want a to be a <tt>Length</tt> variable, even though Length has a 
+constructor converter from <tt>double<br>
+</tt>This is the reason for the <tt>wrap</tt> syntax:</p>
+<pre>    <b>void</b> number::init(context* c)
+    {
+	class_&lt;number,object&gt; cls(&quot;Number&quot;,c);
+	<font color="#008000">//Type wrapping</font>
+	cls.wrap(type&lt;double&gt;());
+    }</pre>
+<p>The above statement signals that all <tt>double</tt> values returned by the 
+system shall be translated to a <tt>number</tt> object. The above statement will 
+only compile if <tt>double</tt> is convertible to <tt>number</tt> (via a 
+constructor) and vice versa, that <tt>number</tt> is convertible to <tt>double</tt> 
+(via a implicit type converting function)</p>
+<p>You can also supply a third argument to the <tt>class_</tt> template 
+definition that will be automatically wrapped in the above manner.</p>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="operators.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="enums.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

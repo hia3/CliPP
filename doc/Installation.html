@@ -1,0 +1,116 @@
+<html>
+<head>
+  <meta http-equiv="Content-Language" content="no-bok">
+  <meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+  <meta name="ProgId" content="FrontPage.Editor.Document">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=windows-1252">
+  <title>Installation</title>
+  <link rel="stylesheet" href="theme/style.css" type="text/css">
+</head>
+<body>
+<table border="0" cellspacing="2" height="48" width="100%">
+  <tbody>
+    <tr>
+      <td><a href="http://sourceforge.net">&nbsp;</a><img
+ src="theme/site_clipp.gif" border="0" height="167" width="237"></td>
+      <td width="85%">
+      <h1 style="text-align: center;" align="center">Installation</h1>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table style="border-collapse: collapse;" id="AutoNumber1" border="0"
+ bordercolor="#111111" cellpadding="0" cellspacing="0" height="421"
+ width="100%">
+  <tbody>
+    <tr>
+      <td height="421" width="22%"><br>
+      <font face="Georgia"><b><a href="index.html">Introduction</a></b></font>
+      <p><a href="download.html">Download</a></p>
+      <p><a href="Tutorial/index.html">Tutorial</a></p>
+      <p><b>Installation</b></p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      </td>
+      <td height="421" width="78%">
+      <h3>Installation</h3>
+      <p>Install CliPP somewhere on your hard disk, %CLIPP_DIR% (for
+example CLIPP_DIR = C:\projects)<br>
+You then need to add the following directories:</p>
+      <p><b>Tools|Options|Directories|Include files<br>
+      </b>%CLIPP_DIR%\CLIPP<br>
+%CLIPP_DIR%\CLIPP\MINI_BOOST</p>
+      <table align="center" border="0" width="80%">
+        <tbody>
+          <tr>
+            <td class="note_box"> <img src="Tutorial/theme/lens.gif"
+ height="16" width="15"> <b>Boost users</b><br>
+            <br>
+If you already have BOOST installed, you can use your version of boost
+UNLESS you are using Visual Studio 6 or Visual Studio 7.0. MINI_BOOST
+contains a patch to SPIRIT trees for these compilers that has not been
+accepted into SPIRIT yet (because it breaks compatibility with Borland
+and old GCC compilers)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><b>Tools|Options|Directories|Library files<br>
+      </b>%CLIPP_DIR%\CLIPP\LIBS\LIB</p>
+      <p><b>Tools|Options|Directories|Executable files<br>
+      </b>%CLIPP_DIR%\CLIPP\LIBS\BIN</p>
+      <p>You also need to add to your Path:<br>
+%CLIPP_DIR%\clipp\libs\bin</p>
+      <h3>Building CliPP</h3>
+      <p>The CliPP workspace lies here:<br>
+%CLIPP_DIR%\clipp\libs\clipp\build\VisualStudio\boost_clipp.dsw</p>
+      <p>You need to build:<br>
+      <b>boost_clipp<br>
+boost_javascript<br>
+      </b>In that order.</p>
+      <p>You will find example projects here:<br>
+%CLIPP_DIR%\clipp\libs\examples</p>
+      <h4>For all new projects, remember to:</h4>
+      <p>Enable Run-Time Type Informaion (RTTI)<br>
+Use run-time library: <br>
+&nbsp;&nbsp;&nbsp; Debug Multithreaded DLL&nbsp; for debug and<br>
+&nbsp;&nbsp;&nbsp; Multithreaded
+DLL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+for release&nbsp; </p>
+      <p>Project hosted by<br>
+      <a href="http://sourceforge.net"> <img
+ src="http://sourceforge.net/sflogo.php?group_id=86947&amp;type=5"
+ alt="SourceForge.net Logo" border="0" height="62" width="210"></a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr size="1">
+<p class="copyright">Copyright &copy; 2003-2005 Peder Holt<br>
+<br>
+<font size="2">Permission to copy, use, modify, sell and distribute
+this document is granted provided this copyright notice appears in all
+copies. This document is provided "as is" without express or implied
+warranty, and with no claim as to its suitability for any purpose. </font></p>
+</body>
+</html>

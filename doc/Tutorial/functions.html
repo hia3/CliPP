@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Functions</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="properties.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="operators.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>Now that we have access to the internal data of our class, we need to define 
+some operations. We will extend our point class:</p>
+<pre><code><span class=identifier><font color="#000000">    <b>class</b> point : <b>public</b> object {
+    <b>public</b>:
+</font><font color="#008000">	//construction
+</font><font color="#000000">	point(<b>double</b> x,<b>double</b> y,<b>double</b> z);
+
+</font><font color="#008000">	//operations
+</font><font color="#000000">	<b>bool</b> inPlane(<b>const</b> point&amp; p1,<b>const</b> point&amp; p2,<b>const</b> point&amp; p3);
+	point project(<b>const</b> line&amp; l1); </font><font color="#008000">//project point onto line</font><font color="#000000">
+
+</font><font color="#008000">	//access
+</font><font color="#000000">	<b>double</b> get_x() <b>const</b>;
+	...
+	<b>void</b> set_z(<b>double</b> z);
+    <b>private</b>:
+	<b>double</b> x_,y_,z_;
+    };</font></span></code></pre>
+<p>As with properties, there are several ways to expose functions to CliPP:</p>
+<p>There&nbsp; are two ways to expose dynamic functions of a class:</p>
+<ul>
+  <li>member-function</li>
+  <li>free functions threated as member functions (first argument interpreted as
+  <tt>this</tt>)</li>
+</ul>
+<p>There are also two ways to expose static functions of a class:</p>
+<ul>
+  <li>free functions</li>
+  <li>member-functions where <tt>this</tt> is added as the first argument to the 
+  function.</li>
+</ul>
+<p>Here are some examples of the different forms for access:</p>
+<pre><span class="identifier"><code><font color="#008000">    //dynamic data access:
+</font>    <b>bool</b> point::</code></span><code><span class=identifier><font color="#000000">inPlane</font></span></code><span class="identifier"><code>(</code></span><code><span class=identifier><font color="#000000"><b>const</b> point&amp; p1,<b>const</b> point&amp; p2,<b>const</b> point&amp; p3</font></span></code><span class="identifier"><code>);<font color="#008000"> 	//member-functions
+</font></code></span><code><span class=identifier>    <b>bool</b></span></code><span class="identifier"><code> is_origo(<font color="#000000"><b>const</b></font> point&amp; p_this);		<font color="#008000">				//</font></code></span><font color="#008000"><span class="identifier"><code>f</code></span>ree functions as member</font><span class="identifier"><code><font color="#008000">
+    //static data access:
+</font>    <b>double</b> intersect_lines(<b>const</b> line&amp; l1,<b>const</b> line&amp; l2);			<font color="#008000">//free function</font>
+    </code></span><code><span class=identifier><font color="#000000">point project(<b>const</b> line&amp; l1);</font></span></code><span class="identifier"><code>						</code></span><font color="#008000"><span class="identifier"><code>	//</code></span>member-functions as <span class="identifier"><code>static</code></span></font></pre>
+<p>And this is how to expose the above to CliPP:</p>
+<pre><span class="identifier"><code><font color="#008000">    //dynamic data access:
+</font></code></span><code><span class=identifier><font color="#000000">    cls.function(&quot;inPlane&quot;,inPlane);							</font></span></code><span class="identifier"><code><font color="#008000">//member-functions
+</font></code></span><code><span class=identifier><font color="#000000">    cls.function(&quot;</font></span></code><span class="identifier"><code>is_origo</code></span><code><span class=identifier><font color="#000000">&quot;,</font></span></code><span class="identifier"><code>is_origo</code></span><code><span class=identifier><font color="#000000">);							</font></span></code><span class="identifier"><code><font color="#008000">//</font></code></span><font color="#008000"><span class="identifier"><code>f</code></span>ree functions as member</font><code><span class=identifier>
+</span></code><span class="identifier"><code><font color="#008000">
+    //static data access:
+</font></code></span><code><span class=identifier><font color="#000000">    cls.static_function(&quot;</font></span></code><span class="identifier"><code>intersect_lines</code></span><code><span class=identifier><font color="#000000">&quot;,</font></span></code><span class="identifier"><code>intersect_lines</code></span><code><span class=identifier><font color="#000000">);	</font></span></code><span class="identifier"><code><font color="#008000">		//</font></code></span><code><span class=identifier><font color="#008000">free function
+</font><font color="#000000">    cls.static_function(&quot;project&quot;,project);						</font></span></code><font color="#008000"><span class="identifier"><code>//</code></span>member-functions as <span class="identifier"><code>static
+
+//Optional syntax:
+</code></span></font><span class="identifier"><code><font color="#008000">
+    //dynamic data access:
+</font></code></span><code><span class=identifier><font color="#000000">    cls[&quot;inPlane&quot;] = function(inPlane);						</font></span></code><span class="identifier"><code><font color="#008000">//member-functions
+</font></code></span><code><span class=identifier><font color="#000000">    cls[&quot;</font></span></code><span class="identifier"><code>is_origo</code></span><code><span class=identifier><font color="#000000">&quot;]= function(</font></span></code><span class="identifier"><code>is_origo</code></span><code><span class=identifier><font color="#000000">);						</font></span></code><span class="identifier"><code><font color="#008000">//</font></code></span><font color="#008000"><span class="identifier"><code>f</code></span>ree functions as member</font><code><span class=identifier>
+</span></code><span class="identifier"><code><font color="#008000">
+    //static data access:
+</font></code></span><code><span class=identifier><font color="#000000">    cls[&quot;</font></span></code><span class="identifier"><code>intersect_lines</code></span><code><span class=identifier><font color="#000000">&quot;]=static_function(</font></span></code><span class="identifier"><code>intersect_lines</code></span><code><span class=identifier><font color="#000000">);	</font></span></code><span class="identifier"><code><font color="#008000">		//</font></code></span><code><span class=identifier><font color="#008000">free function
+</font><font color="#000000">    cls[&quot;project&quot;]		=static_function(project);				</font></span></code><font color="#008000"><span class="identifier"><code>//</code></span>member-functions as <span class="identifier"><code>static</code></span></font></pre>
+<p>Alternatively:</p>
+<p>static functions can also be made available globally:</p>
+<pre><span class="identifier"><code>    context* c=parser.get_context();
+<font color="#008000">    //static data access:</font>
+</code></span><code><span class=identifier><font color="#000000">    function(c,&quot;</font></span></code><span class="identifier"><code>intersect_lines</code></span><code><span class=identifier><font color="#000000">&quot;,</font></span></code><span class="identifier"><code>intersect_lines</code></span><code><span class=identifier><font color="#000000">);	</font></span></code><span class="identifier"><code><font color="#008000">		//</font></code></span><code><span class=identifier><font color="#008000">free function
+</font><font color="#000000">    function(c,&quot;project&quot;,project);					</font></span></code><font color="#008000"><span class="identifier"><code>//</code></span>member-functions as <span class="identifier"><code>static</code></span></font></pre>
+<p>Let's examine how this looks in context of Javascript:</p>
+<pre>    <b>var</b> point1=<b>new</b> <b>point</b>(4,5,6);
+
+<font color="#008000">    //point's functions
+</font>    <span class="identifier"><code><font color="#008000">//member-functions</font></code></span>
+    point1.inPlane(point(0,0,0),point(0,10,0),point(10,10,0));
+<span class="identifier"><code><font color="#008000">
+    //</font></code></span><font color="#008000"><span class="identifier"><code>f</code></span>ree functions as member</font>
+    point1.is_origo();
+<span class="identifier"><code><font color="#008000">
+    //free function</font></code></span>
+    point1.intersect_lines(line1,line2);
+    <b>point</b>.intersect_lines(line1,line2);
+<span class="identifier"><code><font color="#008000">
+    </font></code></span><font color="#008000"><span class="identifier"><code>//</code></span>member-functions as <span class="identifier"><code>static</code></span></font>
+    point1.project(point1,line1);
+    <b>point</b>.project(point1,line1);
+
+<font color="#008000">    //global functions
+    </font><span class="identifier"><code><font color="#008000">//</font></code></span><code><span class=identifier><font color="#008000">free function</font></span></code><font color="#008000">
+</font>    intersect_lines(line1,line2);
+<span class="identifier"><code><font color="#008000">
+    </font></code></span><font color="#008000"><span class="identifier"><code>//</code></span>member-functions as <span class="identifier"><code>static</code></span></font>
+    project(point1,line1);</pre>
+<table width="80%" border="0" align="center">
+  <tr> 
+    <td class="note_box"><img src="../theme/lens.gif" width="15" height="16"> <b>
+    Limitations to number of arguments</b><br>
+      <br>
+      By default, Clipp is restricted to handle free functions with 10 arguments 
+    and member functions with 9 arguments. If you need more than 10 arguments 
+    for a function or a constructor, you can set a new value for the 
+    BOOST_CLIPP_MAX_ARITY macro. This should be done in the cpp file where you 
+    expose the function with more than 10 arguments, and it should be set before 
+    the first include statement.<br>
+    BOOST_CLIPP_MAX_ARITY can not be greater that 47 because of limitations in 
+    boost::mpl.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="properties.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="operators.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

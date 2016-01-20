@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Installation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">
+      Installation</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="introduction.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="classes.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<h2> Using Visual Studio</h2>
+<p>Install CliPP somewhere on your hard disk, %CLIPP_DIR% (for example CLIPP_DIR 
+= <a href="file:///C:/projects">C:\projects</a>)</p>
+<p>You then need to add the following directories:</p>
+<p><b>Tools|Options|Directories|Include files<br>
+</b>%CLIPP_DIR%\CLIPP<br>
+%CLIPP_DIR%\CLIPP\MINI_BOOST</p>
+<table width="80%" border="0" align="center">
+  <tr> 
+    <td class="note_box"><img src="../theme/lens.gif" width="15" height="16"> <b>
+    Boost users</b><br>
+      <br>
+      If you already have BOOST installed, you can use your version of boost 
+    UNLESS you are using Visual Studio 6 or Visual Studio 7.0. MINI_BOOST 
+    contains a patch to SPIRIT trees for these compilers that has not been 
+    accepted into SPIRIT yet (because it breaks compatibility with Borland and 
+    old GCC compilers)</td>
+  </tr>
+</table>
+<p><b>Tools|Options|Directories|Library files<br>
+</b>%CLIPP_DIR%\CLIPP\LIBS\LIB</p>
+<p><b>Tools|Options|Directories|Executable files<br>
+</b>%CLIPP_DIR%\CLIPP\LIBS\BIN</p>
+<p>&nbsp;</p>
+<p>You also need to add to your Path:<br>
+%CLIPP_DIR%\clipp\libs\bin</p>
+<h3>Building CliPP</h3>
+<p>The CliPP workspace lies here:<br>
+%CLIPP_DIR%\clipp\libs\clipp\build\VisualStudio\boost_clipp.dsw</p>
+<p>You need to build:<br>
+<b>boost_clipp<br>
+boost_javascript<br>
+</b>In that order.</p>
+<p>You will find example projects here:<br>
+%CLIPP_DIR%\clipp\libs\examples</p>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="introduction.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="classes.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

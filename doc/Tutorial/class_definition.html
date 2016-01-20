@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Defining a Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Defining a 
+      Class</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="classes.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="constructors.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>In the following pages we will examine in detail most of the aspects related 
+to exposing classes and functions to CliPP.<br>
+We will do this by examining an example class, <tt>point</tt>. We will start 
+from the basics and gradually build up a complete and working wrapper for the 
+class.<br>
+<br>
+The first iteration of class <tt>point</tt> looks like this: </p>
+<pre><code><font color="#000000"><span class=identifier>    <b>class</b> point : <b>public</b> object {
+    <b>public</b>:
+</span></font><span class=identifier><font color="#008000">	//construction
+</font></span><font color="#000000"><span class=identifier>	point(<b>double</b> x,<b>double</b> y,<b>double</b> z);
+    <b>private</b>:
+	<b>double</b> x_,y_,z_;
+    };</span></font></code></pre>
+<p>
+And here is the code for exposing point to the scripting language:</p>
+<pre><code><font color="#000000"><span class=identifier>    class_&lt;point,object&gt; cls(&quot;point&quot;,c);</span></font></code></pre>
+<p>
+Let's examine this piece by piece.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td width="10%"><tt>class_</tt></td>
+    <td width="90%"><font face="Georgia">The class_ identifier is used to 
+    indicate that we are exposing a class or a struct to CliPP.</font></td>
+  </tr>
+  <tr>
+    <td width="10%"><tt>point</tt></td>
+    <td width="90%"><font face="Georgia">This is the class we want to expose</font></td>
+  </tr>
+  <tr>
+    <td width="10%"><tt>object</tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+    <td width="90%"><font face="Georgia">The base class for point. Currently 
+    only 1 base class is allowed.</font></td>
+  </tr>
+  <tr>
+    <td width="10%"><tt>&quot;point&quot;</tt></td>
+    <td width="90%"><font face="Georgia">The name of the class when accessing it 
+    from CliPP.</font></td>
+  </tr>
+  <tr>
+    <td width="10%"><tt>c</tt></td>
+    <td width="90%"><font face="Georgia">This is the object where the class 
+    information is stored (will be explained in detail later)</font></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="classes.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="constructors.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>

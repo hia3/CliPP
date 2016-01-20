@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>Classes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../theme/style.css" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" background="../theme/bkd2.gif" cellspacing="2">
+  <tr> 
+    <td width="10"> 
+    </td>
+    <td width="85%"> 
+      <b><font face="Verdana, Arial, Helvetica, sans-serif" size="6">Classes</font></b>
+    </td>
+    <td width="112"><a href="http://clipp.sourceforge.net">
+    <img src="../theme/clipp.gif" align="right" border="0" width="116" height="69"></a></td>
+  </tr>
+</table>
+<br>
+<table border="0">
+  <tr>
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="introduction.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="class_definition.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+   </tr>
+</table>
+<p>Exposing a C++ class to CliPP is the next step.</p>
+<p>Here is a small example </p>
+<pre><code><font color="#000000"><span class=identifier>    <b>class</b> accumulator : <b>public</b> object {
+    <b>private</b>:
+	<b>double</b> total;
+	<b>int</b> count;
+    <b>public</b>:
+	accumulator() { total = 0.0; count=0;}
+	<b>void</b> add_in(<b>double</b> n) {total+=n; count++;}
+	<b>int</b> number() { <b>return</b> count; }
+	<b>double</b> mean() { <b>return</b> total/count; }
+	<b>static void</b> init(context* c);
+    };</span></font></code></pre>
+<p>It is convenient to let all classes you want to expose to the scripting 
+engine inherit from <tt>object</tt>. the <tt>object</tt> class implements 
+garbage collection, and ensures proper memory management. If you have a c++ 
+class that you want to expose to the scripting, you have to think about how you 
+want CliPP to manage instances of that class, when it is created or returned 
+from function calls. More on thin in the chapter <a href="storage_policies.htm">
+Storage policies</a>.</p>
+<p>If you choose to make your class inherit from <tt>object</tt>, you must implement a 
+static&nbsp; <tt>init</tt> function with the above signature. This is to allow 
+automatic initialisation of
+function arguments (see <a href="type_registering.htm">Automatic type 
+registering</a>)</p>
+<p>The <tt>init</tt> function will expose the class to 
+javascript. </p>
+<pre><code><font color="#000000"><span class=special>    </span><span class="identifier"><b>void</b> accumulator::init(context* c)
+    {
+</span></font><span class="identifier"><font color="#008000">	//Define class</font><font color="#000000">
+	class_&lt;</font></span><font color="#000000"><span class=identifier>accumulator</span></font><span class="identifier"><font color="#000000">,object&gt; cls(&quot;</font></span><font color="#000000"><span class=identifier>accumulator</span></font><span class="identifier"><font color="#000000">&quot;,c);
+</font><font color="#008000">	//Define constructors	
+</font><font color="#000000">	cls.constructor(arguments&lt;&gt;());
+</font><font color="#008000">	//Define functions</font><font color="#000000">
+	cls.function(&quot;</font></span><font color="#000000"><span class=identifier>add_in</span></font><span class="identifier"><font color="#000000">&quot;,</font></span><font color="#000000"><span class=identifier>add_in</span></font><span class="identifier"><font color="#000000">);
+</font><font color="#008000">	//Define properties</font><font color="#000000">
+	cls.read(&quot;number&quot;,number);
+	cls.read(&quot;mean&quot;,mean);
+    }</font></span></code></pre>
+<p>Again, you can access this directly in the javascript parser:</p>
+<pre><code><span class="identifier"><font color="#000000">	parser.parse(&quot;var a=</font></span><font color="#000000"><span class="identifier">accumulator</span></font><span class="identifier"><font color="#000000">();&quot;
+	             &quot;a.add_in(5);&quot;
+	             &quot;a.add_in(7);&quot;
+	             &quot;var b=a.mean;&quot;);</font></span></code><br></pre>
+<table border="0">
+  <tr> 
+    <td width="10"></td>
+    <td width="30"><a href="index.html">
+    <img src="../theme/u_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="30"><a href="introduction.html">
+    <img src="../theme/l_arr.gif" border="0" width="20" height="19"></a></td>
+    <td width="20"><a href="class_definition.html">
+    <img src="../theme/r_arr.gif" border="0" width="20" height="19"></a></td>
+  </tr>
+</table>
+<br>
+<hr size="1">
+<p class="copyright">Copyright © 2003-2005 Peder Holt<br>
+  <br>
+  <font size="2">Permission to copy, use, modify, sell and distribute this document 
+  is granted provided this copyright notice appears in all copies. This document 
+  is provided &quot;as is&quot; without express or implied warranty, and with 
+  no claim as to its suitability for any purpose. </font> </p>
+<p>&nbsp;</p>
+</body>
+</html>
