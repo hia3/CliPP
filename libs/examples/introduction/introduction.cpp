@@ -10,7 +10,7 @@ double square(const double& x)
     return x * x;
 }
 
-void main() 
+int main() 
 {
     //Create a javascript parser
     javascript_parser parser;

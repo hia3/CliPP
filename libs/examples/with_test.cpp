@@ -9,7 +9,7 @@
 using namespace boost::clipp;
 using namespace boost::javascript;
 
-void main() 
+int main() 
 {
     //Create a javascript parser
     javascript_parser parser;

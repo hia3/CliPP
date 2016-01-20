@@ -30,8 +30,8 @@ public:
     static void init(context* c) {
         class_<DerivedWrapper,object,Derived> cls("Derived",c);
         cls.constructor(arguments<>());
-        cls.function("message",Derived::message);
-        cls.read("base",get_base);
+        cls.function("message",&Derived::message);
+        cls.read("base",&get_base);
     }
 private:
     Derived derived_;
@@ -43,7 +43,7 @@ double square(const double& x)
     return x * x;
 }
 
-void main() 
+int main() 
 {
     //Create a javascript parser
     javascript_parser parser;

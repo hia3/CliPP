@@ -12,7 +12,7 @@ using namespace boost::javascript;
 
 //Define a simple javascript function
 
-void main() 
+int main() 
 {
     //Create a javascript parser
     javascript_parser parser;
