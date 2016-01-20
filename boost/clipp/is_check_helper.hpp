@@ -6,92 +6,20 @@
 
 #ifndef BOOST_CLIPP_IS_CHECK_HELPER_HPP_HOLT_28092003
 #define BOOST_CLIPP_IS_CHECK_HELPER_HPP_HOLT_28092003
+#include <boost/config.hpp>
+#if BOOST_WORKAROUND( BOOST_MSVC, > 1900)
 
-#if BOOST_WORKAROUND( BOOST_MSVC, <= 1300)
+template<template<typename...> class T>
+struct is_template_of_impl
+{
+    template<typename Other>
+    struct result : std::false_type {};
+    template<typename... As>
+    struct result<T<As...> > : std::true_type {};
+};
 
-#define BOOST_CLIPP_IS_1(name,expression)\
-namespace detail {\
-template<typename T>\
-struct BOOST_PP_CAT(is_,name)_helper {\
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);\
-    template<typename A0>\
-    static type_traits::yes_type BOOST_TT_DECL _m_check(expression<A0> (*)());\
-\
-    typedef T (*fn)();\
-\
-    BOOST_STATIC_CONSTANT(bool, value = \
-        sizeof(_m_check(((fn)0)) ) == sizeof(type_traits::yes_type)\
-    );\
-};\
-}\
-\
-template<typename T>\
-struct BOOST_PP_CAT(is_,name) : public\
-    mpl::bool_<detail::BOOST_PP_CAT(is_,name)_helper<T>::value>\
-{};
-
-#define BOOST_CLIPP_IS_2(name,expression)\
-namespace detail {\
-template<typename T>\
-struct BOOST_PP_CAT(is_,name)_helper {\
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);\
-    template<typename A0,typename A1>\
-    static type_traits::yes_type BOOST_TT_DECL _m_check(expression<A0,A1> (*)());\
-\
-    typedef T (*fn)();\
-\
-    BOOST_STATIC_CONSTANT(bool, value = \
-        sizeof(_m_check(((fn)0)) ) == sizeof(type_traits::yes_type)\
-    );\
-};\
-}\
-\
-template<typename T>\
-struct BOOST_PP_CAT(is_,name) : public\
-    mpl::bool_<detail::BOOST_PP_CAT(is_,name)_helper<T>::value>\
-{};
-
-#define BOOST_CLIPP_IS_3(name,expression)\
-namespace detail {\
-template<typename T>\
-struct BOOST_PP_CAT(is_,name)_helper {\
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);\
-    template<typename A0,typename A1,typename A2>\
-    static type_traits::yes_type BOOST_TT_DECL _m_check(expression<A0,A1,A2> (*)());\
-\
-    typedef T (*fn)();\
-\
-    BOOST_STATIC_CONSTANT(bool, value = \
-        sizeof(_m_check(((fn)0)) ) == sizeof(type_traits::yes_type)\
-    );\
-};\
-}\
-\
-template<typename T>\
-struct BOOST_PP_CAT(is_,name) : public\
-    mpl::bool_<detail::BOOST_PP_CAT(is_,name)_helper<T>::value>\
-{};
-
-#define BOOST_CLIPP_IS_4(name,expression)\
-namespace detail {\
-template<typename T>\
-struct BOOST_PP_CAT(is_,name)_helper {\
-    static type_traits::no_type BOOST_TT_DECL _m_check(...);\
-    template<typename A0,typename A1,typename A2,typename A3>\
-    static type_traits::yes_type BOOST_TT_DECL _m_check(expression<A0,A1,A2,A3> (*)());\
-\
-    typedef T (*fn)();\
-\
-    BOOST_STATIC_CONSTANT(bool, value = \
-        sizeof(_m_check(((fn)0)) ) == sizeof(type_traits::yes_type)\
-    );\
-};\
-}\
-\
-template<typename T>\
-struct BOOST_PP_CAT(is_,name) : public\
-    mpl::bool_<detail::BOOST_PP_CAT(is_,name)_helper<T>::value>\
-{};
+template<template<typename...> class T, typename Inst>
+constexpr auto is_template_of = is_template_of_impl<T>::template result<Inst>::value;
 
 #else 
 
