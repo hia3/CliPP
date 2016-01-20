@@ -7,7 +7,7 @@
 #ifndef BOOST_CLIPP_VALUE_WRAPPER_HPP_HOLT_12092003
 #define BOOST_CLIPP_VALUE_WRAPPER_HPP_HOLT_12092003
 
-#include "boost/clipp/value.hpp"
+#include <boost/clipp/value.hpp>
 
 namespace boost { namespace clipp {
 

@@ -8,9 +8,9 @@
 #define BOOST_CLIPP_IS_VALARRAY_HPP_HOLT_11082003
 
 #include <valarray>
-#include "boost/mpl/or.hpp"
-#include "boost/type_traits/config.hpp"
-#include "boost/type_traits/detail/yes_no_type.hpp"
+#include <boost/mpl/or.hpp>
+#include <boost/type_traits/config.hpp>
+#include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/call_traits.hpp>
 
 namespace boost { namespace clipp {

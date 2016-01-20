@@ -7,8 +7,8 @@
 #ifndef BOOST_JAVASCRIPT_COMPLEX_HPP_HOLT_27052004
 #define BOOST_JAVASCRIPT_COMPLEX_HPP_HOLT_27052004
 
-#include "boost/javascript/config.hpp"
-#include "boost/clipp/object.hpp"
+#include <boost/javascript/config.hpp>
+#include <boost/clipp/object.hpp>
 
 namespace boost { namespace javascript {
 

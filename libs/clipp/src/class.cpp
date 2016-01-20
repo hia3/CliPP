@@ -4,8 +4,8 @@
 // "as is" without express or implied warranty, and with no claim as
 // to its suitability for any purpose.
 
-#include "boost/clipp/context.hpp"
-#include "boost/clipp/class.hpp"
+#include <boost/clipp/context.hpp>
+#include <boost/clipp/class.hpp>
 
 using namespace boost::clipp;
 

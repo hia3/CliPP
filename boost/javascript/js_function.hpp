@@ -7,9 +7,9 @@
 #ifndef BOOST_JAVASCRIPT_FUNCTION_HPP_HOLT_20032004
 #define BOOST_JAVASCRIPT_FUNCTION_HPP_HOLT_20032004
 
-#include "boost/javascript/config.hpp"
-#include "boost/clipp/object.hpp"
-#include "boost/javascript/callback_handler.hpp"
+#include <boost/javascript/config.hpp>
+#include <boost/clipp/object.hpp>
+#include <boost/javascript/callback_handler.hpp>
 #include <valarray>
 namespace boost { namespace javascript {
 

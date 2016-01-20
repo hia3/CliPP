@@ -7,7 +7,7 @@
 #ifndef BOOST_CLIPP_CONTAINER_WRAPPER_HPP_HOLT_06082003
 #define BOOST_CLIPP_CONTAINER_WRAPPER_HPP_HOLT_06082003
 
-#include "boost/clipp/container_base.hpp"
+#include <boost/clipp/container_base.hpp>
 
 namespace boost { namespace clipp {
 

@@ -7,8 +7,8 @@
 #ifndef BOOST_JAVASCRIPT_ARRAY_HPP_HOLT_15092003
 #define BOOST_JAVASCRIPT_ARRAY_HPP_HOLT_15092003
 
-#include "boost/javascript/config.hpp"
-#include "boost/clipp/container_wrapper.hpp"
+#include <boost/javascript/config.hpp>
+#include <boost/clipp/container_wrapper.hpp>
 #include <boost/javascript/primitive.hpp>
 #include <limits>
 #include <valarray>

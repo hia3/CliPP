@@ -7,8 +7,8 @@
 #ifndef BOOST_CLIPP_ENUM_HPP_HOLT_04122003
 #define BOOST_CLIPP_ENUM_HPP_HOLT_04122003
 
-#include "boost/clipp/class.hpp"
-#include "boost/clipp/enum_wrapper.hpp"
+#include <boost/clipp/class.hpp>
+#include <boost/clipp/enum_wrapper.hpp>
 
 namespace boost { namespace clipp {
 

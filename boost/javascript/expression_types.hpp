@@ -7,7 +7,7 @@
 #ifndef BOOST_JAVASCRIPT_EXPRESSION_TYPES_HPP_HOLT_2003_0103
 #define BOOST_JAVASCRIPT_EXPRESSION_TYPES_HPP_HOLT_2003_0103
 
-#include "boost/javascript/config.hpp"
+#include <boost/javascript/config.hpp>
 
 namespace boost { namespace javascript {
 

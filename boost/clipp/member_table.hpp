@@ -7,8 +7,8 @@
 #ifndef BOOST_CLIPP_MEMBER_TABLE_HPP_HOLT_03082003
 #define BOOST_CLIPP_MEMBER_TABLE_HPP_HOLT_03082003
 
-#include "boost/clipp/value.hpp"
-#include "boost/clipp/detail/decorated_converter.hpp"
+#include <boost/clipp/value.hpp>
+#include <boost/clipp/detail/decorated_converter.hpp>
 #include <map>
 
 namespace boost { namespace clipp {

@@ -8,10 +8,10 @@
 #define JAVASCRIPT_JAVASCRIPT_PARSER_HPP_HOLT_2003_0103
 
 #include <boost/javascript/config.hpp>
-//#include "boost/spirit/core.hpp"
-//#include "boost/spirit/tree/ast.hpp"
-#include "boost/clipp/value.hpp"
-#include "boost/clipp/context.hpp"
+//#include <boost/spirit/core.hpp>
+//#include <boost/spirit/tree/ast.hpp>
+#include <boost/clipp/value.hpp>
+#include <boost/clipp/context.hpp>
 #include <boost/javascript/message_handler.hpp>
 #include <fstream>
 #include <stack>

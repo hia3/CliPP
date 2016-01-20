@@ -1,5 +1,5 @@
-#include "boost/spirit/core.hpp"
-#include "boost/spirit/tree/ast.hpp"
+#include <boost/spirit/core.hpp>
+#include <boost/spirit/tree/ast.hpp>
 #include <boost/javascript/javascript_grammar.hpp>
 #include <boost/clipp/context.hpp>
 #include <boost/clipp/scope.hpp>
@@ -133,7 +133,7 @@ valueP js_function::call(Params& args,valueP parent)
 valueP js_function::construct(Params& args,valueP parent)
 {
     valueP result=wrap(new js_object(),get_context());
-	result->insert("constructor", this);
+    result->insert("constructor", this);
     call(args,result);
     return result;
 }

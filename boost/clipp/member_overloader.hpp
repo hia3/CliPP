@@ -7,7 +7,7 @@
 #ifndef BOOST_CLIPP_MEMBER_OVERLOADER_HPP_HOLT_24082003
 #define BOOST_CLIPP_MEMBER_OVERLOADER_HPP_HOLT_24082003
 
-#include "boost/clipp/member.hpp"
+#include <boost/clipp/member.hpp>
 #include <list>
 
 namespace boost { namespace clipp {

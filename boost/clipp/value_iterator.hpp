@@ -7,7 +7,7 @@
 #ifndef BOOST_CLIPP_VALUE_ITERATOR_HPP_HOLT_04122003
 #define BOOST_CLIPP_VALUE_ITERATOR_HPP_HOLT_04122003
 
-#include "boost/clipp/object.hpp"
+#include <boost/clipp/object.hpp>
 #include <boost/call_traits.hpp>
 #include <iterator>
 

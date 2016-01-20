@@ -7,7 +7,7 @@
 #ifndef BOOST_CLIPP_ARGUMENTS_HPP_HOLT_13082003
 #define BOOST_CLIPP_ARGUMENTS_HPP_HOLT_13082003
 
-#include "boost/clipp/config.hpp"
+#include <boost/clipp/config.hpp>
 
 #include <boost/mpl/vector.hpp>
 

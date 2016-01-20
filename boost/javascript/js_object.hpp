@@ -7,9 +7,9 @@
 #ifndef BOOST_JAVASCRIPT_OBJECT_HPP_HOLT_23112003
 #define BOOST_JAVASCRIPT_OBJECT_HPP_HOLT_23112003
 
-#include "boost/javascript/config.hpp"
-#include "boost/javascript/primitive.hpp"
-#include "boost/clipp/scope.hpp"
+#include <boost/javascript/config.hpp>
+#include <boost/javascript/primitive.hpp>
+#include <boost/clipp/scope.hpp>
 
 namespace boost { namespace javascript {
 

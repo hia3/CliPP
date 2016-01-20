@@ -2,10 +2,10 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "boost/clipp/object.hpp"
-#include "boost/clipp/context.hpp"
-#include "boost/clipp/member_table.hpp"
-#include "boost/clipp/class.hpp"
+#include <boost/clipp/object.hpp>
+#include <boost/clipp/context.hpp>
+#include <boost/clipp/member_table.hpp>
+#include <boost/clipp/class.hpp>
 #include <boost/clipp/member_property_wrapper.hpp>
 
 //////////////////////////////////////////////////////////////////////

@@ -8,8 +8,8 @@
 #define BOOST_MESSAGE_HANDLER_HPP_HOLT_02052004
 
 #include <boost/javascript/callback_handler.hpp>
-#include "boost/javascript/config.hpp"
-#include "boost/clipp/scope.hpp"
+#include <boost/javascript/config.hpp>
+#include <boost/clipp/scope.hpp>
 #include <stdexcept>
 
 namespace boost { namespace javascript {

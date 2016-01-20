@@ -7,8 +7,8 @@
 #ifndef BOOST_JAVASCRIPT_BOOLEAN_HPP_HOLT_15092003
 #define BOOST_JAVASCRIPT_BOOLEAN_HPP_HOLT_15092003
 
-#include "boost/javascript/config.hpp"
-#include "boost/clipp/object.hpp"
+#include <boost/javascript/config.hpp>
+#include <boost/clipp/object.hpp>
 
 namespace boost { namespace javascript {
 

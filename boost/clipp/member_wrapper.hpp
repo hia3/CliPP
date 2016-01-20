@@ -7,7 +7,7 @@
 #ifndef BOOST_CLIPP_MEMBER_WRAPPER_HPP_HOLT_20102003
 #define BOOST_CLIPP_MEMBER_WRAPPER_HPP_HOLT_20102003
 
-#include "boost/clipp/object.hpp"
+#include <boost/clipp/object.hpp>
 
 namespace boost { namespace clipp {
 

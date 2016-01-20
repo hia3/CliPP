@@ -8,12 +8,12 @@
 #define BOOST_CLIPP_CLASS_BUILDER_HPP_HOLT_27052004
 
 #include <boost/clipp/class_wrapper.hpp>
-#include "boost/clipp/define_constructor.hpp"
-#include "boost/clipp/define_function.hpp"
-#include "boost/clipp/define_read.hpp"
-#include "boost/clipp/define_write.hpp"
-#include "boost/clipp/define_operator.hpp"
-#include "boost/clipp/define_converter.hpp"
+#include <boost/clipp/define_constructor.hpp>
+#include <boost/clipp/define_function.hpp>
+#include <boost/clipp/define_read.hpp>
+#include <boost/clipp/define_write.hpp>
+#include <boost/clipp/define_operator.hpp>
+#include <boost/clipp/define_converter.hpp>
 
 namespace boost { namespace clipp {
 

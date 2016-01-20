@@ -7,23 +7,23 @@
 #ifndef BOOST_CLIPP_MEMBER_PROPERTY_HPP_HOLT_15092003
 #define BOOST_CLIPP_MEMBER_PROPERTY_HPP_HOLT_15092003
 
-#include "boost/clipp/member.hpp"
-#include "boost/clipp/object.hpp"
-#include "boost/clipp/context.hpp"
-#include "boost/clipp/argument_lists.hpp"
-#include "boost/clipp/member_with_arguments.hpp"
-#include "boost/clipp/static_with_arguments.hpp"
+#include <boost/clipp/member.hpp>
+#include <boost/clipp/object.hpp>
+#include <boost/clipp/context.hpp>
+#include <boost/clipp/argument_lists.hpp>
+#include <boost/clipp/member_with_arguments.hpp>
+#include <boost/clipp/static_with_arguments.hpp>
 #include <boost/clipp/member_property_wrapper.hpp>
 
-#include "boost/clipp/detail/signature_extracter.hpp"
-#include "boost/clipp/detail/read_generator.hpp"
-#include "boost/clipp/detail/write_generator.hpp"
-#include "boost/clipp/detail/argument_validator.hpp"
-#include "boost/clipp/detail/register_types.hpp"
+#include <boost/clipp/detail/signature_extracter.hpp>
+#include <boost/clipp/detail/read_generator.hpp>
+#include <boost/clipp/detail/write_generator.hpp>
+#include <boost/clipp/detail/argument_validator.hpp>
+#include <boost/clipp/detail/register_types.hpp>
 
-#include "boost/mpl/size.hpp"
-#include "boost/mpl/at.hpp"
-#include "boost/mpl/int.hpp"
+#include <boost/mpl/size.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/mpl/int.hpp>
 
 namespace boost { namespace clipp {
 

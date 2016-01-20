@@ -9,12 +9,12 @@
 
 #include <boost/clipp/member_with_arguments.hpp>
 #include <boost/clipp/static_with_arguments.hpp>
-#include "boost/clipp/argument_lists.hpp"
-#include "boost/clipp/context.hpp"
+#include <boost/clipp/argument_lists.hpp>
+#include <boost/clipp/context.hpp>
 
-#include "boost/clipp/detail/call_generator.hpp"
-#include "boost/clipp/detail/argument_validator.hpp"
-#include "boost/clipp/detail/register_types.hpp"
+#include <boost/clipp/detail/call_generator.hpp>
+#include <boost/clipp/detail/argument_validator.hpp>
+#include <boost/clipp/detail/register_types.hpp>
 
 namespace boost { namespace clipp {
 

@@ -7,12 +7,12 @@
 #ifndef BOOST_CLIPP_MEMBER_CONSTRUCTOR_HPP_HOLT_23082003
 #define BOOST_CLIPP_MEMBER_CONSTRUCTOR_HPP_HOLT_23082003
 
-#include "boost/clipp/member.hpp"
-#include "boost/clipp/detail/signature.hpp"
-#include "boost/clipp/detail/signature_extracter.hpp"
-#include "boost/clipp/detail/constructor_generator.hpp"
-#include "boost/clipp/detail/argument_validator.hpp"
-#include "boost/clipp/static_with_arguments.hpp"
+#include <boost/clipp/member.hpp>
+#include <boost/clipp/detail/signature.hpp>
+#include <boost/clipp/detail/signature_extracter.hpp>
+#include <boost/clipp/detail/constructor_generator.hpp>
+#include <boost/clipp/detail/argument_validator.hpp>
+#include <boost/clipp/static_with_arguments.hpp>
 
 namespace boost { namespace clipp {
 

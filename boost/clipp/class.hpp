@@ -7,15 +7,15 @@
 #ifndef BOOST_CLIPP_CLASS_HPP_HOLT_07082003
 #define BOOST_CLIPP_CLASS_HPP_HOLT_07082003
 
-#include "boost/clipp/context.hpp"
+#include <boost/clipp/context.hpp>
 
-#include "boost/clipp/member_table.hpp"
-#include "boost/clipp/context.hpp"
-#include "boost/clipp/detail/wrapper.hpp"
-#include "boost/clipp/class_wrapper.hpp"
-#include "boost/clipp/type_id.hpp"
-#include "boost/mpl/void.hpp"
-#include "boost/static_assert.hpp"
+#include <boost/clipp/member_table.hpp>
+#include <boost/clipp/context.hpp>
+#include <boost/clipp/detail/wrapper.hpp>
+#include <boost/clipp/class_wrapper.hpp>
+#include <boost/clipp/type_id.hpp>
+#include <boost/mpl/void.hpp>
+#include <boost/static_assert.hpp>
 #include <boost/clipp/invalid_conversion.hpp>
 #include <boost/clipp/class_builder.hpp>
 

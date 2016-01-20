@@ -2,7 +2,7 @@
 #include <boost/javascript/reference.hpp>
 #include <boost/javascript/undefined.hpp>
 #include <boost/clipp/class.hpp>
-#include "boost/clipp/container_wrapper.ipp"
+#include <boost/clipp/container_wrapper.ipp>
 #include <boost/clipp/detail/operator_invoker.hpp>
 #include <boost/next_prior.hpp>
 

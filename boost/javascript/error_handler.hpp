@@ -7,8 +7,8 @@
 #ifndef BOOST_JAVASCRIPT_ERROR_HANDLER_HPP_HOLT_09052004
 #define BOOST_JAVASCRIPT_ERROR_HANDLER_HPP_HOLT_09052004
 
-#include "boost/javascript/config.hpp"
-#include "BOOST\SPIRIT\error_handling\exceptions.hpp"
+#include <boost/javascript/config.hpp>
+#include <boost/spirit/error_handling/exceptions.hpp>
 
 namespace boost { namespace javascript {
 

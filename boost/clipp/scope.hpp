@@ -7,7 +7,7 @@
 #ifndef BOOST_CLIPP_OBJECT_HPP_HOLT_28092003
 #define BOOST_CLIPP_OBJECT_HPP_HOLT_28092003
 
-#include "boost/clipp/object.hpp"
+#include <boost/clipp/object.hpp>
 #include <map>
 #include <list>
 

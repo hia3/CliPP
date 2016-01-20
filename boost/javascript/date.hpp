@@ -7,9 +7,9 @@
 #ifndef BOOST_JAVASCRIPT_DATE_HPP_HOLT_15012004
 #define BOOST_JAVASCRIPT_DATE_HPP_HOLT_15012004
 
-#include "boost/javascript/config.hpp"
-#include "boost/clipp/object.hpp"
-#include "boost/javascript/primitive.hpp"
+#include <boost/javascript/config.hpp>
+#include <boost/clipp/object.hpp>
+#include <boost/javascript/primitive.hpp>
 #include <valarray>
 
 struct tm;
