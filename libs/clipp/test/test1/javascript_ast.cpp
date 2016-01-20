@@ -219,8 +219,8 @@ struct class_
 
 void hei(int) {}
 void hopp(int) {}
-void main() {
-    iterator_tester(get_test_map().begin());
+int main() {
+    //iterator_tester(get_test_map().begin());
 /*    boost::clipp::class2_<test_c> cls;
     std::string text = cls.function("MyFunction",test_c::c_1).signature("arg1").format();
     cls.constructor(boost::clipp::arguments<int>());
