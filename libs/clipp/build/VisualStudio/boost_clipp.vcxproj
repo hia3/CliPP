@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>Perforce Project</SccProjectName>
+    <SccLocalPath>..\..\..\..</SccLocalPath>
+    <ProjectGuid>{7FBDE4BB-A6EA-4153-9A06-9B0B0A50A915}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalIncludeDirectories>..\..\..\..\;..\..\..\..\mini_boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;BOOST_CLIPP_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\boost_clipp.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release\boost_clipp.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0414</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\boost_clipp.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>../../../bin/boost_clippR.dll</OutputFile>
+      <ImportLibrary>../../../lib/boost_clippR.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalIncludeDirectories>..\..\..\..\;..\..\..\..\mini_boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;BOOST_CLIPP_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Debug\boost_clipp.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <AdditionalOptions> /Zm200 </AdditionalOptions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4275</DisableSpecificWarnings>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Debug\boost_clipp.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0414</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\boost_clipp.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LinkDLL>true</LinkDLL>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>../../../bin/boost_clippD.dll</OutputFile>
+      <ImportLibrary>../../../lib/boost_clippD.lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\class.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\container_wrapper.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\context.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\decorated_wrapper.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\error_messages.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\from_value.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\member.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\member_constructor.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\member_function.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\member_overloader.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\member_property.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\member_property_wrapper.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\member_table.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\member_wrapper.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\object.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\scope.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\self.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\value.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"> /Zm200   /Zm200 </AdditionalOptions>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\boost\clipp.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\argument.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\arguments.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\argument_lists.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\back_reference.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\class.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\class_builder.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\class_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\clipp_ptr.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\clipp_stream.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\config.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\container_base.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\container_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\context.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\decoration.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\define_constructor.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\define_converter.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\define_free_members.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\define_function.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\define_operator.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\define_read.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\define_write.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\argument_validator.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\call_generator.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\constructor_generator.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\converter.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\converter_definer.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\cv_category.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\decorated_converter.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\decorated_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\indirection_category.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\list.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\make_value_type.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\not_specified.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\operators.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\operators_base.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\operators_msvc.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\operator_id.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\operator_invoker.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\pre_wrap_value.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\read_generator.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\register_type.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\register_types.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\signature.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\signature_extracter.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\tuple.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\unwrap_type.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\detail\write_generator.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\enum.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\enum_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\error_messages.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\invalid_conversion.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\is_check_helper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\is_container.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\is_function_pointer.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\is_valarray.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_base.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_constructor.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_function.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_overloader.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_property.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_property_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_table.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_with_arguments.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\member_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\object.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\other.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\policy_tag.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\ref_base.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\scope.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\self.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\set_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\static_with_arguments.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\type_id.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\unwrap.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\value.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\value_iterator.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\value_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\boost\clipp\wrap.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\boost\clipp\container_wrapper.ipp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
