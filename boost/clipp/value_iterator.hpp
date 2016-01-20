@@ -42,7 +42,7 @@ struct is_iterator_helper {
     static type_traits::yes_type BOOST_TT_DECL _m_check(std::iterator<A0,A1,A2> const&);    
 
     BOOST_STATIC_CONSTANT(bool, value = 
-        sizeof(_m_check( *( (T const*)(NULL) ) )) == sizeof(type_traits::yes_type)
+        sizeof(_m_check( *( (T const*)(nullptr) ) )) == sizeof(type_traits::yes_type)
     );
 };
 
@@ -65,8 +65,13 @@ template<typename T,typename U>struct is_pair<std::pair<T,U>const& > : mpl::true
 template<typename T,typename U>struct is_pair<std::pair<T,U>* > : mpl::true_ {};
 template<typename T,typename U>struct is_pair<std::pair<T,U>const* > : mpl::true_ {};
 
-template<typename T>struct is_iterator : mpl::false_ {};
-template<typename T,typename U,typename V> struct is_iterator<std::iterator<T,U,V> > : mpl::true_ {};
+
+template<typename T, typename = void>
+struct is_iterator : mpl::false_ {};
+template<typename T>
+struct is_iterator<T, typename std::enable_if<!std::is_same<typename std::iterator_traits<T>::value_type, void>::value>::type> : mpl::true_ {};
+/*template<typename T>struct is_iterator : mpl::false_ {};
+template<typename T,typename U,typename V> struct is_iterator<std::iterator<T,U,V> > : mpl::true_ {};*/
 #endif
 
 namespace detail {
@@ -74,7 +79,8 @@ namespace detail {
 struct iterator_holder_base 
 {
     iterator_holder_base(iterator_holder_base const& rhs) : context_(rhs.context_) {}
-    iterator_holder_base(context* c) : context_(c) {}
+    explicit iterator_holder_base(context* c) : context_(c) {}
+    virtual ~iterator_holder_base() = 0 {}
     virtual void inc() = 0;
     virtual void dec() = 0;
     virtual valueP          get() const= 0;
