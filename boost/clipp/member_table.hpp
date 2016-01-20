@@ -18,7 +18,7 @@ class BOOST_CLIPP_EXPORT_IMPORT member_table : public value
 public:
     member_table(const type_detail& info,const std::string& name);
     member_table(const type_detail& info);
-	virtual ~member_table();
+    virtual ~member_table();
 
     ///Lookup identifier. Returns NULL if none found
     virtual valueP lookup(const std::string& identifier,valueP parent=NULL);
@@ -61,7 +61,7 @@ private:
     member_table* base_;
 
     type_detail info_;
-    std::string             name_;
+    std::string name_;
 };
 
 }} // namespace boost::clipp

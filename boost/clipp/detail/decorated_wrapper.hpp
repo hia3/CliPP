@@ -20,7 +20,7 @@ typedef intrusive_ptr<wrapper_base> wrapperP;
 class decorated_wrapper {
 public:
     decorated_wrapper() {}
-    void       add_wrapper(wrapperP c);
+    void     add_wrapper(wrapperP c);
     wrapperP get_wrapper(decoration d);
 private:
     wrapperP wrappers_[6];

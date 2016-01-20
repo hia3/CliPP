@@ -18,7 +18,7 @@ class BOOST_JAVASCRIPT_EXPORT_IMPORT callback_handler
 {
 public:
     callback_handler() {}
-    virtual ~callback_handler() {}    
+    virtual ~callback_handler() {}
     virtual void report_error(std::string const& message) const{}
     virtual bool branch_callback() const {return true;}
     virtual void branch_call() const
@@ -29,7 +29,7 @@ public:
         }
     }
     virtual bool is_exception_handler() const {return false;}
-    parser_position& parser_pos() const {return parser_pos_;}
+    parser_position& parser_pos() const { return parser_pos_; }
 private:
     mutable parser_position parser_pos_;
 };

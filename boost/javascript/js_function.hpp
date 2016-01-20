@@ -19,12 +19,12 @@ class BOOST_JAVASCRIPT_EXPORT_IMPORT js_function : public clipp::object
 {
 public:
     js_function(std::valarray<std::string>& args);
-    js_function(const std::string& args,const std::string& program,const callback_handler& handler=callback_handler());
+    js_function(const std::string& args,const std::string& program, const callback_handler& handler = callback_handler());
     virtual ~js_function();
-    virtual clipp::valueP call(clipp::Params& args,clipp::valueP parent=NULL);
-    virtual clipp::valueP construct(clipp::Params& args,clipp::valueP parent=NULL);
+    virtual clipp::valueP call(clipp::Params& args,clipp::valueP parent = nullptr);
+    virtual clipp::valueP construct(clipp::Params& args,clipp::valueP parent = nullptr);
     std::string toString() const;
-    const std::string& program() const {return program_;}
+    const std::string& program() const { return program_; }
     virtual clipp::valueP wrap_value(clipp::valueP parent);
 
     static void init(clipp::context* c);

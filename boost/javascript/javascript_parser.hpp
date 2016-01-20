@@ -46,15 +46,15 @@ public:
 
 class js_break : public std::exception {
 public:
-    const char* what() const throw(){return "Invalid context for break statement";}
+    const char* what() const throw() {return "Invalid context for break statement";}
 };
 
 class js_throw_statement : public std::exception {
 public:
     js_throw_statement(clipp::valueP expression) : expression_(expression) {}
     virtual ~js_throw_statement() throw() {}
-    const char* what() const throw() {return "Javascript exception";}
-    clipp::valueP expression() {return expression_;}
+    const char* what() const noexcept {return "Javascript exception";}
+    clipp::valueP expression() const {return expression_;}
 private:
     clipp::valueP expression_;
 };
@@ -67,15 +67,14 @@ public:
 
 class parse_guard_triggered : public std::runtime_error {
 public:
-    parse_guard_triggered(const std::string& error,const char* where) : std::runtime_error(error) , where_(where) {}
+    parse_guard_triggered(const std::string& error, const char* where) : std::runtime_error(error), where_(where) {}
     virtual ~parse_guard_triggered() {}
-    const char* where() const {return where_;}
+    const char* where() const { return where_; }
 private:
     const char* where_;
 };
 
-
-class BOOST_JAVASCRIPT_EXPORT_IMPORT javascript_parser 
+class BOOST_JAVASCRIPT_EXPORT_IMPORT javascript_parser
 :   public boost::clipp::context
 {
 public:
@@ -103,7 +102,7 @@ public:
     void top_stack_only(bool status);
     bool top_stack_only() const;
     clipp::valueP evaluate(tree_parse_t & info,callback_handler const& handler=cerr_handler());
-    const callback_handler* get_callback_handler() {return m_handler;}
+    const callback_handler* get_callback_handler() { return m_handler; }
 protected:
     void dump(tree_parse_t & info);
 private:

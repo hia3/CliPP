@@ -25,13 +25,13 @@ public:
 class BOOST_JAVASCRIPT_EXPORT_IMPORT positional_runtime_error : public std::runtime_error
 {
 public:
-    positional_runtime_error(const std::string& message,const parser_position& position) 
-        : std::runtime_error(message) 
+    positional_runtime_error(const std::string& message, const parser_position& position)
+        : std::runtime_error(message)
         , position_(position)
     {
     }
     virtual ~positional_runtime_error() {}
-    const parser_position& parser_pos() const {return position_;}
+    const parser_position& parser_pos() const { return position_; }
 private:
     parser_position position_;
 };
@@ -42,7 +42,7 @@ public:
     exception_handler()  {}
     virtual ~exception_handler() {}
     virtual void report_error(std::string const& message) const{
-        throw positional_runtime_error(message,parser_pos());
+        throw positional_runtime_error(message, parser_pos());
     }
     virtual bool is_exception_handler() const {return true;}
 };

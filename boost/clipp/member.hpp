@@ -17,7 +17,7 @@ class BOOST_CLIPP_EXPORT_IMPORT member : public value
 {
 public:
     member(const char* name);
-	virtual ~member();
+    virtual ~member();
     valueP join(valueP rhs);
     virtual bool is_free() const;
     const std::string& name() const {return name_;}
