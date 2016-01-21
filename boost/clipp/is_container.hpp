@@ -13,8 +13,6 @@
 #include <set>
 #include <vector>
 #include <boost/mpl/or.hpp>
-#include <boost/type_traits/config.hpp>
-#include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/clipp/is_valarray.hpp>
 
 namespace boost { 
