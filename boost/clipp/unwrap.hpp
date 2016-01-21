@@ -122,7 +122,7 @@ private:
         converter_ = static_cast<converter_type*>(
                         wrapped_->get_converter_from_this(type_id_traits(t),precedence_,wrapped_).get()
                      );
-        return converter_;
+        return converter_ != nullptr;
     }
     template<typename Traits>
     bool install_converter_internal_2(Traits t,mpl::true_) const{
@@ -132,7 +132,7 @@ private:
         intrusive_ptr<element_converter> cvt = new element_converter();
         detail::converterP decvt = cvt->get_converter(decoration(detail::unwrap_decoration<Traits>::value));
         converter_ = static_cast<converter_type*>(decvt.get());
-        return converter_;
+        return converter_ != nullptr;
     }
     mutable valueP wrapped_;
     mutable precedence precedence_;
