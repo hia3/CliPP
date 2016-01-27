@@ -8,7 +8,7 @@
 #define BOOST_JAVASCRIPT_ERROR_HANDLER_HPP_HOLT_09052004
 
 #include <boost/javascript/config.hpp>
-#include <boost/spirit/error_handling/exceptions.hpp>
+#include <boost/spirit/include/classic_exceptions.hpp>
 
 namespace boost { namespace javascript {
 
@@ -19,7 +19,7 @@ struct javascript_error_handler {
     std::string error_message;
 };
 
-typedef boost::spirit::assertion<javascript_error_handler> javascript_assertion;
+typedef boost::spirit::classic::assertion<javascript_error_handler> javascript_assertion;
 static javascript_assertion assert_function("Unexpected function declaration");
 static javascript_assertion assert_literal("Expected literal");
 

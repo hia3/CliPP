@@ -7,11 +7,11 @@
 #if !defined(BOOST_SPIRIT_PRECEDENCE_HPP)
 #define BOOST_SPIRIT_PRECEDENCE_HPP
 
-#include <boost/spirit/core/parser.hpp>
-#include <boost/spirit/core/primitives/primitives.hpp>
-#include <boost/spirit/core/composite/composite.hpp>
+#include <boost/spirit/include/classic_parser.hpp>
+#include <boost/spirit/include/classic_primitives.hpp>
+#include <boost/spirit/include/classic_composite.hpp>
 
-namespace boost { namespace spirit {
+namespace boost { namespace spirit { namespace classic {
 
     #if defined(BOOST_MSVC) && (BOOST_MSVC <= 1300)
 
@@ -670,7 +670,7 @@ namespace boost { namespace spirit {
         return precedence_parser<ExpressionP>(expr);
     }
 
-}} // namespace boost::spirit
+}}} // namespace boost::spirit::classic
 
 #endif
 

@@ -7,9 +7,9 @@
 #if !defined(BOOST_SPIRIT_NO_EOL_DIRECTIVE_HPP)
 #define BOOST_SPIRIT_NO_EOL_DIRECTIVE_HPP
 
-#include <boost/spirit/core/parser.hpp>
+#include <boost/spirit/include/classic_parser.hpp>
 
-namespace boost { namespace spirit {
+namespace boost { namespace spirit { namespace classic {
 
     struct skip_grammar_no_eol : public grammar<skip_grammar_no_eol>
     {
@@ -130,7 +130,7 @@ namespace boost { namespace spirit {
 
     static no_eol_parser_gen no_eol_d=no_eol_parser_gen();
 
-}}//namespace boost::spirit
+}}}//namespace boost::spirit::classic
 
 #endif
 

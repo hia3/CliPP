@@ -6,8 +6,8 @@ void javascript_grammar::definition<javascript_grammar::scanner_t>::define_gramm
 {
 // javascript identifiers
     identifier = 
-        leaf_node_d[ 
-            lexeme_d[
+        lexeme_d[
+            leaf_node_d[
                 (
                     (alpha_p | '_' | '$') >> 
                     *(alnum_p | '_' | '$')

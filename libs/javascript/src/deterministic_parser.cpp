@@ -1,8 +1,8 @@
 #include <boost/javascript/javascript_grammar.hpp>
 
 //#define compound_case_parser ccp
-//#include <boost/spirit/dynamic/switch.hpp>
-#include <boost/spirit/error_handling.hpp>
+//#include <boost/spirit/include/classic_switch.hpp>
+#include <boost/spirit/include/classic_error_handling.hpp>
 #include <boost/javascript/literal_directive.hpp>
 
 using namespace boost::javascript;

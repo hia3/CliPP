@@ -7,9 +7,9 @@
 #if !defined(BOOST_SPIRIT_LITERAL_DIRECTIVE_HPP)
 #define BOOST_SPIRIT_LITERAL_DIRECTIVE_HPP
 
-#include <boost/spirit/core/parser.hpp>
+#include <boost/spirit/include/classic_parser.hpp>
 
-namespace boost { namespace spirit {
+namespace boost { namespace spirit { namespace classic {
 
     namespace impl
     {
@@ -132,7 +132,7 @@ namespace boost { namespace spirit {
 
     static literal_parser_gen literal_d=literal_parser_gen();
 
-}}//namespace boost::spirit
+}}}//namespace boost::spirit::classic
 
 #endif
 

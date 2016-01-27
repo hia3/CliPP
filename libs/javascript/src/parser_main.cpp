@@ -1,9 +1,9 @@
-#include <boost/spirit/core.hpp>
-#include <boost/spirit/tree/ast.hpp>
+#include <boost/spirit/include/classic_core.hpp>
+#include <boost/spirit/include/classic_ast.hpp>
 #include <boost/javascript/javascript_parser.hpp>
 #include <boost/javascript/javascript_grammar.hpp>
 #include <boost/clipp/context.hpp>
-#include <boost/spirit/error_handling/exceptions.hpp>
+#include <boost/spirit/include/classic_exceptions.hpp>
 
 using namespace std;
 using namespace boost::javascript;
@@ -54,7 +54,7 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
             return 0;
         }
     }
-    catch(boost::spirit::parser_error<iterator_t, iterator_t>& e) {
+    catch(boost::spirit::classic::parser_error<iterator_t, iterator_t>& e) {
         m_handler=0;
         handler.parser_pos().set_current(e.where);
         if(handler.is_exception_handler()) throw;
@@ -63,7 +63,7 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
             return 0;
         }
     }
-    catch(exception& e) {
+    catch(std::exception& e) {
         m_handler=0;
         if(handler.is_exception_handler()) throw;
         else {

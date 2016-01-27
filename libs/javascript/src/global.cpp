@@ -1,5 +1,5 @@
-#include <boost/spirit/core.hpp>
-#include <boost/spirit/tree/ast.hpp>
+#include <boost/spirit/include/classic_core.hpp>
+#include <boost/spirit/include/classic_ast.hpp>
 #include <boost/javascript/javascript_parser.hpp>
 #include <boost/javascript/global.hpp>
 #include <boost/clipp/class.hpp>
@@ -8,7 +8,7 @@
 
 using namespace boost::javascript;
 using namespace boost::clipp;
-using namespace boost::spirit;
+using namespace boost::spirit::classic;
 template <typename T = unsigned>
 struct radix_parser : parser<radix_parser<T> >
 {

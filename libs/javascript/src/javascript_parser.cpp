@@ -1,5 +1,5 @@
-#include <boost/spirit/core.hpp>
-#include <boost/spirit/tree/ast.hpp>
+#include <boost/spirit/include/classic_core.hpp>
+#include <boost/spirit/include/classic_ast.hpp>
 #include <boost/javascript/javascript_parser.hpp>
 
 #include <boost/clipp/context.hpp>
@@ -8,7 +8,7 @@
 #include <iostream>
 #include <ctype.h>
 #include <boost/next_prior.hpp>
-#include <boost/spirit/tree/tree_to_xml.hpp>
+#include <boost/spirit/include/classic_tree_to_xml.hpp>
 
 #include <boost/clipp/class.hpp>
 
@@ -30,9 +30,9 @@
 
 using namespace boost::javascript;
 using namespace boost::clipp;
-using namespace boost::spirit;
+using namespace boost::spirit::classic;
 
-//#define SPIRIT_DUMP_PARSETREE_AS_XML
+#define SPIRIT_DUMP_PARSETREE_AS_XML
 
 typedef tree_match<javascript_parser::iterator_t,javascript_parser::factory_t, nil_t> parse_tree_match_t;
 typedef parse_tree_match_t::tree_iterator iter_t;

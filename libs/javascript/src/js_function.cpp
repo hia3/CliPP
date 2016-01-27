@@ -1,5 +1,5 @@
-#include <boost/spirit/core.hpp>
-#include <boost/spirit/tree/ast.hpp>
+#include <boost/spirit/include/classic_core.hpp>
+#include <boost/spirit/include/classic_ast.hpp>
 #include <boost/javascript/javascript_grammar.hpp>
 #include <boost/clipp/context.hpp>
 #include <boost/clipp/scope.hpp>
@@ -12,7 +12,7 @@
 using namespace boost::javascript;
 using namespace boost::clipp;
 
-typedef boost::spirit::tree_match<javascript_parser::iterator_t,javascript_parser::factory_t, boost::spirit::nil_t> parse_tree_match_t;
+typedef boost::spirit::classic::tree_match<javascript_parser::iterator_t,javascript_parser::factory_t, boost::spirit::classic::nil_t> parse_tree_match_t;
 typedef parse_tree_match_t::tree_iterator iter_t;
 
 namespace boost {namespace javascript {

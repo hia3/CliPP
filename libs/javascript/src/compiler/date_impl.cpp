@@ -5,7 +5,7 @@
 
 //Windows implementation
 
-#if BOOST_WORKAROUND(BOOST_MSVC, <= 1200)
+#if defined(BOOST_MSVC)
 
 #include <windows.h>
 #pragma comment(lib,"oleaut32.lib")
@@ -54,8 +54,8 @@ double boost::javascript::convertStringToDate(const char* date)
 
     DATE dateOut;
     
-    HRESULT res = VarDateFromStr(strIn, nullptr, LOCALE_NOUSEROVERRIDE, &dateOut);
-    if(res!=S_OK) res=VarDateFromStr(strIn, nullptr, 0, &dateOut);
+    HRESULT res = VarDateFromStr(strIn, 0, LOCALE_NOUSEROVERRIDE, &dateOut);
+    if(res!=S_OK) res=VarDateFromStr(strIn, 0, 0, &dateOut);
     if(res!=S_OK) return boost::javascript::math::NaN();
 
     double days;

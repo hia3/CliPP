@@ -7,11 +7,11 @@
 #if !defined(BOOST_JAVASCRIPT_PARSE_GUARD_HPP)
 #define BOOST_JAVASCRIPT_PARSE_GUARD_HPP
 
-#include <boost/spirit/core/parser.hpp>
+#include <boost/spirit/include/classic_parser.hpp>
 #include <boost/javascript/javascript_parser.hpp>
 #include <boost/javascript/literal_directive.hpp>
 
-namespace boost { namespace spirit {
+namespace boost { namespace spirit { namespace classic {
 
 
     template <typename CharT>
@@ -60,7 +60,7 @@ namespace boost { namespace spirit {
     template<typename IteratorT>
     inline std::string
     parser_error_text(strlit<IteratorT> const& p) {
-        return std::string(p.seq().first(),p.seq().last());
+        return "error somewhere"; // TODO: use x3
     }
 
     struct parse_guard_gen;
@@ -170,6 +170,6 @@ namespace boost { namespace spirit {
     };
 
     static parse_guard_gen parse_guard_d=parse_guard_gen();
-}}
+}}}
 
 #endif

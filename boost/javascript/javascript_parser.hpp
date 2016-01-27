@@ -8,8 +8,8 @@
 #define JAVASCRIPT_JAVASCRIPT_PARSER_HPP_HOLT_2003_0103
 
 #include <boost/javascript/config.hpp>
-//#include <boost/spirit/core.hpp>
-//#include <boost/spirit/tree/ast.hpp>
+//#include <boost/spirit/include/classic_core.hpp>
+//#include <boost/spirit/include/classic_ast.hpp>
 #include <boost/clipp/value.hpp>
 #include <boost/clipp/context.hpp>
 #include <boost/javascript/message_handler.hpp>
@@ -17,7 +17,7 @@
 #include <stack>
 #include <list>
 
-namespace boost { namespace spirit {
+namespace boost { namespace spirit { namespace classic {
     template <typename ValueT>
     class node_iter_data_factory;
 
@@ -25,7 +25,7 @@ namespace boost { namespace spirit {
 
     template <typename IteratorT,typename NodeFactoryT,typename T>
     struct tree_parse_info;
-}} //namespace boost::spirit
+}}} //namespace boost::spirit::classic
 
 namespace boost { namespace javascript {
 
@@ -87,10 +87,10 @@ public:
 
     clipp::valueP parse(iterator_t const& first,iterator_t const& last,callback_handler const& handler=cerr_handler());
 
-    typedef spirit::node_iter_data_factory<double> factory_t;
-//    typedef spirit::tree_match<iterator_t,factory_t, spirit::nil_t> parse_tree_match_t;
+    typedef spirit::classic::node_iter_data_factory<double> factory_t;
+//    typedef spirit::classic::tree_match<iterator_t,factory_t, spirit::classic::nil_t> parse_tree_match_t;
 //    typedef parse_tree_match_t::tree_iterator iter_t;
-    typedef spirit::tree_parse_info<iterator_t,factory_t, spirit::nil_t> tree_parse_t;
+    typedef spirit::classic::tree_parse_info<iterator_t,factory_t, spirit::classic::nil_t> tree_parse_t;
     clipp::context* get_context() {return this;}
 public:
     void push_all_scope(boost::clipp::valueP value);

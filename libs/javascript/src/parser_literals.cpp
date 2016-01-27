@@ -5,13 +5,13 @@ struct string_grammar : public grammar<string_grammar> {
     template <typename ScannerT>
     struct definition
     {
-        rule<ScannerT, parser_context, parser_tag<escape_sequenceID> > escape_sequence;
-        rule<ScannerT, parser_context, parser_tag<hex_escape_sequenceID> > hex_escape_sequence;
-        rule<ScannerT, parser_context, parser_tag<character_escape_sequenceID> > character_escape_sequence;
-        rule<ScannerT, parser_context, parser_tag<null_escape_sequenceID> > null_escape_sequence;
-        rule<ScannerT, parser_context, parser_tag<string_charactersID> > single_string_characters;
-        rule<ScannerT, parser_context, parser_tag<string_charactersID> > double_string_characters;
-        rule<ScannerT, parser_context, parser_tag<string_literalID> > string_literal;
+        rule<ScannerT, parser_context<>, parser_tag<escape_sequenceID> > escape_sequence;
+        rule<ScannerT, parser_context<>, parser_tag<hex_escape_sequenceID> > hex_escape_sequence;
+        rule<ScannerT, parser_context<>, parser_tag<character_escape_sequenceID> > character_escape_sequence;
+        rule<ScannerT, parser_context<>, parser_tag<null_escape_sequenceID> > null_escape_sequence;
+        rule<ScannerT, parser_context<>, parser_tag<string_charactersID> > single_string_characters;
+        rule<ScannerT, parser_context<>, parser_tag<string_charactersID> > double_string_characters;
+        rule<ScannerT, parser_context<>, parser_tag<string_literalID> > string_literal;
         rule<ScannerT> line_terminator;
 
         definition(string_grammar const& /*self*/)
@@ -34,7 +34,7 @@ struct string_grammar : public grammar<string_grammar> {
                              inner_node_d[ch_p('\"') >> *(double_string_characters | escape_sequence) >> ch_p('\"')];
         };
 
-        rule<ScannerT, parser_context, parser_tag<string_literalID> > const&
+        rule<ScannerT, parser_context<>, parser_tag<string_literalID> > const&
         start() const { return string_literal; }
     };
 };
