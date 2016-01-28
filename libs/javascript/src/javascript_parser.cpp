@@ -1033,7 +1033,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
                     return eval_expression(parser_,it->children.begin(),handler);
                 }
             }
-            if(finally_index) {
+            if(finally_index != -1) {
                 iter_t it=i->children.begin()+finally_index;
                 eval_expression(parser_,it->children.begin(),handler);
             }
