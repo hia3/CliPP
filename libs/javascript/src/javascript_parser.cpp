@@ -330,7 +330,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
             if(value>='0' && value<='9') value-='0';
             else if(value>='a' && value<='f') value-='a'-10;
             else if(value>='A' && value<='F') value-='A'-10;
-            literal=value<<5;
+            literal=value<<4;
             value = *(i->value.begin()+1);
             if(value>='0' && value<='9') value-='0';
             else if(value>='a' && value<='f') value-='a'-10;
