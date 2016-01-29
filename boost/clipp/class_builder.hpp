@@ -15,6 +15,8 @@
 #include <boost/clipp/define_operator.hpp>
 #include <boost/clipp/define_converter.hpp>
 
+#include <type_traits>
+
 namespace boost { namespace clipp {
 
 namespace detail {
@@ -22,16 +24,16 @@ namespace detail {
 template<typename C,typename T1,typename T2,typename T3>
 struct select_storage_policy {
     typedef typename mpl::if_<
-        is_convertible<C*,value*>,
+        std::is_convertible<C*,value*>,
         default_storage_policy,
         typename mpl::if_<
-            is_convertible<T1,storage_policy_tag>,
+            std::is_convertible<T1,storage_policy_tag>,
             T1,
             typename mpl::if_<
-                is_convertible<T2,storage_policy_tag>,
+                std::is_convertible<T2,storage_policy_tag>,
                 T2,
                 typename mpl::if_<
-                    is_convertible<T3,storage_policy_tag>,
+                    std::is_convertible<T3,storage_policy_tag>,
                     T3,
                     direct_storage_policy
                 >::type
@@ -52,7 +54,7 @@ struct select_base_type {
 template<typename C,typename T1,typename T2>
 struct select_wrapped_type {
     typedef typename mpl::if_<
-        is_convertible<C*,value*>,
+        std::is_convertible<C*,value*>,
         typename mpl::if_<
             is_same<typename select_base_type<C,T1>::type,mpl::void_>,
             T1,
