@@ -75,6 +75,7 @@
       <PrecompiledHeaderOutputFile>.\Release\test1.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\Release\</ObjectFileName>
       <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <AdditionalIncludeDirectories>..\..\..\..\;..\..\..\..\mini_boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <TypeLibraryName>.\Release\test1.tlb</TypeLibraryName>
