@@ -1,0 +1,27 @@
+// strict mode not implemented
+
+libs\tests\chakra\test\strict\01.octal_sm.baseline
+libs\tests\chakra\test\strict\03.assign_sm.baseline
+libs\tests\chakra\test\strict\04.eval_sm.baseline
+libs\tests\chakra\test\strict\05.arguments_sm.baseline
+libs\tests\chakra\test\strict\06.arguments_sm.baseline
+libs\tests\chakra\test\strict\07.arguments_sm.baseline
+libs\tests\chakra\test\strict\08.ObjectLiteral_sm.baseline
+libs\tests\chakra\test\strict\09.ObjectLiteral_sm.baseline
+libs\tests\chakra\test\strict\10.eval_sm.baseline
+libs\tests\chakra\test\strict\11.this_sm.baseline
+libs\tests\chakra\test\strict\12.delete_sm.baseline
+libs\tests\chakra\test\strict\13.delete_sm.baseline
+libs\tests\chakra\test\strict\14.var_sm.baseline
+libs\tests\chakra\test\strict\15.with_sm.baseline
+libs\tests\chakra\test\strict\16.catch_sm.baseline
+libs\tests\chakra\test\strict\17.formal_sm.baseline
+libs\tests\chakra\test\strict\18.formal_sm.baseline
+libs\tests\chakra\test\strict\19.function_sm.baseline
+libs\tests\chakra\test\strict\20.function_sm.baseline
+libs\tests\chakra\test\strict\21.functionDeclaration_sm.baseline
+libs\tests\chakra\test\strict\22.callerCalleeArguments_sm.baseline
+libs\tests\chakra\test\strict\23.reservedWords_sm.baseline
+libs\tests\chakra\test\strict\24.properties_sm.baseline
+libs\tests\chakra\test\strict\basics_function_in_SM.baseline
+
