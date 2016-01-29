@@ -19,7 +19,9 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
         tree_parse_t info = ast_parse<factory_t>(first, last, grammar, skip);
         dump(info);
         if (info.full) {
-            return evaluate(info,handler);
+            auto result = evaluate(info,handler);
+            m_handler = nullptr;
+            return result;
         }
         else {
             handler.parser_pos().set_current(info.stop);
@@ -35,7 +37,7 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
         }
     }
     catch(parse_guard_triggered& e) {
-        m_handler=0;
+        m_handler = nullptr;
         handler.parser_pos().set_current(e.where());
         if(handler.is_exception_handler()) throw;
         else {
@@ -46,7 +48,7 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
         }
     }
     catch(positional_runtime_error& e) {
-        m_handler=0;
+        m_handler = nullptr;
         handler.parser_pos()=e.parser_pos();
         if(handler.is_exception_handler()) throw;
         else {
@@ -55,7 +57,7 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
         }
     }
     catch(boost::spirit::parser_error<iterator_t, iterator_t>& e) {
-        m_handler=0;
+        m_handler = nullptr;
         handler.parser_pos().set_current(e.where);
         if(handler.is_exception_handler()) throw;
         else {
@@ -64,7 +66,7 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
         }
     }
     catch(exception& e) {
-        m_handler=0;
+        m_handler = nullptr;
         if(handler.is_exception_handler()) throw;
         else {
             handler.report_error(e.what());
@@ -73,10 +75,10 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
     }
 
     catch(...) {
-        m_handler=0;
+        m_handler = nullptr;
         handler.report_error("A parsing error occured\n");
         return 0;
     }
-    m_handler=0;
+    m_handler = nullptr;
 }
 

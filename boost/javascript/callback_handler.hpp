@@ -19,6 +19,10 @@ class BOOST_JAVASCRIPT_EXPORT_IMPORT callback_handler
 public:
     callback_handler() {}
     virtual ~callback_handler() {}
+
+    callback_handler(callback_handler const &) = delete;
+    callback_handler & operator = (callback_handler const &) = delete;
+
     virtual void report_error(std::string const& message) const{}
     virtual bool branch_callback() const {return true;}
     virtual void branch_call() const
