@@ -152,10 +152,19 @@ std::string array::toLocaleString() const
 
 arrayP array::concat(std::valarray<valueP> const& items)
 {
-    array* new_array=new array(items.size());
-    for(unsigned i=0;i<items.size();++i)
-    (*new_array)[i]=items[i];
-    return new_array;
+    if (items.size())
+    {
+        auto context = items[0]->get_context();
+        array* new_array = new array(items.size());
+        new_array->create(context);
+        for (unsigned i = 0;i<items.size();++i)
+            (*new_array)[i] = items[i];
+        return new_array;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 std::string array::join(std::string const& separator) const
