@@ -298,7 +298,14 @@ arrayP array::splice(int start,int deleteCount,std::valarray<valueP> const &item
         container_type& c=*this;
         int item_count=items.size()-deleteCount;
         int itemsStart=start+deleteCount;
-        for(int i=0;i<item_count;++i) c.insert(c.begin()+itemsStart+1,0);
+        for (int i = 0; i < item_count;++i)
+        {
+            if (itemsStart + 1 > c.size())
+            {
+                c.resize(itemsStart + 1);
+            }
+            c.insert(c.begin() + itemsStart + 1, 0);
+        }
     }
     for(i=0;i<items.size();++i) {
         (*this)[start+i]=items[i];
