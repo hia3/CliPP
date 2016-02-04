@@ -69,8 +69,8 @@ valueP get_binary_operator(valueP const& lhs,valueP const& rhs,value::Params& pa
     params[0]=lhs;
     params[1]=rhs;
 
-    valueP method1=lhs->lookup(detail::operator_l<id>::name(),lhs);
-    valueP method2=rhs->lookup(detail::operator_r<id>::name(),rhs);
+    valueP method1 = lhs ? lhs->lookup(detail::operator_l<id>::name(),lhs) : nullptr;
+    valueP method2 = rhs ? rhs->lookup(detail::operator_r<id>::name(),rhs) : nullptr;
     if(method1 && method2) {
         valueP overload_resolution=new member_overloader();
         method1->join_client(overload_resolution);
