@@ -284,7 +284,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
                         eval_params(parser_,inner_i,params,handler);
                         valueP result = callee->construct(params);
                         if (!result)
-                        {					
+                        {
                             result = wrap(new undefined() ,parser_->get_context());
                         }
                         return result;
@@ -296,9 +296,8 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
     case new_expressionID:
         {
             valueP result = eval_expression(parser_,i->children.begin(),handler);
-            return result;
-/*            value::Params params;
-            return result->construct(params);*/
+            value::Params params;
+            return result->construct(params);
         }
     case identifierID:
         {
