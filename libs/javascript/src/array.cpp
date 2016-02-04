@@ -219,6 +219,7 @@ arrayP array::slice(int start,int end)
     else end=std::min(int(length()),end);
     if(end<start) return new array(0);
     array* a=new array(end-start+1);
+    a->create(get_context());
     for(int i=start;i<=end;++i) {
         (*a)[i-start]=(*this)[i].duplicate();
     }
