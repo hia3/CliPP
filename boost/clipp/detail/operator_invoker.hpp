@@ -89,7 +89,7 @@ valueP get_binary_inplace_operator(valueP const& lhs,valueP const& rhs,boost::mp
     params[0]=lhs;
     params[1]=rhs;
 
-    valueP method=lhs->lookup(detail::operator_l<id>::name(),lhs);
+    valueP method = lhs ? lhs->lookup(detail::operator_l<id>::name(),lhs) : nullptr;
     if(method && method->validate_arguments(value::call_method,params)) return method;
     return nullptr;
 }
