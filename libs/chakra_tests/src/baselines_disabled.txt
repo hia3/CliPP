@@ -1,4 +1,36 @@
-// strict mode not implemented
+Following test are disabled in baselines.txt
+
+
+Crashes:
+
+crash in strftime:
+off failure libs\tests\chakra\test\Date\formatting.baseline libs\tests\chakra\test\Date\formatting.js
+
+stack overflow - eval_expression eats >2KB of stack on every recursion step:
+off failure libs\tests\chakra\test\Strings\long_concatstr.baseline libs\tests\chakra\test\Strings\long_concatstr.js
+
+stack overflow:
+off failure libs\tests\chakra\test\EH\newso.baseline libs\tests\chakra\test\EH\newso.js
+
+no idea:
+off failure libs\tests\chakra\test\Boolean\simple2.baseline libs\tests\chakra\test\Boolean\simple2.js
+
+stack overflow:
+off failure libs\tests\chakra\test\EH\so.baseline libs\tests\chakra\test\EH\so.js
+
+
+Other issues:
+
+takes too long to complete:
+off failure libs\tests\chakra\test\Date\date_cache_bug.baseline libs\tests\chakra\test\Date\date_cache_bug.js
+
+tries to trigger out of memory condition (the test is great, but it is annoying):
+off failure libs\tests\chakra\test\Miscellaneous\oom.baseline libs\tests\chakra\test\Miscellaneous\oom.js
+
+name speaks for itself:
+off failure libs\tests\chakra\test\Error\RuntimeCompileStackOverflow.baseline libs\tests\chakra\test\Error\RuntimeCompileStackOverflow.js
+
+strict mode not implemented:
 
 libs\tests\chakra\test\strict\01.octal_sm.baseline
 libs\tests\chakra\test\strict\03.assign_sm.baseline

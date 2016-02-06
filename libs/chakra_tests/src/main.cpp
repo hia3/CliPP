@@ -14,31 +14,23 @@
 #include <boost/config.hpp>
 #include <boost/config/suffix.hpp>
 
+#include <windows.h>
+
 struct WScriptClass
 {
-    /*WScriptClass()
+    explicit WScriptClass(std::vector<std::string> & lines) : lines(lines)
+    {
+    }
+
+    WScriptClass(WScriptClass const & other) : lines(other.lines)
     {
 
     }
-    ~WScriptClass()
-    {
-
-    }
-    WScriptClass(WScriptClass const &)
-    {
-        assert(false);
-    }
-    WScriptClass & operator = (WScriptClass const &)
-    {
-        assert(false);
-    }*/
+    WScriptClass & operator = (WScriptClass const &) = delete;
 
     void Echo(std::string const & line)
     {
         lines.push_back(line);
-    }
-    WScriptClass(std::vector<std::string> & lines) : lines(lines)
-    {
     }
 
 private:
@@ -58,7 +50,7 @@ try
     {
     case 2:
         {
-            int success = 0, failure = 0;
+            int success = 0, failure = 0, disabled = 0;
 
             auto exe = args.at(0);
             auto baselines_file_name = args.at(1);
@@ -68,23 +60,51 @@ try
             {
                 do
                 {
-                    std::string baseline_file_name;
-                    if (std::getline(baselines_file, baseline_file_name))
+                    std::string test_info;
+                    if (std::getline(baselines_file, test_info))
                     {
-                        std::cout << "baseline: " << baseline_file_name << " ";
-                        auto script_file_name = baseline_file_name.substr(0, baseline_file_name.find_last_of(".")) + ".js";
+                        std::string enabled, expected_result, baseline_file_name, script_file_name;
 
-                        int result = system((exe + " " + baseline_file_name + " " + script_file_name).c_str());
+                        std::istringstream test_info_stream(test_info);
+                        test_info_stream >> enabled >> expected_result >> baseline_file_name >> script_file_name;
 
-                        if (result == EXIT_SUCCESS)
+                        if (enabled == "on")
                         {
-                            success++;
+                            int const result = system((exe + " " + baseline_file_name + " " + script_file_name).c_str());
+
+                            bool const is_success = result == EXIT_SUCCESS;
+
+                            std::string unexpected_result;
+                            if (is_success && expected_result == "failure")
+                            {
+                                unexpected_result = "New test passed";
+                            }
+
+                            if (!is_success && expected_result == "success")
+                            {
+                                unexpected_result = "Regression detected";
+                            }
+
+                            if (unexpected_result.length() != 0)
+                            {
+                                ::MessageBoxA(0, (unexpected_result + "\n\n" + baseline_file_name + "\n" + script_file_name).c_str(), "clipp", MB_OK);
+                            }
+
+                            std::cout << "% " << (is_success ? "success" : "failure") << " " << baseline_file_name << " " << script_file_name << std::endl;
+
+                            if (is_success)
+                            {
+                                success++;
+                            }
+                            else
+                            {
+                                failure++;
+                            }
                         }
                         else
                         {
-                            failure++;
+                            disabled++;
                         }
-                        std::cout << failure << " " << success << std::endl;
                     }
                 } while (baselines_file);
             }
@@ -93,6 +113,8 @@ try
                 system("dir");
                 std::cerr << "Can't open " << baselines_file_name << std::endl;
             }
+
+            std::cout << "Total: " << "failed - " << failure << " succeeded - " << success << " disabled - " << disabled << std::endl;
         }
         break;
     case 3:
@@ -105,15 +127,17 @@ try
 
             if (!baseline_file)
             {
-                std::cout << "baseline not found";
+                std::cerr << "baseline not found";
+                return EXIT_FAILURE;
             }
             if (!script_file)
             {
-                std::cout << "script not found";
+                std::cerr << "script not found";
+                return EXIT_FAILURE;
             }
-            std::cout << std::endl;
 
             std::vector<std::string> echo;
+            WScriptClass WScript(echo);
             {
                 using namespace boost::clipp;
                 using namespace boost::javascript;
@@ -121,12 +145,11 @@ try
                 javascript_parser parser;
                 auto context = parser.get_context();
 
-                class_<WScriptClass> cls("WScriptClass", context);
+                class_<WScriptClass/*, boost::clipp::reference_storage_policy*/> cls("WScriptClass", context);
                 cls.function("Echo", &WScriptClass::Echo);
 
-                context->global()->insert("WScript", wrap(new WScriptClass(echo), context));
+                context->global()->insert("WScript", wrap_ref(WScript, context));
                 parser.parse(script_file);
-                //context->global()->erase(wrapped_WScript);
             }
 
             std::size_t echo_idx = 0;
@@ -142,6 +165,8 @@ try
                     "HasFuncDecl",
                     "HasFuncAssignment",
                     "HasMaybeEscapedNestedFunc",
+                    "HasMaybeEscapedUse",
+                    "DoStackNestedFunc",
                     "TODO"
                 };
                 bool ignore = std::any_of(ignore_lines.begin(), ignore_lines.end(), [&](auto & ignore_line) { return starts_with(baseline_line, ignore_line); });
@@ -156,7 +181,7 @@ try
                 }
                 else
                 {
-                    std::cerr << "Test failed - got `" << got << "` instead of " << baseline_line << std::endl;
+                    std::cerr << "Test failed - got `" << got << "` instead of " << baseline_line << ", line " << echo_idx << std::endl;
                     return EXIT_FAILURE;
                 }
 
@@ -180,9 +205,29 @@ catch (...)
 
 int main(int argc, char * argv[])
 {
+    DWORD s = ::GetTickCount();
+
     std::vector<std::string> args(argv, argv + argc);
     /*args.resize(3);
-    args[1] = R"*(libs\tests\chakra\test\strict\09.ObjectLiteral.baseline)*";
-    args[2] = R"*(libs\tests\chakra\test\strict\09.ObjectLiteral.js)*";*/
-    return the_main(args);
+    args[1] = R"*(libs\tests\chakra\test\Generated\rsh0.baseline)*";
+    args[2] = R"*(libs\tests\chakra\test\Generated\rsh0.js)*";*/
+
+    /*args.resize(3); // regression?
+    args[1] = R"*(libs\tests\chakra\test\Basics\StringFromCharCode.baseline)*";
+    args[2] = R"*(libs\tests\chakra\test\Basics\StringFromCharCode.js)*";*/
+
+    /*args.resize(3);
+    args[1] = R"*(libs\chakra_tests\src\first.baseline)*";
+    args[2] = R"*(libs\chakra_tests\src\first.js)*";*/
+
+    /*args.resize(3);
+    args[1] = R"*(F:\2.baseline)*";
+    args[2] = R"*(F:\3.js)*";*/
+
+    int r = the_main(args);
+
+    DWORD e = ::GetTickCount() - s;
+    //printf("%i\n", e);
+
+    return r;
 }
