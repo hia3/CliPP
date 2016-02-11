@@ -974,26 +974,74 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
     case switch_statementID:
         {
             valueP expression = eval_expression(parser_,i->children.begin(),handler);
-            int default_index=-1;
-            int case_size=(i->children.end()-i->children.begin())-1;
-            for(int case_i=1;case_i<=case_size;++case_i) {
-                iter_t it=i->children.begin()+case_i;
-                switch(it->value.id().to_long()) {
+            int default_index = -1;
+            int matched_index = -1;
+            int const case_size = i->children.size() - 1;
+            for(int case_i = 1; case_i <= case_size && matched_index == -1; ++case_i)
+            {
+                iter_t it = i->children.begin() + case_i;
+                switch(it->value.id().to_long())
+                {
                 case default_clauseID: 
-                    default_index=case_i;
+                    {
+                        default_index = case_i;
+                    }
                     break;
                 case case_clauseID:
-                    if(unwrap<bool>(invoke_operator<'=='>(eval_expression(parser_,it->children.begin(),handler),expression))()) {
-                        return eval_expression(parser_,it->children.begin()+1,handler);
+                    if (unwrap<bool>(invoke_operator<'=='>(eval_expression(parser_, it->children.begin(), handler), expression))()) // TODO: should we use === instead?
+                    {
+                        matched_index = case_i;
                     }
                     break;
                 }
             }
-            if(default_index!=-1) {
-                iter_t it=i->children.begin()+default_index;
-                return eval_expression(parser_,it->children.begin(),handler);
+            if (matched_index == -1)
+            {
+                matched_index = default_index;
             }
-            break;
+
+            if(matched_index != -1)
+            {
+                for (int case_i = matched_index; case_i <= case_size; ++case_i)
+                {
+                    iter_t it = i->children.begin() + case_i;
+
+                    switch (it->value.id().to_long())
+                    {
+                    case default_clauseID:
+                        {
+                            for (auto statement = it->children.begin(); statement != it->children.end(); ++statement)
+                            try
+                            {
+                                eval_expression(parser_, statement, handler);
+                            }
+                            catch (js_break const & /*b*/)
+                            {
+                                return nullptr;
+                            }
+                        }
+                    break;
+                    case case_clauseID:
+                        {
+                            if (it->children.size() > 1) // case with code
+                            {
+                                for (auto statement = it->children.begin() + 1; statement != it->children.end(); ++statement)
+                                try
+                                {
+                                    eval_expression(parser_, statement, handler);
+                                }
+                                catch (js_break const & /*b*/)
+                                {
+                                    return nullptr;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return nullptr;
         }
     case throw_statementID:
         {
