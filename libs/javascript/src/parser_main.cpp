@@ -19,12 +19,13 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
         tree_parse_t info = ast_parse<factory_t>(first, last, grammar, skip);
         dump(info);
         if (info.full) {
+            code_begin_ = first;
             auto result = evaluate(info,handler);
             m_handler = nullptr;
             return result;
         }
         else {
-            handler.parser_pos().set_current(info.stop);
+            handler.parser_pos().set_current(info.stop - first);
             std::string message = " Fails Parsing\n";
             for (int i = 0; i < 50; i++)
             {
@@ -38,7 +39,7 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
     }
     catch(parse_guard_triggered& e) {
         m_handler = nullptr;
-        handler.parser_pos().set_current(e.where());
+        handler.parser_pos().set_current(e.where() - first);
         if(handler.is_exception_handler()) throw;
         else {
             std::string message = " Syntax error: ";
@@ -58,7 +59,7 @@ valueP javascript_parser::parse(iterator_t const& first,iterator_t const& last,c
     }
     catch(boost::spirit::parser_error<iterator_t, iterator_t>& e) {
         m_handler = nullptr;
-        handler.parser_pos().set_current(e.where);
+        handler.parser_pos().set_current(e.where - first);
         if(handler.is_exception_handler()) throw;
         else {
             handler.report_error(e.descriptor);

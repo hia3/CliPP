@@ -232,14 +232,14 @@ void eval_params(javascript_parser* parser_,iter_t const& i,value::Params& param
 
 valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_handler const& handler)
 {
-
+    char const * code_begin = parser_->code_begin();
 #if defined(SPIRIT_DUMP_PARSETREE_AS_XML)
     using namespace boost::clipp::detail;
     std::cout << "In eval_expression. i->value = " <<
         std::string(i->value.begin(), i->value.end()) <<
         " i->children.size() = " << i->children.size() << std::endl;
 #endif
-    handler.parser_pos().set_current(i->value.begin());
+    handler.parser_pos().set_current(i->value.begin() - code_begin);
     switch(i->value.id().to_long()) {
     case call_expressionID:
         {   
@@ -888,7 +888,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
             iter_t istart=it->children.begin();
             iter_t iend=boost::prior(it->children.end());
             std::string program(istart->value.begin()+1,iend->value.begin());
-            handler.parser_pos().set_current(istart->value.begin() + 1);
+            handler.parser_pos().set_current(istart->value.begin() + 1 - code_begin);
             valueP function = wrap(new js_function(arguments, program, handler), parser_->get_context());
             invoke_operator<'='>(eval_expression(parser_,i->children.begin(),handler),function);
             break;
