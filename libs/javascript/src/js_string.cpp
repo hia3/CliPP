@@ -44,8 +44,13 @@ void js_string::init(context* c)
 };
 
 double js_string::toNumber() const
+try
 {
     return lexical_cast<double>(value_);
+}
+catch (boost::bad_lexical_cast const & /*e*/)
+{
+    return 0;
 }
 
 std::string boost::javascript::operator+(js_string const& lhs,double const & rhs)
