@@ -38,14 +38,14 @@ on failure libs\tests\chakra\test\Generated\add2.baseline libs\tests\chakra\test
 on failure libs\tests\chakra\test\Generated\add3.baseline libs\tests\chakra\test\Generated\add3.js
 on failure libs\tests\chakra\test\Bugs\addexception.baseline libs\tests\chakra\test\Bugs\addexception.js
 on failure libs\tests\chakra\test\InlineCaches\addFldFastPath.baseline libs\tests\chakra\test\InlineCaches\addFldFastPath.js
-on success libs\tests\chakra\test\TaggedIntegers\addition.baseline libs\tests\chakra\test\TaggedIntegers\addition.js
+off success libs\tests\chakra\test\TaggedIntegers\addition.baseline libs\tests\chakra\test\TaggedIntegers\addition.js
 on failure libs\tests\chakra\test\Optimizer\AggressiveIntTypeSpec.baseline libs\tests\chakra\test\Optimizer\AggressiveIntTypeSpec.js
 on failure libs\tests\chakra\test\Optimizer\AggressiveIntTypeSpec_Off_MaxInterpret.baseline libs\tests\chakra\test\Optimizer\AggressiveIntTypeSpec_Off_MaxInterpret.js
 on failure libs\tests\chakra\test\switchStatement\allIIntCases.baseline libs\tests\chakra\test\switchStatement\allIIntCases.js
 on success libs\tests\chakra\test\switchStatement\allStringCases.baseline libs\tests\chakra\test\switchStatement\allStringCases.js
 on failure libs\tests\chakra\test\switchStatement\amd64JScriptNumberRegression.baseline libs\tests\chakra\test\switchStatement\amd64JScriptNumberRegression.js
 on failure libs\tests\chakra\test\Generated\and.baseline libs\tests\chakra\test\Generated\and.js
-on failure libs\tests\chakra\test\TaggedIntegers\and.baseline libs\tests\chakra\test\TaggedIntegers\and.js
+off failure libs\tests\chakra\test\TaggedIntegers\and.baseline libs\tests\chakra\test\TaggedIntegers\and.js
 on failure libs\tests\chakra\test\Generated\and0.baseline libs\tests\chakra\test\Generated\and0.js
 on failure libs\tests\chakra\test\Generated\and1.baseline libs\tests\chakra\test\Generated\and1.js
 on failure libs\tests\chakra\test\Generated\and2.baseline libs\tests\chakra\test\Generated\and2.js
@@ -125,7 +125,7 @@ on failure libs\tests\chakra\test\LetConst\AssignmentToConst.baseline libs\tests
 on failure libs\tests\chakra\test\es7\asyncawait-functionality.baseline libs\tests\chakra\test\es7\asyncawait-functionality.js
 on failure libs\tests\chakra\test\Math\atan.baseline libs\tests\chakra\test\Math\atan.js
 on failure libs\tests\chakra\test\Math\atan2.baseline libs\tests\chakra\test\Math\atan2.js
-on failure libs\tests\chakra\test\Generated\attackoftheclones.baseline libs\tests\chakra\test\Generated\attackoftheclones.js
+off failure libs\tests\chakra\test\Generated\attackoftheclones.baseline libs\tests\chakra\test\Generated\attackoftheclones.js
 on failure libs\tests\chakra\test\es5\augmentPrimitive.baseline libs\tests\chakra\test\es5\augmentPrimitive.js
 on failure libs\tests\chakra\test\LetConst\b.baseline libs\tests\chakra\test\LetConst\b.js
 on failure libs\tests\chakra\test\Generated\B9AA6BBF.0.baseline libs\tests\chakra\test\Generated\B9AA6BBF.0.js
@@ -142,7 +142,7 @@ on failure libs\tests\chakra\test\bailout\bailout2.baseline libs\tests\chakra\te
 on failure libs\tests\chakra\test\bailout\bailout3.baseline libs\tests\chakra\test\bailout\bailout3.js
 on failure libs\tests\chakra\test\bailout\bailout4.baseline libs\tests\chakra\test\bailout\bailout4.js
 on failure libs\tests\chakra\test\bailout\bailout5.baseline libs\tests\chakra\test\bailout\bailout5.js
-on failure libs\tests\chakra\test\bailout\bailout7.baseline libs\tests\chakra\test\bailout\bailout7.js
+off failure libs\tests\chakra\test\bailout\bailout7.baseline libs\tests\chakra\test\bailout\bailout7.js
 on failure libs\tests\chakra\test\AsmJs\BasicBranching.baseline libs\tests\chakra\test\AsmJs\BasicBranching.js
 on failure libs\tests\chakra\test\AsmJs\basicComparisonDouble.baseline libs\tests\chakra\test\AsmJs\basicComparisonDouble.js
 on failure libs\tests\chakra\test\AsmJs\basicComparisonInt.baseline libs\tests\chakra\test\AsmJs\basicComparisonInt.js
@@ -160,7 +160,7 @@ on failure libs\tests\chakra\test\Operators\biops.baseline libs\tests\chakra\tes
 on failure libs\tests\chakra\test\AsmJs\blockLabelBug.baseline libs\tests\chakra\test\AsmJs\blockLabelBug.js
 on failure libs\tests\chakra\test\es6\blockscope-deferred.baseline libs\tests\chakra\test\es6\blockscope-deferred.js
 on failure libs\tests\chakra\test\es6\blockscope-functionbinding.baseline libs\tests\chakra\test\es6\blockscope-functionbinding.js
-on failure libs\tests\chakra\test\stackfunc\blockscope_funcdecl.baseline libs\tests\chakra\test\stackfunc\blockscope_funcdecl.js
+on success libs\tests\chakra\test\stackfunc\blockscope_funcdecl.baseline libs\tests\chakra\test\stackfunc\blockscope_funcdecl.js
 on failure libs\tests\chakra\test\Regex\blue_102584_1.baseline libs\tests\chakra\test\Regex\blue_102584_1.js
 on failure libs\tests\chakra\test\Regex\blue_102584_2.baseline libs\tests\chakra\test\Regex\blue_102584_2.js
 on failure libs\tests\chakra\test\Bugs\blue_1086262.baseline libs\tests\chakra\test\Bugs\blue_1086262.js
@@ -203,7 +203,7 @@ on failure libs\tests\chakra\test\typedarray\bug2268573.baseline libs\tests\chak
 on failure libs\tests\chakra\test\inlining\bug2328551.baseline libs\tests\chakra\test\inlining\bug2328551.js
 on failure libs\tests\chakra\test\Bugs\bug3.shrua-3.baseline libs\tests\chakra\test\Bugs\bug3.shrua-3.js
 on failure libs\tests\chakra\test\inlining\bug515849.baseline libs\tests\chakra\test\inlining\bug515849.js
-on failure libs\tests\chakra\test\stackfunc\bug565705.baseline libs\tests\chakra\test\stackfunc\bug565705.js
+on success libs\tests\chakra\test\stackfunc\bug565705.baseline libs\tests\chakra\test\stackfunc\bug565705.js
 on failure libs\tests\chakra\test\Bugs\bug6.shrua-3.baseline libs\tests\chakra\test\Bugs\bug6.shrua-3.js
 on failure libs\tests\chakra\test\Bugs\bug602_3.baseline libs\tests\chakra\test\Bugs\bug602_3.js
 on failure libs\tests\chakra\test\Basics\bug650104.baseline libs\tests\chakra\test\Basics\bug650104.js
@@ -217,8 +217,8 @@ on failure libs\tests\chakra\test\UnifiedRegex\bugFixVersioned.baseline libs\tes
 on failure libs\tests\chakra\test\inlining\builtInApplyTarget.baseline libs\tests\chakra\test\inlining\builtInApplyTarget.js
 on failure libs\tests\chakra\test\LetConst\c.baseline libs\tests\chakra\test\LetConst\c.js
 on failure libs\tests\chakra\test\Closures\cachedscope_1.baseline libs\tests\chakra\test\Closures\cachedscope_1.js
-on failure libs\tests\chakra\test\stackfunc\cachescope.baseline libs\tests\chakra\test\stackfunc\cachescope.js
-on failure libs\tests\chakra\test\stackfunc\call_escape.baseline libs\tests\chakra\test\stackfunc\call_escape.js
+on success libs\tests\chakra\test\stackfunc\cachescope.baseline libs\tests\chakra\test\stackfunc\cachescope.js
+on success libs\tests\chakra\test\stackfunc\call_escape.baseline libs\tests\chakra\test\stackfunc\call_escape.js
 on failure libs\tests\chakra\test\stackfunc\call_escape.deferparse.baseline libs\tests\chakra\test\stackfunc\call_escape.deferparse.js
 on failure libs\tests\chakra\test\Function\call1.baseline libs\tests\chakra\test\Function\call1.js
 on failure libs\tests\chakra\test\Function\call2.baseline libs\tests\chakra\test\Function\call2.js
@@ -350,14 +350,14 @@ on failure libs\tests\chakra\test\Generated\divbypow2.baseline libs\tests\chakra
 on success libs\tests\chakra\test\TaggedIntegers\divide.baseline libs\tests\chakra\test\TaggedIntegers\divide.js
 on failure libs\tests\chakra\test\ControlFlow\DoLoop.baseline libs\tests\chakra\test\ControlFlow\DoLoop.js
 on failure libs\tests\chakra\test\ControlFlow\DoLoop2.baseline libs\tests\chakra\test\ControlFlow\DoLoop2.js
-on failure libs\tests\chakra\test\ControlFlow\DoLoop3.baseline libs\tests\chakra\test\ControlFlow\DoLoop3.js
+on success libs\tests\chakra\test\ControlFlow\DoLoop3.baseline libs\tests\chakra\test\ControlFlow\DoLoop3.js
 on failure libs\tests\chakra\test\LetConst\dop.baseline libs\tests\chakra\test\LetConst\dop.js
 on failure libs\tests\chakra\test\LetConst\dop1.baseline libs\tests\chakra\test\LetConst\dop1.js
 on failure libs\tests\chakra\test\ControlFlow\DoWhileES5.baseline libs\tests\chakra\test\ControlFlow\DoWhileES5.js
 on failure libs\tests\chakra\test\StackTrace\dynamic.js.baseline libs\tests\chakra\test\StackTrace\dynamic.js.js
 on failure libs\tests\chakra\test\LetConst\e.baseline libs\tests\chakra\test\LetConst\e.js
 on failure libs\tests\chakra\test\switchStatement\emptyCases.baseline libs\tests\chakra\test\switchStatement\emptyCases.js
-on failure libs\tests\chakra\test\switchStatement\emptyStringCases.baseline libs\tests\chakra\test\switchStatement\emptyStringCases.js
+on success libs\tests\chakra\test\switchStatement\emptyStringCases.baseline libs\tests\chakra\test\switchStatement\emptyStringCases.js
 on failure libs\tests\chakra\test\Error\encodeoverflow.baseline libs\tests\chakra\test\Error\encodeoverflow.js
 on failure libs\tests\chakra\test\Basics\enum.baseline libs\tests\chakra\test\Basics\enum.js
 on failure libs\tests\chakra\test\es5\enumerable.baseline libs\tests\chakra\test\es5\enumerable.js
@@ -551,7 +551,7 @@ on failure libs\tests\chakra\test\Object\hasOwnProperty.baseline libs\tests\chak
 on failure libs\tests\chakra\test\Strings\HTMLHelpers.baseline libs\tests\chakra\test\Strings\HTMLHelpers.js
 on failure libs\tests\chakra\test\LetConst\i.baseline libs\tests\chakra\test\LetConst\i.js
 on failure libs\tests\chakra\test\Basics\IdsWithEscapes.baseline libs\tests\chakra\test\Basics\IdsWithEscapes.js
-on failure libs\tests\chakra\test\stackfunc\iffuncdecl.baseline libs\tests\chakra\test\stackfunc\iffuncdecl.js
+on success libs\tests\chakra\test\stackfunc\iffuncdecl.baseline libs\tests\chakra\test\stackfunc\iffuncdecl.js
 on failure libs\tests\chakra\test\bailout\implicit_nosideeffect.baseline libs\tests\chakra\test\bailout\implicit_nosideeffect.js
 on failure libs\tests\chakra\test\Optimizer\implicit_upwardexposed.baseline libs\tests\chakra\test\Optimizer\implicit_upwardexposed.js
 on failure libs\tests\chakra\test\switchStatement\implicitCallSwitchExpr.baseline libs\tests\chakra\test\switchStatement\implicitCallSwitchExpr.js
@@ -657,7 +657,7 @@ on failure libs\tests\chakra\test\StackTrace\LongCallStackThrow.js.Args5.baselin
 on failure libs\tests\chakra\test\StackTrace\LongCallStackThrow.js.Args6.baseline libs\tests\chakra\test\StackTrace\LongCallStackThrow.js.Args6.js
 on failure libs\tests\chakra\test\StackTrace\LongCallStackThrow.js.Args7.baseline libs\tests\chakra\test\StackTrace\LongCallStackThrow.js.Args7.js
 on failure libs\tests\chakra\test\loop\loop.baseline libs\tests\chakra\test\loop\loop.js
-on failure libs\tests\chakra\test\switchStatement\loopAndRetarget.baseline libs\tests\chakra\test\switchStatement\loopAndRetarget.js
+on success libs\tests\chakra\test\switchStatement\loopAndRetarget.baseline libs\tests\chakra\test\switchStatement\loopAndRetarget.js
 on failure libs\tests\chakra\test\AsmJs\LoopBodyToJit.baseline libs\tests\chakra\test\AsmJs\LoopBodyToJit.js
 on failure libs\tests\chakra\test\TaggedIntegers\loopbounds.baseline libs\tests\chakra\test\TaggedIntegers\loopbounds.js
 on failure libs\tests\chakra\test\LetConst\loopinit.baseline libs\tests\chakra\test\LetConst\loopinit.js
@@ -712,7 +712,7 @@ on failure libs\tests\chakra\test\Generated\mod3.baseline libs\tests\chakra\test
 on failure libs\tests\chakra\test\Operators\modopt.baseline libs\tests\chakra\test\Operators\modopt.js
 on failure libs\tests\chakra\test\AsmJs\ModuleVarRead.baseline libs\tests\chakra\test\AsmJs\ModuleVarRead.js
 on failure libs\tests\chakra\test\AsmJs\ModuleVarWrite.baseline libs\tests\chakra\test\AsmJs\ModuleVarWrite.js
-on failure libs\tests\chakra\test\TaggedIntegers\modulus.baseline libs\tests\chakra\test\TaggedIntegers\modulus.js
+off failure libs\tests\chakra\test\TaggedIntegers\modulus.baseline libs\tests\chakra\test\TaggedIntegers\modulus.js
 on failure libs\tests\chakra\test\Function\moreFuncExpr3.baseline libs\tests\chakra\test\Function\moreFuncExpr3.js
 on failure libs\tests\chakra\test\Object\moreProperties-enumeration.baseline libs\tests\chakra\test\Object\moreProperties-enumeration.js
 on failure libs\tests\chakra\test\switchStatement\moreSwitches1.baseline libs\tests\chakra\test\switchStatement\moreSwitches1.js
@@ -730,7 +730,7 @@ on failure libs\tests\chakra\test\Regex\multiline.baseline libs\tests\chakra\tes
 on failure libs\tests\chakra\test\UnifiedRegex\multiline.baseline libs\tests\chakra\test\UnifiedRegex\multiline.js
 on failure libs\tests\chakra\test\stackfunc\multinested_escape.baseline libs\tests\chakra\test\stackfunc\multinested_escape.js
 on failure libs\tests\chakra\test\stackfunc\multinested_escape.deferparse.baseline libs\tests\chakra\test\stackfunc\multinested_escape.deferparse.js
-on failure libs\tests\chakra\test\TaggedIntegers\multiplication.baseline libs\tests\chakra\test\TaggedIntegers\multiplication.js
+off failure libs\tests\chakra\test\TaggedIntegers\multiplication.baseline libs\tests\chakra\test\TaggedIntegers\multiplication.js
 on failure libs\tests\chakra\test\strict\multiunit.baseline libs\tests\chakra\test\strict\multiunit.js
 on failure libs\tests\chakra\test\Object\multivardecl.baseline libs\tests\chakra\test\Object\multivardecl.js
 on failure libs\tests\chakra\test\LetConst\n.baseline libs\tests\chakra\test\LetConst\n.js
@@ -825,7 +825,7 @@ off failure libs\tests\chakra\test\Miscellaneous\oom.baseline libs\tests\chakra\
 on failure libs\tests\chakra\test\Optimizer\opttagchecks1.baseline libs\tests\chakra\test\Optimizer\opttagchecks1.js
 on failure libs\tests\chakra\test\Generated\or.baseline libs\tests\chakra\test\Generated\or.js
 on failure libs\tests\chakra\test\Operators\or.baseline libs\tests\chakra\test\Operators\or.js
-on failure libs\tests\chakra\test\TaggedIntegers\or.baseline libs\tests\chakra\test\TaggedIntegers\or.js
+off failure libs\tests\chakra\test\TaggedIntegers\or.baseline libs\tests\chakra\test\TaggedIntegers\or.js
 on failure libs\tests\chakra\test\Generated\or0.baseline libs\tests\chakra\test\Generated\or0.js
 on failure libs\tests\chakra\test\Generated\or1.baseline libs\tests\chakra\test\Generated\or1.js
 on failure libs\tests\chakra\test\Generated\or2.baseline libs\tests\chakra\test\Generated\or2.js
@@ -956,13 +956,13 @@ on failure libs\tests\chakra\test\AsmJs\shadowingBug.baseline libs\tests\chakra\
 on failure libs\tests\chakra\test\TaggedIntegers\shift_constants.baseline libs\tests\chakra\test\TaggedIntegers\shift_constants.js
 on failure libs\tests\chakra\test\Array\shift_unshift.baseline libs\tests\chakra\test\Array\shift_unshift.js
 on failure libs\tests\chakra\test\Array\shift_unshift_es5.baseline libs\tests\chakra\test\Array\shift_unshift_es5.js
-on failure libs\tests\chakra\test\TaggedIntegers\signedshiftleft.baseline libs\tests\chakra\test\TaggedIntegers\signedshiftleft.js
-on failure libs\tests\chakra\test\TaggedIntegers\signedshiftright.baseline libs\tests\chakra\test\TaggedIntegers\signedshiftright.js
+off failure libs\tests\chakra\test\TaggedIntegers\signedshiftleft.baseline libs\tests\chakra\test\TaggedIntegers\signedshiftleft.js
+off failure libs\tests\chakra\test\TaggedIntegers\signedshiftright.baseline libs\tests\chakra\test\TaggedIntegers\signedshiftright.js
 on failure libs\tests\chakra\test\Bugs\SIMDExtendArgCSE.baseline libs\tests\chakra\test\Bugs\SIMDExtendArgCSE.js
 on failure libs\tests\chakra\test\JSON\simple.baseline libs\tests\chakra\test\JSON\simple.js
 on failure libs\tests\chakra\test\JSON\simple.stringify.baseline libs\tests\chakra\test\JSON\simple.stringify.js
 on failure libs\tests\chakra\test\JSON\simple.withLog.baseline libs\tests\chakra\test\JSON\simple.withLog.js
-on failure libs\tests\chakra\test\stackfunc\simple_escape.baseline libs\tests\chakra\test\stackfunc\simple_escape.js
+on success libs\tests\chakra\test\stackfunc\simple_escape.baseline libs\tests\chakra\test\stackfunc\simple_escape.js
 on failure libs\tests\chakra\test\stackfunc\simple_Escape.deferparse.baseline libs\tests\chakra\test\stackfunc\simple_Escape.deferparse.js
 on failure libs\tests\chakra\test\stackfunc\simple_namedstackfunc.baseline libs\tests\chakra\test\stackfunc\simple_namedstackfunc.js
 on failure libs\tests\chakra\test\stackfunc\simple_namedstackfunc.deferparse.baseline libs\tests\chakra\test\stackfunc\simple_namedstackfunc.deferparse.js
@@ -1002,7 +1002,7 @@ on failure libs\tests\chakra\test\Error\stack2.baseline libs\tests\chakra\test\E
 on failure libs\tests\chakra\test\Function\stackargs.baseline libs\tests\chakra\test\Function\stackargs.js
 on failure libs\tests\chakra\test\Object\stackobject.baseline libs\tests\chakra\test\Object\stackobject.js
 on failure libs\tests\chakra\test\Object\stackobject_escape.baseline libs\tests\chakra\test\Object\stackobject_escape.js
-on failure libs\tests\chakra\test\Error\stackoverflow.baseline libs\tests\chakra\test\Error\stackoverflow.js
+off failure libs\tests\chakra\test\Error\stackoverflow.baseline libs\tests\chakra\test\Error\stackoverflow.js
 on failure libs\tests\chakra\test\Regex\stackregex_box.baseline libs\tests\chakra\test\Regex\stackregex_box.js
 on failure libs\tests\chakra\test\StackTrace\StackTraceLimit.baseline libs\tests\chakra\test\StackTrace\StackTraceLimit.js
 on failure libs\tests\chakra\test\StackTrace\StackTraceLimitOOS.baseline libs\tests\chakra\test\StackTrace\StackTraceLimitOOS.js
@@ -1045,7 +1045,7 @@ on failure libs\tests\chakra\test\Generated\sub3.baseline libs\tests\chakra\test
 on failure libs\tests\chakra\test\typedarray\subarray.baseline libs\tests\chakra\test\typedarray\subarray.js
 on failure libs\tests\chakra\test\Strings\substring.baseline libs\tests\chakra\test\Strings\substring.js
 on failure libs\tests\chakra\test\switchStatement\substring.baseline libs\tests\chakra\test\switchStatement\substring.js
-on success libs\tests\chakra\test\TaggedIntegers\subtraction.baseline libs\tests\chakra\test\TaggedIntegers\subtraction.js
+off success libs\tests\chakra\test\TaggedIntegers\subtraction.baseline libs\tests\chakra\test\TaggedIntegers\subtraction.js
 on failure libs\tests\chakra\test\es6\supersyntax02.baseline libs\tests\chakra\test\es6\supersyntax02.js
 on failure libs\tests\chakra\test\es6\supersyntax05.baseline libs\tests\chakra\test\es6\supersyntax05.js
 on failure libs\tests\chakra\test\es6\supersyntax06.baseline libs\tests\chakra\test\es6\supersyntax06.js
@@ -1066,7 +1066,7 @@ on failure libs\tests\chakra\test\Function\TApply1.baseline libs\tests\chakra\te
 on failure libs\tests\chakra\test\LetConst\tdz1.baseline libs\tests\chakra\test\LetConst\tdz1.js
 on failure libs\tests\chakra\test\AsmJs\ternaryfloat.baseline libs\tests\chakra\test\AsmJs\ternaryfloat.js
 on success libs\tests\chakra\test\Basics\TernaryOperator.baseline libs\tests\chakra\test\Basics\TernaryOperator.js
-on failure libs\tests\chakra\test\TaggedFloats\test.baseline libs\tests\chakra\test\TaggedFloats\test.js
+off failure libs\tests\chakra\test\TaggedFloats\test.baseline libs\tests\chakra\test\TaggedFloats\test.js
 on success libs\tests\chakra\test\Optimizer\test0.baseline libs\tests\chakra\test\Optimizer\test0.js
 on failure libs\tests\chakra\test\Optimizer\test1.baseline libs\tests\chakra\test\Optimizer\test1.js
 on failure libs\tests\chakra\test\Optimizer\test10.baseline libs\tests\chakra\test\Optimizer\test10.js
@@ -1341,7 +1341,7 @@ on failure libs\tests\chakra\test\EH\try5-ES3.baseline libs\tests\chakra\test\EH
 on failure libs\tests\chakra\test\EH\try6.baseline libs\tests\chakra\test\EH\try6.js
 on failure libs\tests\chakra\test\Optimizer\trycatch_assert.baseline libs\tests\chakra\test\Optimizer\trycatch_assert.js
 on failure libs\tests\chakra\test\Optimizer\trycatch_functional.baseline libs\tests\chakra\test\Optimizer\trycatch_functional.js
-on failure libs\tests\chakra\test\stackfunc\trycatch_stackfunc.baseline libs\tests\chakra\test\stackfunc\trycatch_stackfunc.js
+on success libs\tests\chakra\test\stackfunc\trycatch_stackfunc.baseline libs\tests\chakra\test\stackfunc\trycatch_stackfunc.js
 on failure libs\tests\chakra\test\es5\TypeConversions.baseline libs\tests\chakra\test\es5\TypeConversions.js
 on failure libs\tests\chakra\test\typedarray\TypedArrayBuiltins.baseline libs\tests\chakra\test\typedarray\TypedArrayBuiltins.js
 on failure libs\tests\chakra\test\Function\typeErrorAccessor.baseline libs\tests\chakra\test\Function\typeErrorAccessor.js
@@ -1369,7 +1369,7 @@ on failure libs\tests\chakra\test\es6\unicode_regex_surrogate.baseline libs\test
 on failure libs\tests\chakra\test\es6\unicode_regex_surrogate_atoms.baseline libs\tests\chakra\test\es6\unicode_regex_surrogate_atoms.js
 on failure libs\tests\chakra\test\AsmJs\unitybug.baseline libs\tests\chakra\test\AsmJs\unitybug.js
 on failure libs\tests\chakra\test\Optimizer\UnreachableCode.baseline libs\tests\chakra\test\Optimizer\UnreachableCode.js
-on success libs\tests\chakra\test\TaggedIntegers\unsignedshiftright.baseline libs\tests\chakra\test\TaggedIntegers\unsignedshiftright.js
+off success libs\tests\chakra\test\TaggedIntegers\unsignedshiftright.baseline libs\tests\chakra\test\TaggedIntegers\unsignedshiftright.js
 on failure libs\tests\chakra\test\Lib\uri.baseline libs\tests\chakra\test\Lib\uri.js
 on failure libs\tests\chakra\test\UnitTestFramework\UTFTests.baseline libs\tests\chakra\test\UnitTestFramework\UTFTests.js
 on failure libs\tests\chakra\test\es5\valueof5.baseline libs\tests\chakra\test\es5\valueof5.js
@@ -1389,8 +1389,8 @@ on failure libs\tests\chakra\test\stackfunc\with_namedfunc.deferparse.baseline l
 on failure libs\tests\chakra\test\Basics\With2.baseline libs\tests\chakra\test\Basics\With2.js
 on failure libs\tests\chakra\test\Basics\with3.baseline libs\tests\chakra\test\Basics\with3.js
 on failure libs\tests\chakra\test\Basics\witheval.baseline libs\tests\chakra\test\Basics\witheval.js
-on failure libs\tests\chakra\test\stackfunc\withref_delayobjscope.baseline libs\tests\chakra\test\stackfunc\withref_delayobjscope.js
-on failure libs\tests\chakra\test\UnifiedRegex\WOOB1138949.baseline libs\tests\chakra\test\UnifiedRegex\WOOB1138949.js
+on success libs\tests\chakra\test\stackfunc\withref_delayobjscope.baseline libs\tests\chakra\test\stackfunc\withref_delayobjscope.js
+off failure libs\tests\chakra\test\UnifiedRegex\WOOB1138949.baseline libs\tests\chakra\test\UnifiedRegex\WOOB1138949.js
 on failure libs\tests\chakra\test\Boolean\wrappedobj.baseline libs\tests\chakra\test\Boolean\wrappedobj.js
 on failure libs\tests\chakra\test\AsmJs\WriteArrayView.baseline libs\tests\chakra\test\AsmJs\WriteArrayView.js
 on failure libs\tests\chakra\test\AsmJs\WriteFixOffset.baseline libs\tests\chakra\test\AsmJs\WriteFixOffset.js
@@ -1398,7 +1398,7 @@ on failure libs\tests\chakra\test\StackTrace\x64StackWalk.baseline libs\tests\ch
 on failure libs\tests\chakra\test\StackTrace\x64StackWalkLoopBody.baseline libs\tests\chakra\test\StackTrace\x64StackWalkLoopBody.js
 on failure libs\tests\chakra\test\Generated\xor.baseline libs\tests\chakra\test\Generated\xor.js
 on failure libs\tests\chakra\test\Operators\xor.baseline libs\tests\chakra\test\Operators\xor.js
-on failure libs\tests\chakra\test\TaggedIntegers\xor.baseline libs\tests\chakra\test\TaggedIntegers\xor.js
+off failure libs\tests\chakra\test\TaggedIntegers\xor.baseline libs\tests\chakra\test\TaggedIntegers\xor.js
 on failure libs\tests\chakra\test\Generated\xor0.baseline libs\tests\chakra\test\Generated\xor0.js
 on failure libs\tests\chakra\test\Generated\xor1.baseline libs\tests\chakra\test\Generated\xor1.js
 on failure libs\tests\chakra\test\Generated\xor2.baseline libs\tests\chakra\test\Generated\xor2.js

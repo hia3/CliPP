@@ -23,12 +23,27 @@ Other issues:
 
 takes too long to complete:
 off failure libs\tests\chakra\test\Date\date_cache_bug.baseline libs\tests\chakra\test\Date\date_cache_bug.js
+off success libs\tests\chakra\test\TaggedIntegers\addition.baseline libs\tests\chakra\test\TaggedIntegers\addition.js
+off failure libs\tests\chakra\test\TaggedIntegers\and.baseline libs\tests\chakra\test\TaggedIntegers\and.js
+off failure libs\tests\chakra\test\Generated\attackoftheclones.baseline libs\tests\chakra\test\Generated\attackoftheclones.js
+off failure libs\tests\chakra\test\bailout\bailout7.baseline libs\tests\chakra\test\bailout\bailout7.js
+off failure libs\tests\chakra\test\TaggedIntegers\modulus.baseline libs\tests\chakra\test\TaggedIntegers\modulus.js
+off failure libs\tests\chakra\test\TaggedIntegers\multiplication.baseline libs\tests\chakra\test\TaggedIntegers\multiplication.js
+off failure libs\tests\chakra\test\TaggedIntegers\or.baseline libs\tests\chakra\test\TaggedIntegers\or.js
+off failure libs\tests\chakra\test\TaggedIntegers\signedshiftleft.baseline libs\tests\chakra\test\TaggedIntegers\signedshiftleft.js
+off failure libs\tests\chakra\test\TaggedIntegers\signedshiftright.baseline libs\tests\chakra\test\TaggedIntegers\signedshiftright.js
+off success libs\tests\chakra\test\TaggedIntegers\subtraction.baseline libs\tests\chakra\test\TaggedIntegers\subtraction.js
+off failure libs\tests\chakra\test\TaggedFloats\test.baseline libs\tests\chakra\test\TaggedFloats\test.js
+off success libs\tests\chakra\test\TaggedIntegers\unsignedshiftright.baseline libs\tests\chakra\test\TaggedIntegers\unsignedshiftright.js
+off failure libs\tests\chakra\test\UnifiedRegex\WOOB1138949.baseline libs\tests\chakra\test\UnifiedRegex\WOOB1138949.js
+off failure libs\tests\chakra\test\TaggedIntegers\xor.baseline libs\tests\chakra\test\TaggedIntegers\xor.js
 
 tries to trigger out of memory condition (the test is great, but it is annoying):
 off failure libs\tests\chakra\test\Miscellaneous\oom.baseline libs\tests\chakra\test\Miscellaneous\oom.js
 
 name speaks for itself:
 off failure libs\tests\chakra\test\Error\RuntimeCompileStackOverflow.baseline libs\tests\chakra\test\Error\RuntimeCompileStackOverflow.js
+off failure libs\tests\chakra\test\Error\stackoverflow.baseline libs\tests\chakra\test\Error\stackoverflow.js
 
 strict mode not implemented:
 
