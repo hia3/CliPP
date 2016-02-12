@@ -92,6 +92,9 @@ public:
 //    typedef parse_tree_match_t::tree_iterator iter_t;
     typedef spirit::classic::tree_parse_info<iterator_t,factory_t, spirit::classic::nil_t> tree_parse_t;
     clipp::context* get_context() {return this;}
+
+    iterator_t code_begin() { assert(code_begin_ != nullptr); return code_begin_; }
+    iterator_t code_begin_ = nullptr;
 public:
     void push_all_scope(boost::clipp::valueP value);
     void push_lookup_scope(boost::clipp::valueP value);

@@ -70,7 +70,14 @@ bool boost::javascript::isObject(clipp::valueP input)
 
 bool boost::javascript::isString(clipp::valueP input)
 {
-    return unwrap<js_string>(input).ok();
+    bool a = unwrap<js_string>(input).ok();
+    bool b = unwrap<js_string const>(input).ok();
+    bool c = unwrap<js_string &>(input).ok();
+    bool d = unwrap<js_string const &>(input).ok();
+    bool e = unwrap<js_string *>(input).ok();
+    bool f = unwrap<js_string const *>(input).ok();
+
+    return a || b || c || d || e || f;
 }
 
 bool boost::javascript::isNumber(clipp::valueP input)

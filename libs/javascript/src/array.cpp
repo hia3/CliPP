@@ -152,10 +152,19 @@ std::string array::toLocaleString() const
 
 arrayP array::concat(std::valarray<valueP> const& items)
 {
-    array* new_array=new array(items.size());
-    for(unsigned i=0;i<items.size();++i)
-    (*new_array)[i]=items[i];
-    return new_array;
+    if (items.size())
+    {
+        auto context = items[0]->get_context();
+        array* new_array = new array(items.size());
+        new_array->create(context);
+        for (unsigned i = 0;i<items.size();++i)
+            (*new_array)[i] = items[i];
+        return new_array;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 std::string array::join(std::string const& separator) const
@@ -219,6 +228,7 @@ arrayP array::slice(int start,int end)
     else end=std::min(int(length()),end);
     if(end<start) return new array(0);
     array* a=new array(end-start+1);
+    a->create(get_context());
     for(int i=start;i<=end;++i) {
         (*a)[i-start]=(*this)[i].duplicate();
     }
@@ -297,7 +307,14 @@ arrayP array::splice(int start,int deleteCount,std::valarray<valueP> const &item
         container_type& c=*this;
         int item_count=items.size()-deleteCount;
         int itemsStart=start+deleteCount;
-        for(int i=0;i<item_count;++i) c.insert(c.begin()+itemsStart+1,0);
+        for (int i = 0; i < item_count;++i)
+        {
+            if (itemsStart + 1 > c.size())
+            {
+                c.resize(itemsStart + 1);
+            }
+            c.insert(c.begin() + itemsStart + 1, 0);
+        }
     }
     for(i=0;i<items.size();++i) {
         (*this)[start+i]=items[i];

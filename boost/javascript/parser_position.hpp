@@ -23,19 +23,17 @@ public:
     void set_range(const char* first,const char* last);
     void set_file_name(const std::string& file_name);
     void set_start_line(int start_line);
-    bool set_current(const char* current); //!< returns true if valid position, else returns false;
+    bool set_current(std::size_t current); //!< returns true if valid position, else returns false;
     int get_current_line() const;
-    int get_line_at(const char* current) const;
+    int get_line_at(std::size_t current) const;
     std::string get_line_message(const std::string &pos_message) const;
     const std::string &file_name() const {return file_name_;}
-    const char* start() const {return first_;}
 protected:
-    int get_line_at(const char* current, const char *&line_start) const;
+    int get_line_at(std::size_t current, std::string::const_iterator & line_start) const;
 private:
     int start_line_;
-    const char* first_;
-    const char* last_;
-    const char* current_;
+    std::string code_;
+    std::size_t current_;
     std::string file_name_;
 };
 

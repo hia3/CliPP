@@ -232,14 +232,14 @@ void eval_params(javascript_parser* parser_,iter_t const& i,value::Params& param
 
 valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_handler const& handler)
 {
-
+    char const * code_begin = parser_->code_begin();
 #if defined(SPIRIT_DUMP_PARSETREE_AS_XML)
     using namespace boost::clipp::detail;
     std::cout << "In eval_expression. i->value = " <<
         std::string(i->value.begin(), i->value.end()) <<
         " i->children.size() = " << i->children.size() << std::endl;
 #endif
-    handler.parser_pos().set_current(i->value.begin());
+    handler.parser_pos().set_current(i->value.begin() - code_begin);
     switch(i->value.id().to_long()) {
     case call_expressionID:
         {   
@@ -284,7 +284,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
                         eval_params(parser_,inner_i,params,handler);
                         valueP result = callee->construct(params);
                         if (!result)
-                        {					
+                        {
                             result = wrap(new undefined() ,parser_->get_context());
                         }
                         return result;
@@ -296,9 +296,8 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
     case new_expressionID:
         {
             valueP result = eval_expression(parser_,i->children.begin(),handler);
-            return result;
-/*            value::Params params;
-            return result->construct(params);*/
+            value::Params params;
+            return result->construct(params);
         }
     case identifierID:
         {
@@ -330,7 +329,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
             if(value>='0' && value<='9') value-='0';
             else if(value>='a' && value<='f') value-='a'-10;
             else if(value>='A' && value<='F') value-='A'-10;
-            literal=value<<5;
+            literal=value<<4;
             value = *(i->value.begin()+1);
             if(value>='0' && value<='9') value-='0';
             else if(value>='a' && value<='f') value-='a'-10;
@@ -889,7 +888,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
             iter_t istart=it->children.begin();
             iter_t iend=boost::prior(it->children.end());
             std::string program(istart->value.begin()+1,iend->value.begin());
-            handler.parser_pos().set_current(istart->value.begin() + 1);
+            handler.parser_pos().set_current(istart->value.begin() + 1 - code_begin);
             valueP function = wrap(new js_function(arguments, program, handler), parser_->get_context());
             invoke_operator<'='>(eval_expression(parser_,i->children.begin(),handler),function);
             break;
@@ -975,26 +974,74 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
     case switch_statementID:
         {
             valueP expression = eval_expression(parser_,i->children.begin(),handler);
-            int default_index=-1;
-            int case_size=(i->children.end()-i->children.begin())-1;
-            for(int case_i=1;case_i<=case_size;++case_i) {
-                iter_t it=i->children.begin()+case_i;
-                switch(it->value.id().to_long()) {
+            int default_index = -1;
+            int matched_index = -1;
+            int const case_size = i->children.size() - 1;
+            for(int case_i = 1; case_i <= case_size && matched_index == -1; ++case_i)
+            {
+                iter_t it = i->children.begin() + case_i;
+                switch(it->value.id().to_long())
+                {
                 case default_clauseID: 
-                    default_index=case_i;
+                    {
+                        default_index = case_i;
+                    }
                     break;
                 case case_clauseID:
-                    if(unwrap<bool>(invoke_operator<'=='>(eval_expression(parser_,it->children.begin(),handler),expression))()) {
-                        return eval_expression(parser_,it->children.begin()+1,handler);
+                    if (unwrap<bool>(invoke_operator<'=='>(eval_expression(parser_, it->children.begin(), handler), expression))()) // TODO: should we use === instead?
+                    {
+                        matched_index = case_i;
                     }
                     break;
                 }
             }
-            if(default_index!=-1) {
-                iter_t it=i->children.begin()+default_index;
-                return eval_expression(parser_,it->children.begin(),handler);
+            if (matched_index == -1)
+            {
+                matched_index = default_index;
             }
-            break;
+
+            if(matched_index != -1)
+            {
+                for (int case_i = matched_index; case_i <= case_size; ++case_i)
+                {
+                    iter_t it = i->children.begin() + case_i;
+
+                    switch (it->value.id().to_long())
+                    {
+                    case default_clauseID:
+                        {
+                            for (auto statement = it->children.begin(); statement != it->children.end(); ++statement)
+                            try
+                            {
+                                eval_expression(parser_, statement, handler);
+                            }
+                            catch (js_break const & /*b*/)
+                            {
+                                return nullptr;
+                            }
+                        }
+                    break;
+                    case case_clauseID:
+                        {
+                            if (it->children.size() > 1) // case with code
+                            {
+                                for (auto statement = it->children.begin() + 1; statement != it->children.end(); ++statement)
+                                try
+                                {
+                                    eval_expression(parser_, statement, handler);
+                                }
+                                catch (js_break const & /*b*/)
+                                {
+                                    return nullptr;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return nullptr;
         }
     case throw_statementID:
         {
@@ -1033,7 +1080,7 @@ valueP eval_expression(javascript_parser* parser_,iter_t const& i, callback_hand
                     return eval_expression(parser_,it->children.begin(),handler);
                 }
             }
-            if(finally_index) {
+            if(finally_index != -1) {
                 iter_t it=i->children.begin()+finally_index;
                 eval_expression(parser_,it->children.begin(),handler);
             }

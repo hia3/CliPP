@@ -111,11 +111,13 @@ valueP js_function::call(Params& args,valueP parent)
     const callback_handler* used_handler;
     used_handler=parser->get_callback_handler();
     if(!used_handler) used_handler=&handler;
+    auto old_parser_pos = used_handler->parser_pos();
     try {        
         used_handler->parser_pos()=parser_pos_;
         parser->evaluate(function_info_->program_execution_,*used_handler);
     }
     catch(js_exit_return& e) {
+        used_handler->parser_pos() = old_parser_pos;
         return e.return_value();
     }
     catch(js_continue& e) {

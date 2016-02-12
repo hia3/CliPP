@@ -12,24 +12,26 @@
 #include <boost/clipp/detail/signature_extracter.hpp>
 #include <boost/clipp/detail/cv_category.hpp>
 
+#include <type_traits>
+
 namespace boost { namespace clipp {
 
 template<typename From,typename To>
 struct convertible_from_to {
     typedef typename mpl::if_<
-        is_convertible<From const&,To>,
+        std::is_convertible<From const&,To>,
         From const&,
         typename mpl::if_<
-            is_convertible<From&,To>,
+            std::is_convertible<From&,To>,
             From&,
             typename mpl::if_<
-                is_convertible<From const*,To>,
+                std::is_convertible<From const*,To>,
                 From const*,
                 typename mpl::if_<
-                    is_convertible<From*,To>,
+                    std::is_convertible<From*,To>,
                     From*,
                     typename mpl::if_<
-                        is_convertible<From,To>,
+                        std::is_convertible<From,To>,
                         From,
                         invalid_conversion<From,To>
                     >::type
@@ -42,19 +44,19 @@ struct convertible_from_to {
 template<typename To,typename From>
 struct convertible_to_from {
     typedef typename mpl::if_<
-        is_convertible<From,To&>,
+        std::is_convertible<From,To&>,
         To&,
         typename mpl::if_<
-            is_convertible<From,To>,
+            std::is_convertible<From,To>,
             To,
             typename mpl::if_<
-                is_convertible<From,To*>,
+                std::is_convertible<From,To*>,
                 To*,
                 typename mpl::if_<
-                    is_convertible<From,To const*>,
+                    std::is_convertible<From,To const*>,
                     To const*,
                     typename mpl::if_<
-                        is_convertible<From,To const&>,
+                        std::is_convertible<From,To const&>,
                         To const&,
                         invalid_conversion<From,To>
                     >::type
@@ -106,12 +108,12 @@ private:
     //No autodeduction of conversion type
     void wrap_selector(type<U> const& u,mpl::true_) {
         typedef typename mpl::if_<
-            is_convertible<U,class_type>,
+            std::is_convertible<U,class_type>,
             U,
             invalid_conversion<U,class_type>
         >::type from_type;
         typename mpl::if_<
-            is_convertible<class_type,U>,
+            std::is_convertible<class_type,U>,
             U,
             invalid_conversion<class_type,U>
         >::type to_type;

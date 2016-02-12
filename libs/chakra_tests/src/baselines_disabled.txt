@@ -1,0 +1,74 @@
+Following test are disabled in baselines.txt
+
+
+Crashes:
+
+crash in strftime:
+off failure libs\tests\chakra\test\Date\formatting.baseline libs\tests\chakra\test\Date\formatting.js
+
+stack overflow - eval_expression eats >2KB of stack on every recursion step:
+off failure libs\tests\chakra\test\Strings\long_concatstr.baseline libs\tests\chakra\test\Strings\long_concatstr.js
+
+stack overflow:
+off failure libs\tests\chakra\test\EH\newso.baseline libs\tests\chakra\test\EH\newso.js
+
+no idea:
+off failure libs\tests\chakra\test\Boolean\simple2.baseline libs\tests\chakra\test\Boolean\simple2.js
+
+stack overflow:
+off failure libs\tests\chakra\test\EH\so.baseline libs\tests\chakra\test\EH\so.js
+
+
+Other issues:
+
+takes too long to complete:
+off failure libs\tests\chakra\test\Date\date_cache_bug.baseline libs\tests\chakra\test\Date\date_cache_bug.js
+off success libs\tests\chakra\test\TaggedIntegers\addition.baseline libs\tests\chakra\test\TaggedIntegers\addition.js
+off failure libs\tests\chakra\test\TaggedIntegers\and.baseline libs\tests\chakra\test\TaggedIntegers\and.js
+off failure libs\tests\chakra\test\Generated\attackoftheclones.baseline libs\tests\chakra\test\Generated\attackoftheclones.js
+off failure libs\tests\chakra\test\bailout\bailout7.baseline libs\tests\chakra\test\bailout\bailout7.js
+off failure libs\tests\chakra\test\TaggedIntegers\modulus.baseline libs\tests\chakra\test\TaggedIntegers\modulus.js
+off failure libs\tests\chakra\test\TaggedIntegers\multiplication.baseline libs\tests\chakra\test\TaggedIntegers\multiplication.js
+off failure libs\tests\chakra\test\TaggedIntegers\or.baseline libs\tests\chakra\test\TaggedIntegers\or.js
+off failure libs\tests\chakra\test\TaggedIntegers\signedshiftleft.baseline libs\tests\chakra\test\TaggedIntegers\signedshiftleft.js
+off failure libs\tests\chakra\test\TaggedIntegers\signedshiftright.baseline libs\tests\chakra\test\TaggedIntegers\signedshiftright.js
+off success libs\tests\chakra\test\TaggedIntegers\subtraction.baseline libs\tests\chakra\test\TaggedIntegers\subtraction.js
+off failure libs\tests\chakra\test\TaggedFloats\test.baseline libs\tests\chakra\test\TaggedFloats\test.js
+off success libs\tests\chakra\test\TaggedIntegers\unsignedshiftright.baseline libs\tests\chakra\test\TaggedIntegers\unsignedshiftright.js
+off failure libs\tests\chakra\test\UnifiedRegex\WOOB1138949.baseline libs\tests\chakra\test\UnifiedRegex\WOOB1138949.js
+off failure libs\tests\chakra\test\TaggedIntegers\xor.baseline libs\tests\chakra\test\TaggedIntegers\xor.js
+
+tries to trigger out of memory condition (the test is great, but it is annoying):
+off failure libs\tests\chakra\test\Miscellaneous\oom.baseline libs\tests\chakra\test\Miscellaneous\oom.js
+
+name speaks for itself:
+off failure libs\tests\chakra\test\Error\RuntimeCompileStackOverflow.baseline libs\tests\chakra\test\Error\RuntimeCompileStackOverflow.js
+off failure libs\tests\chakra\test\Error\stackoverflow.baseline libs\tests\chakra\test\Error\stackoverflow.js
+
+strict mode not implemented:
+
+libs\tests\chakra\test\strict\01.octal_sm.baseline
+libs\tests\chakra\test\strict\03.assign_sm.baseline
+libs\tests\chakra\test\strict\04.eval_sm.baseline
+libs\tests\chakra\test\strict\05.arguments_sm.baseline
+libs\tests\chakra\test\strict\06.arguments_sm.baseline
+libs\tests\chakra\test\strict\07.arguments_sm.baseline
+libs\tests\chakra\test\strict\08.ObjectLiteral_sm.baseline
+libs\tests\chakra\test\strict\09.ObjectLiteral_sm.baseline
+libs\tests\chakra\test\strict\10.eval_sm.baseline
+libs\tests\chakra\test\strict\11.this_sm.baseline
+libs\tests\chakra\test\strict\12.delete_sm.baseline
+libs\tests\chakra\test\strict\13.delete_sm.baseline
+libs\tests\chakra\test\strict\14.var_sm.baseline
+libs\tests\chakra\test\strict\15.with_sm.baseline
+libs\tests\chakra\test\strict\16.catch_sm.baseline
+libs\tests\chakra\test\strict\17.formal_sm.baseline
+libs\tests\chakra\test\strict\18.formal_sm.baseline
+libs\tests\chakra\test\strict\19.function_sm.baseline
+libs\tests\chakra\test\strict\20.function_sm.baseline
+libs\tests\chakra\test\strict\21.functionDeclaration_sm.baseline
+libs\tests\chakra\test\strict\22.callerCalleeArguments_sm.baseline
+libs\tests\chakra\test\strict\23.reservedWords_sm.baseline
+libs\tests\chakra\test\strict\24.properties_sm.baseline
+libs\tests\chakra\test\strict\basics_function_in_SM.baseline
+

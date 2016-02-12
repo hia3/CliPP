@@ -17,7 +17,6 @@ template<typename Signature, typename DerivedT>
 struct member_with_arguments : public member_base<DerivedT>
 {
     typedef Signature signature_type;
-    //constexpr int ;
     BOOST_STATIC_CONSTANT(int, arity = detail::signature_arity<Signature>::value);
     constexpr int get_arity() const { return arity; }
 
@@ -39,14 +38,14 @@ struct member_with_arguments : public member_base<DerivedT>
     }
 
     //Define the signature of this function/constructor
-    template<typename Arg0, typename... Args, unsigned idx = 0>
-    DerivedT& signature(Arg0 && arg0, Args && ... args)
+    template<typename... Args>
+    DerivedT& signature(Args && ... args)
     {
-        static_assert(1 /*arg0*/ + sizeof...(Args) == arity - 1 /*this*/, "");
+        static_assert(sizeof...(Args) == arity - 1 /*this*/, "");
 
         for_each
         (
-            std::forward_as_tuple(std::forward<Arg0>(arg0), std::forward<Args>(args)...),
+            std::forward_as_tuple(std::forward<Args>(args)...),
             [this](auto n, auto && e)
             {
                 std::get<decltype(n)::value>(_a).signature(std::forward<decltype(e)>(e));

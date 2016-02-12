@@ -39,7 +39,7 @@ struct redecorate_wrapper_base : wrapper<T>
 {
     typedef Wrapper wrapper_type;
     typedef typename mpl::list<void,typename unwrap_type<T>::indirection,typename unwrap_type<T>::cv> new_decoration;
-    redecorate_wrapper_base(Wrapper* w) : w_(w) {};
+    explicit redecorate_wrapper_base(Wrapper* w) : w_(w) {};
     wrapperP get_wrapper(decoration d) {
         if(decoration(unwrap_decoration<new_decoration>::value)==d) return this;
         return w_->get_wrapper(d);
@@ -76,7 +76,7 @@ template<typename Wrapper,typename T>
 struct redecorate_wrapper : redecorate_wrapper_base<Wrapper,T>
 {
     typedef typename wrapper<T>::input_type input_type;
-    redecorate_wrapper(Wrapper* w) : redecorate_wrapper_base<Wrapper,T>(w) {}
+    explicit redecorate_wrapper(Wrapper* w) : redecorate_wrapper_base<Wrapper,T>(w) {}
     valueP operator()(input_type input,context* c) {
         return other_wrapper()(input,c);
     }

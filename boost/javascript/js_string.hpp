@@ -39,7 +39,7 @@ public:
     int lastIndexOf(const std::string& searchString,int position=std::numeric_limits<int>::max()) const;
 
 //Static operations
-    static std::string fromCharCode(const std::valarray<char>& charI);
+    static std::string fromCharCode(const std::valarray<int>& charI);
 
 //Operators
     friend inline std::string operator+(js_string const& lhs,std::string const & rhs) {return std::string(lhs) + rhs;}

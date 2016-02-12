@@ -24,6 +24,8 @@ void js_object::init(context* c)
     cls[+self];
     cls[-self];
     cls[~self];
+    cls[int() ^ self];
+    cls[self ^ int()];
 }
 
 valueP js_object::defaultValue(PreferredType::Hint hint)

@@ -44,8 +44,13 @@ void js_string::init(context* c)
 };
 
 double js_string::toNumber() const
+try
 {
     return lexical_cast<double>(value_);
+}
+catch (boost::bad_lexical_cast const & /*e*/)
+{
+    return 0;
 }
 
 std::string boost::javascript::operator+(js_string const& lhs,double const & rhs)
@@ -58,7 +63,7 @@ std::string boost::javascript::operator+(double const& lhs,js_string const & rhs
     return lexical_cast<std::string>(lhs)+rhs;
 }
 
-std::string js_string::fromCharCode(const std::valarray<char>& charI)
+std::string js_string::fromCharCode(const std::valarray<int>& charI)
 {
     std::string text;
     for(size_t i=0;i<charI.size();++i) {

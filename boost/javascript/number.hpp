@@ -66,6 +66,12 @@ public:
 
     double operator+() const {return value_;}
     double operator-() const {return -value_;}
+
+    /*number & operator ++ () { ++value_; return *this; }
+    double   operator ++ (int) { number old(*this); ++(*this); return old; }
+    number & operator -- () { --value_; return *this; }
+    double   operator -- (int) { number old(*this); --(*this); return old; }*/
+
     long operator~() const {return ~long(value_);}
     bool operator!() const {return !operator bool();}
 private:
