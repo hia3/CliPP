@@ -60,6 +60,12 @@ void number::init(context* c)
     cls[double() % self];
     cls[+self];
     cls[-self];
+
+    /*cls[++self];
+    cls[--self];
+    cls[self++];
+    cls[self--];*/
+
     cls[~self];
     cls[!self];
     cls[self < double()];
