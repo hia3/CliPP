@@ -63,7 +63,7 @@ std::string boost::javascript::operator+(double const& lhs,js_string const & rhs
     return lexical_cast<std::string>(lhs)+rhs;
 }
 
-std::string js_string::fromCharCode(const std::valarray<char>& charI)
+std::string js_string::fromCharCode(const std::valarray<int>& charI)
 {
     std::string text;
     for(size_t i=0;i<charI.size();++i) {
