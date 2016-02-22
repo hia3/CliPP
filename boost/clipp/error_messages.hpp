@@ -69,16 +69,18 @@ private:
 
 class BOOST_CLIPP_EXPORT_IMPORT invalid_number_of_arguments : public scripting_exception {
 public:
-    invalid_number_of_arguments(int arity,int nargs,bool valarray=false) : arity_(arity) , nargs_(nargs) , valarray_(valarray) {}
+    invalid_number_of_arguments(size_t arity, size_t nargs,bool valarray=false) : arity_(arity) , nargs_(nargs) , valarray_(valarray) {}
     virtual  ~invalid_number_of_arguments() noexcept {}
     virtual const char* what() const noexcept {
         set_error("invalid number of arguments " + 
-                  lexical_cast<std::string>(nargs_));
+                  lexical_cast<std::string>(nargs_) + 
+                  " arity: " + lexical_cast<std::string>(arity_) + 
+                  " valarray: " + lexical_cast<std::string>(valarray_));
         return scripting_exception::what();
     }
 private:
-    int arity_;
-    int nargs_;
+    size_t arity_;
+    size_t nargs_;
     bool valarray_;
 };
 

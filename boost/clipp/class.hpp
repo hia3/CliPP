@@ -71,7 +71,7 @@ public:
     member_operator<typename detail::operator_<id,L,R>::template apply<C>::signature_type>&
     operator[](detail::operator_<id,L,R> const& op)
     {
-        return def_operator(op);
+        return this->def_operator(op);
     }
     function_adder<class_> operator[](const std::string& name) {
         return function_adder<class_>(this,name);
@@ -82,22 +82,22 @@ public:
     member_operator<typename detail::operator_<id,L,R>::template apply<C>::signature_type>&
     operator_(detail::operator_<id,L,R> const& op)
     {
-        return def_operator(op);
+        return this->def_operator(op);
     }
 
     template<typename T,typename MemberType>
     MemberType& define_member(const char* name,T value,boost::type<MemberType> const& dummy)
     {
         MemberType* member=new MemberType(name,value);
-        member->create(get_context());
-        prototype()->insert(name,member);
+        member->create(this->get_context());
+        this->prototype()->insert(name,member);
         return *member;
     }
     template<typename MemberType>
     MemberType& define_member(const char* name,MemberType* member)
     {
-        member->create(get_context());
-        prototype()->insert(name,member);
+        member->create(this->get_context());
+        this->prototype()->insert(name,member);
         return *member;
     }
 };

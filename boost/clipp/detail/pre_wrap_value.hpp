@@ -29,8 +29,8 @@ struct pre_wrap_value
 
     pre_wrap_value() {}
     pre_wrap_value(const pre_wrap_value& rhs) 
-    :   value_(rhs.value_)
-    ,   base_(rhs.base_)
+    :   base_(rhs.base_)
+    ,   value_(rhs.value_)
     {}
     pre_wrap_value& operator=(const pre_wrap_value& rhs) {
         if(this!=&rhs) {

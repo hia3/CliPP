@@ -34,7 +34,7 @@ struct iterator_holder_base
 {
     iterator_holder_base(iterator_holder_base const& rhs) : context_(rhs.context_) {}
     explicit iterator_holder_base(context* c) : context_(c) {}
-    virtual ~iterator_holder_base() = 0 {}
+    virtual ~iterator_holder_base() {}
     virtual void inc() = 0;
     virtual void dec() = 0;
     virtual valueP          get() const= 0;
@@ -48,7 +48,7 @@ struct iterator_holder : iterator_holder_base
 {
     static iterator_holder* create(IteratorT const& iterator,context* c) {return new iterator_holder(iterator,c);}
     iterator_holder(iterator_holder const& rhs) : iterator_holder_base(rhs) ,iterator_(rhs.iterator_) {}
-    iterator_holder(IteratorT const& iterator,context* c) : iterator_(iterator) , iterator_holder_base(c) {}
+    iterator_holder(IteratorT const& iterator,context* c) : iterator_holder_base(c), iterator_(iterator) {}
     virtual void inc() {++iterator_;}
     virtual void dec() {--iterator_;}
     virtual valueP          get() const {return wrap_ref(*iterator_,*iterator_,context_);}
@@ -65,7 +65,7 @@ template<typename IteratorT>
 struct pair_iterator_holder : iterator_holder_base
 {
     pair_iterator_holder(pair_iterator_holder const& rhs) : iterator_holder_base(rhs) ,iterator_(rhs.iterator_) {}
-    pair_iterator_holder(IteratorT const& iterator,context* c) : iterator_(iterator) , iterator_holder_base(c) {}
+    pair_iterator_holder(IteratorT const& iterator,context* c) : iterator_holder_base(c), iterator_(iterator) {}
     virtual void inc() {++iterator_;}
     virtual void dec() {--iterator_;}
     virtual valueP          get() const {return wrap_ref(iterator_->second,iterator_->second,context_);}

@@ -43,7 +43,7 @@ struct address_of_converter : redecorate_converter_base<Converter,T>
     address_of_converter(Converter* c) : redecorate_converter_base<Converter,T>(c) {}
     virtual ~address_of_converter() {}
     result_type operator()(const valueP& input,valueP& output) {
-        return &other_converter()(input,output);
+        return &this->other_converter()(input,output);
     }
 };
 
@@ -54,7 +54,7 @@ struct dereference_converter : redecorate_converter_base<Converter,T>
     dereference_converter(Converter* c) : redecorate_converter_base<Converter,T>(c) {}
     virtual ~dereference_converter() {}
     result_type operator()(const valueP& input,valueP& output) {
-        return *other_converter()(input,output);
+        return *this->other_converter()(input,output);
     }
 };
 
@@ -65,7 +65,7 @@ struct redecorate_converter : redecorate_converter_base<Converter,T>
     redecorate_converter(Converter* c) : redecorate_converter_base<Converter,T>(c) {}
     virtual ~redecorate_converter() {}
     result_type operator()(const valueP& input,valueP& output) {
-        return other_converter()(input,output);
+        return this->other_converter()(input,output);
     }
 };
 
@@ -77,7 +77,7 @@ struct dereference_wrap_converter : redecorate_converter_base<Converter,T>
     virtual ~dereference_wrap_converter() {}
     virtual result_type operator()(const valueP& input,valueP& output) {
         value_wrapper<BOOST_DEDUCED_TYPENAME Converter::to_type>* wrapper=
-            new value_wrapper<BOOST_DEDUCED_TYPENAME Converter::to_type>(other_converter()(input,output));
+            new value_wrapper<BOOST_DEDUCED_TYPENAME Converter::to_type>(this->other_converter()(input,output));
         output=wrapper;
         return *wrapper;
     }
@@ -138,9 +138,9 @@ struct converter_base_selector<direct_,cv_unqualified>
             case decoration::direct:
                 return this;
             case decoration::const_direct:
-                return new redecorate_converter<converter_type,to_type const>(&derived());
+                return new redecorate_converter<converter_type,to_type const>(&this->derived());
             case decoration::const_reference:
-                return new dereference_wrap_converter<converter_type,to_type const&>(&derived());
+                return new dereference_wrap_converter<converter_type,to_type const&>(&this->derived());
             default:
                 return nullptr;
             }
@@ -158,11 +158,11 @@ struct converter_base_selector<direct_,const_>
             typedef typename converter_type::to_type  to_type;
             switch(d) {
             case decoration::direct:
-                return new redecorate_converter<converter_type,to_type>(&derived());
+                return new redecorate_converter<converter_type,to_type>(&this->derived());
             case decoration::const_direct:
                 return this;
             case decoration::const_reference:
-                return new dereference_wrap_converter<converter_type,to_type const&>(&derived());
+                return new dereference_wrap_converter<converter_type,to_type const&>(&this->derived());
             default:
                 return nullptr;
             }
@@ -180,17 +180,17 @@ struct converter_base_selector<pointer_,cv_unqualified>
             typedef typename converter_type::to_type  to_type;
             switch(d) {
 /*            case decoration::direct:
-                return new dereference_converter<converter_type,to_type>(&derived());
+                return new dereference_converter<converter_type,to_type>(&this->derived());
             case decoration::const_direct:
-                return new dereference_converter<converter_type,to_type const>(&derived());*/
+                return new dereference_converter<converter_type,to_type const>(&this->derived());*/
             case decoration::pointer:
                 return this;
             case decoration::const_pointer:
-                return new redecorate_converter<converter_type,to_type const*>(&derived());
+                return new redecorate_converter<converter_type,to_type const*>(&this->derived());
             case decoration::reference:
-                return new dereference_converter<converter_type,to_type&>(&derived());
+                return new dereference_converter<converter_type,to_type&>(&this->derived());
             case decoration::const_reference:
-                return new dereference_converter<converter_type,to_type const&>(&derived());
+                return new dereference_converter<converter_type,to_type const&>(&this->derived());
             default:
                 return nullptr;
             }
@@ -208,11 +208,11 @@ struct converter_base_selector<pointer_,const_>
             typedef typename converter_type::to_type  to_type;
             switch(d) {
             case decoration::direct:
-                return new dereference_converter<converter_type,to_type>(&derived());
+                return new dereference_converter<converter_type,to_type>(&this->derived());
             case decoration::const_direct:
-                return new dereference_converter<converter_type,to_type const>(&derived());
+                return new dereference_converter<converter_type,to_type const>(&this->derived());
             case decoration::const_reference:
-                return new dereference_converter<converter_type,to_type const&>(&derived());                
+                return new dereference_converter<converter_type,to_type const&>(&this->derived());
             case decoration::const_pointer:
                 return this;
             default:
@@ -232,17 +232,17 @@ struct converter_base_selector<reference_,cv_unqualified>
             typedef typename converter_type::to_type  to_type;
             switch(d) {
             case decoration::direct:
-                return new redecorate_converter<converter_type,to_type>(&derived());
+                return new redecorate_converter<converter_type,to_type>(&this->derived());
             case decoration::const_direct:
-                return new redecorate_converter<converter_type,to_type const>(&derived());
+                return new redecorate_converter<converter_type,to_type const>(&this->derived());
             case decoration::pointer:
-                return new address_of_converter<converter_type,to_type*>(&derived());
+                return new address_of_converter<converter_type,to_type*>(&this->derived());
             case decoration::const_pointer:
-                return new address_of_converter<converter_type,to_type const*>(&derived());
+                return new address_of_converter<converter_type,to_type const*>(&this->derived());
             case decoration::reference:
                 return this;
             case decoration::const_reference:
-                return new redecorate_converter<converter_type,to_type const&>(&derived());
+                return new redecorate_converter<converter_type,to_type const&>(&this->derived());
             default:
                 return nullptr;
             }
@@ -260,13 +260,13 @@ struct converter_base_selector<reference_,const_>
             typedef typename converter_type::to_type  to_type;
             switch(d) {
             case decoration::direct:
-                return new redecorate_converter<converter_type,to_type>(&derived());
+                return new redecorate_converter<converter_type,to_type>(&this->derived());
             case decoration::const_direct:
-                return new redecorate_converter<converter_type,to_type const>(&derived());
+                return new redecorate_converter<converter_type,to_type const>(&this->derived());
             case decoration::const_reference:
                 return this;
             case decoration::const_pointer:
-                return new address_of_converter<converter_type,to_type const*>(&derived());
+                return new address_of_converter<converter_type,to_type const*>(&this->derived());
             default:
                 return nullptr;
             }

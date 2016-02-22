@@ -31,8 +31,8 @@ public:
 
     std::string format() {
         typedef detail::return_type<Signature> return_type;
-        std::string format = get_context()->type_name(type_id<return_type>());
-    return format + " " + name()+"("+format_argument_list()+")";
+        std::string format = this->get_context()->type_name(type_id<return_type>());
+        return format + " " + this->name()+"("+this->format_argument_list()+")";
     }
 
     virtual bool validate_arguments(value::value_method method,Params& arguments,valueP parent) 
@@ -50,8 +50,8 @@ public:
     virtual type_detail type() {return typeid(function_id);}
     virtual std::ostream& store(std::ostream& stream) {
         typedef detail::return_type<Signature> return_type;
-        stream << get_context()->type_name(type_id<return_type>());
-        return stream << " " << name() << "(" << format_argument_list() << ");" << std::endl;        
+        stream << this->get_context()->type_name(type_id<return_type>());
+        return stream << " " << this->name() << "(" << this->format_argument_list() << ");" << std::endl;
     }
 private:
     value_type function_;
@@ -60,7 +60,7 @@ private:
 template<typename Signature>
 class member_static_function : public static_with_arguments<Signature,member_static_function<Signature> > {
 public:
-    typedef typename static_with_arguments<Signature,member_static_function> base_type;
+    typedef static_with_arguments<Signature,member_static_function> base_type;
     typedef detail::signature_type<Signature> value_type;
     member_static_function(const char* name,value_type function) 
     :   base_type(name)
@@ -68,8 +68,8 @@ public:
 
     std::string format() {        
         typedef detail::return_type<Signature> return_type;
-        std::string format = get_context()->type_name(type_id<return_type>());
-        return format + " " + name()+"("+format_argument_list()+")";
+        std::string format = this->get_context()->type_name(type_id<return_type>());
+        return format + " " + this->name()+"("+ this->format_argument_list()+")";
     }
 
     virtual bool   validate_arguments(value::value_method method,Params& arguments,valueP parent) 
@@ -87,32 +87,12 @@ public:
     virtual type_detail type() {return typeid(function_id);}
     virtual std::ostream& store(std::ostream& stream) {
         typedef detail::return_type<Signature> return_type;
-        stream << get_context()->type_name(type_id<return_type>());
-        return stream << " " << name() << "(" << format_argument_list() << ");" << std::endl;
+        stream << this->get_context()->type_name(type_id<return_type>());
+        return stream << " " << this->name() << "(" << this->format_argument_list() << ");" << std::endl;
     }
 private:
     value_type function_;
 };
-
-/*
-template<typename Fn>
-valueP function(context* c,const std::string& name,Fn fn) {
-    member* m = detail::define_function<static_argument_list>(fn,detail::get_signature(fn,boost::type<void>()));
-    m->create(c);
-    c->global()->insert(name,m);
-    return m;
-}
-
-template<typename Fn>
-member* function(Fn fn) {
-    return detail::define_function<member_argument_list>(fn,detail::get_signature(fn,boost::type<void>()));
-}
-
-template<typename Fn>
-member* static_function(Fn fn) {
-    return detail::define_function<static_argument_list>(fn,detail::get_signature(fn,boost::type<void>()));
-}
-*/
 
 }} // namespace boost::clipp
 

@@ -566,7 +566,6 @@ long date::dayWithinYear(double t)
 
 long date::dateFromTime(double t)
 {
-    long day=dayWithinYear(t);
     long month=monthFromTime(t);
     int leapDay=inLeapYear(t)?1:0;
 

@@ -68,9 +68,9 @@ struct unwrap
     typedef detail::converter<argument_type> converter_type;
     unwrap(const unwrap& rhs) :
         wrapped_(rhs.wrapped_),
-        local_(rhs.local_),
         precedence_(rhs.precedence_),
-        converter_(rhs.converter_)
+        converter_(rhs.converter_),
+        local_(rhs.local_)
     {}
     unwrap(const valueP& wrapped,precedence p = precedence::create) : wrapped_(wrapped) , precedence_(p) {}
     void set(const valueP& wrapped) {

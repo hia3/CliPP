@@ -104,7 +104,7 @@ std::string parser_position::get_line_message(const std::string &pos_message) co
     std::strstream str;
     str << line << '\0';
     message += str.str();
-    for (iter ; iter != code_.end(); iter++)
+    for (; iter != code_.end(); iter++)
     {
         if (*iter == '\n')
             break;

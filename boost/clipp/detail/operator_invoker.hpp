@@ -99,7 +99,7 @@ struct binary_inplace_operator_invoker
 {
     static valueP invoke(valueP const& lhs,valueP const& rhs) {
         valueP method;
-        if(method=get_binary_inplace_operator<id>(lhs,rhs)) return call_operator(method,lhs,rhs);
+        if((method=get_binary_inplace_operator<id>(lhs,rhs))) return call_operator(method,lhs,rhs);
         throw operator_error(id,lhs,rhs);
     }
 };
@@ -110,7 +110,7 @@ struct binary_operator_invoker
     static valueP invoke(valueP const& lhs,valueP const& rhs) {
         valueP method;
         value::Params params(2);        
-        if(method=get_binary_operator<id>(lhs,rhs,params)) return method->call(params);
+        if((method=get_binary_operator<id>(lhs,rhs,params))) return method->call(params);
         throw operator_error(id,lhs,rhs);
     }
 };
@@ -134,10 +134,10 @@ struct binary_operator_invoker<'>'>
     static valueP invoke(valueP const& lhs,valueP const& rhs) {
         valueP method;
         value::Params params(2);
-        if(method=get_binary_operator<'>'>(lhs,rhs,params)) return method->call(params);
-        if(method=get_binary_operator<'<'>(rhs,lhs,params)) return method->call(params);
-        if(method=get_binary_operator<'<='>(lhs,rhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
-        if(method=get_binary_operator<'>='>(rhs,lhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'>'>(lhs,rhs,params))) return method->call(params);
+        if((method=get_binary_operator<'<'>(rhs,lhs,params))) return method->call(params);
+        if((method=get_binary_operator<'<='>(lhs,rhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'>='>(rhs,lhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
 
         throw operator_error('>',lhs,rhs);
     }
@@ -149,10 +149,10 @@ struct binary_operator_invoker<'<'>
     static valueP invoke(valueP const& lhs,valueP const& rhs) {
         valueP method;
         value::Params params(2);
-        if(method=get_binary_operator<'<'>(lhs,rhs,params)) return method->call(params);
-        if(method=get_binary_operator<'>'>(rhs,lhs,params)) return method->call(params);
-        if(method=get_binary_operator<'>='>(lhs,rhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
-        if(method=get_binary_operator<'<='>(rhs,lhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'<'>(lhs,rhs,params))) return method->call(params);
+        if((method=get_binary_operator<'>'>(rhs,lhs,params))) return method->call(params);
+        if((method=get_binary_operator<'>='>(lhs,rhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'<='>(rhs,lhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
 
         throw operator_error('<',lhs,rhs);
     }
@@ -164,10 +164,10 @@ struct binary_operator_invoker<'<='>
     static valueP invoke(valueP const& lhs,valueP const& rhs) {
         valueP method;
         value::Params params(2);
-        if(method=get_binary_operator<'<='>(lhs,rhs,params)) return method->call(params);
-        if(method=get_binary_operator<'>='>(rhs,lhs,params)) return method->call(params);
-        if(method=get_binary_operator<'>'>(lhs,rhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
-        if(method=get_binary_operator<'<'>(rhs,lhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'<='>(lhs,rhs,params))) return method->call(params);
+        if((method=get_binary_operator<'>='>(rhs,lhs,params))) return method->call(params);
+        if((method=get_binary_operator<'>'>(lhs,rhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'<'>(rhs,lhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
 
         throw operator_error('<=',lhs,rhs);
     }
@@ -179,10 +179,10 @@ struct binary_operator_invoker<'>='>
     static valueP invoke(valueP const& lhs,valueP const& rhs) {
         valueP method;
         value::Params params(2);
-        if(method=get_binary_operator<'>='>(lhs,rhs,params)) return method->call(params);
-        if(method=get_binary_operator<'<='>(rhs,lhs,params)) return method->call(params);
-        if(method=get_binary_operator<'<'>(lhs,rhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
-        if(method=get_binary_operator<'>'>(rhs,lhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'>='>(lhs,rhs,params))) return method->call(params);
+        if((method=get_binary_operator<'<='>(rhs,lhs,params))) return method->call(params);
+        if((method=get_binary_operator<'<'>(lhs,rhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'>'>(rhs,lhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
 
         throw operator_error('>=',lhs,rhs);
     }
@@ -194,10 +194,10 @@ struct binary_operator_invoker<'=='>
     static valueP invoke(valueP const& lhs,valueP const& rhs) {
         valueP method;
         value::Params params(2);
-        if(method=get_binary_operator<'=='>(lhs,rhs,params)) return method->call(params);
-        if(method=get_binary_operator<'=='>(rhs,lhs,params)) return method->call(params);
-        if(method=get_binary_operator<'!='>(lhs,rhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
-        if(method=get_binary_operator<'!='>(rhs,lhs,params)) return wrap(!unwrap<bool>(method->call(params))(),rhs->get_context());
+        if((method=get_binary_operator<'=='>(lhs,rhs,params))) return method->call(params);
+        if((method=get_binary_operator<'=='>(rhs,lhs,params))) return method->call(params);
+        if((method=get_binary_operator<'!='>(lhs,rhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'!='>(rhs,lhs,params))) return wrap(!unwrap<bool>(method->call(params))(),rhs->get_context());
 
         throw operator_error('==',lhs,rhs);
     }
@@ -209,10 +209,10 @@ struct binary_operator_invoker<'!='>
     static valueP invoke(valueP const& lhs,valueP const& rhs) {
         valueP method;
         value::Params params(2);
-        if(method=get_binary_operator<'!='>(lhs,rhs,params)) return method->call(params);
-        if(method=get_binary_operator<'!='>(rhs,lhs,params)) return method->call(params);
-        if(method=get_binary_operator<'=='>(lhs,rhs,params)) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
-        if(method=get_binary_operator<'=='>(rhs,lhs,params)) return wrap(!unwrap<bool>(method->call(params))(),rhs->get_context());
+        if((method=get_binary_operator<'!='>(lhs,rhs,params))) return method->call(params);
+        if((method=get_binary_operator<'!='>(rhs,lhs,params))) return method->call(params);
+        if((method=get_binary_operator<'=='>(lhs,rhs,params))) return wrap(!unwrap<bool>(method->call(params))(),lhs->get_context());
+        if((method=get_binary_operator<'=='>(rhs,lhs,params))) return wrap(!unwrap<bool>(method->call(params))(),rhs->get_context());
 
         throw operator_error('!=',lhs,rhs);
     }

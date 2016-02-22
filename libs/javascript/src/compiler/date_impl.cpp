@@ -8,6 +8,8 @@
 #if defined(BOOST_MSVC)
 
 #include <windows.h>
+#include <WTypes.h>
+#include <OleAuto.h>
 #pragma comment(lib,"oleaut32.lib")
 
 const double msPerDay=86400000.;

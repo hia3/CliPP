@@ -10,11 +10,12 @@
 using namespace boost::clipp;
 using namespace boost::javascript;
 
-void main() 
+int main() 
 {
     //Create a javascript parser
     javascript_parser parser;
     context* c=parser.get_context();
+    (void)c;
 
     //Parse a file
     double a=3.14;

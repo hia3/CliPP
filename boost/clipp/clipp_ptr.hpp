@@ -61,7 +61,7 @@ public:
     template<typename... A>
     clipp_ptr operator()(A && ... a)
     {
-        Params params{wrap(a, get()->get_context())...};
+        Params params{wrap(a, this->get()->get_context())...};
         return this->get()->call(params);
     }
 

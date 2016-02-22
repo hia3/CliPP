@@ -58,7 +58,7 @@ struct address_of_wrapper : redecorate_wrapper_base<Wrapper,T>
     typedef typename wrapper<T>::input_type input_type;
     address_of_wrapper(Wrapper* w) : redecorate_wrapper_base<Wrapper,T>(w) {}
     valueP operator()(input_type input,context* c) {
-        return other_wrapper()(&input,c);
+        return this->other_wrapper()(&input,c);
     }
 };
 
@@ -68,7 +68,7 @@ struct dereference_wrapper : redecorate_wrapper_base<Wrapper,T>
     typedef typename wrapper<T>::input_type input_type;
     dereference_wrapper(Wrapper* w) : redecorate_wrapper_base<Wrapper,T>(w) {}
     valueP operator()(input_type input,context* c) {
-        return other_wrapper()(*input,c);
+        return this->other_wrapper()(*input,c);
     }
 };
 
@@ -78,7 +78,7 @@ struct redecorate_wrapper : redecorate_wrapper_base<Wrapper,T>
     typedef typename wrapper<T>::input_type input_type;
     explicit redecorate_wrapper(Wrapper* w) : redecorate_wrapper_base<Wrapper,T>(w) {}
     valueP operator()(input_type input,context* c) {
-        return other_wrapper()(input,c);
+        return this->other_wrapper()(input,c);
     }
 };
 

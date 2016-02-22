@@ -13,10 +13,6 @@ namespace boost { namespace spirit { namespace classic {
 
     namespace impl
     {
-       inline void breaker2()
-       {
-          int a=0;
-       }
         template <typename RT, typename ST, typename ScannerT, typename BaseT>
         inline RT
         literal_parser_parse(
@@ -30,7 +26,7 @@ namespace boost { namespace spirit { namespace classic {
                 BOOST_DEDUCED_TYPENAME ScannerT::match_policy_t,
                 BOOST_DEDUCED_TYPENAME ScannerT::action_policy_t
             > policies_t;
-            breaker2();
+
             typedef typename ScannerT::iterator_t iterator_t;
             iterator_t save=scan.first;
             if(!scan.at_end()) {

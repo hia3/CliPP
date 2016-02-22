@@ -23,7 +23,7 @@ public:
 
     static_property_read<mpl::list<EnumT,EnumT,detail::free_data_tag,detail::cv_unqualified> >&
     value(const char* name,EnumT var) {
-        return define_member(name,var,boost::type<static_property_read<mpl::list<EnumT,EnumT,detail::free_data_tag,detail::cv_unqualified> > >());
+        return this->define_member(name,var,boost::type<static_property_read<mpl::list<EnumT,EnumT,detail::free_data_tag,detail::cv_unqualified> > >());
     }
 
     static_property_read<mpl::list<EnumT,EnumT,detail::free_data_tag,detail::cv_unqualified> >&

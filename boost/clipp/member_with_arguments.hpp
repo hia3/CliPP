@@ -52,14 +52,14 @@ struct member_with_arguments : public member_base<DerivedT>
             }
         );
 
-        return derived();
+        return this->derived();
     }
 
     //Return a formatted argument list
     std::string format_argument_list()
     {
         std::string format;
-        for_each(_a, [&format, c = get_context()](auto n, auto & e) { format += (n.value ? ", " : "") + e.format(c); });
+        for_each(_a, [&format, c = this->get_context()](auto n, auto & e) { format += (n.value ? ", " : "") + e.format(c); });
         return format;
     }
 
@@ -67,7 +67,7 @@ struct member_with_arguments : public member_base<DerivedT>
     valueP get_default_value(size_t index)
     {
         valueP result;
-        for_each(_a, [&result, index, c = get_context()](auto n, auto & e) { if (index == n.value) { result = e.get_default_value(c); }; });
+        for_each(_a, [&result, index, c = this->get_context()](auto n, auto & e) { if (index == n.value) { result = e.get_default_value(c); }; });
         return result;
     }
 
@@ -78,7 +78,7 @@ private:
     {
         return generator.execute
         (
-            get_context(),
+            this->get_context(),
             detail::return_type_wrapper<Signature>(),
             detail::data_type<Signature>(),
             detail::cv_type<Signature>(),

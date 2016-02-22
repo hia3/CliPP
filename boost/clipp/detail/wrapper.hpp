@@ -57,15 +57,15 @@ struct wrapper_base_selector<direct_,cv_unqualified>
             case decoration::direct:
                 return this;
             case decoration::const_direct:
-                return new redecorate_wrapper<wrapper_type,from_type const>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type const>(&this->derived());
             case decoration::reference:
-                return new redecorate_wrapper<wrapper_type,from_type&>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type&>(&this->derived());
             case decoration::const_reference:
-                return new redecorate_wrapper<wrapper_type,from_type const&>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type const&>(&this->derived());
             case decoration::pointer:
-                return new dereference_wrapper<wrapper_type,from_type*>(&derived());
+                return new dereference_wrapper<wrapper_type,from_type*>(&this->derived());
             case decoration::const_pointer:
-                return new dereference_wrapper<wrapper_type,from_type const*>(&derived());
+                return new dereference_wrapper<wrapper_type,from_type const*>(&this->derived());
             default:
                 return nullptr;
             }
@@ -83,17 +83,17 @@ struct wrapper_base_selector<direct_,const_>
             typedef typename wrapper_type::from_type  from_type;
             switch(d) {
             case decoration::direct:
-                return new redecorate_wrapper<wrapper_type,from_type>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type>(&this->derived());
             case decoration::const_direct:
                 return this;
             case decoration::reference:
-                return new redecorate_wrapper<wrapper_type,from_type&>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type&>(&this->derived());
             case decoration::const_reference:
-                return new redecorate_wrapper<wrapper_type,from_type const&>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type const&>(&this->derived());
             case decoration::pointer:
-                return new dereference_wrapper<wrapper_type,from_type*>(&derived());
+                return new dereference_wrapper<wrapper_type,from_type*>(&this->derived());
             case decoration::const_pointer:
-                return new dereference_wrapper<wrapper_type,from_type const*>(&derived());
+                return new dereference_wrapper<wrapper_type,from_type const*>(&this->derived());
             default:
                 return nullptr;
             }
@@ -114,7 +114,7 @@ struct wrapper_base_selector<pointer_,cv_unqualified>
             case decoration::pointer:
                 return this;
             case decoration::reference:
-                return new address_of_wrapper<wrapper_type,from_type&>(&derived());
+                return new address_of_wrapper<wrapper_type,from_type&>(&this->derived());
             default:
                 return nullptr;
             }
@@ -132,13 +132,13 @@ struct wrapper_base_selector<pointer_,const_>
             typedef typename wrapper_type::from_type  from_type;
             switch(d) {
             case decoration::pointer:
-                return new redecorate_wrapper<wrapper_type,from_type*>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type*>(&this->derived());
             case decoration::const_pointer:
                 return this;
             case decoration::reference:
-                return new address_of_wrapper<wrapper_type,from_type&>(&derived());
+                return new address_of_wrapper<wrapper_type,from_type&>(&this->derived());
             case decoration::const_reference:
-                return new address_of_wrapper<wrapper_type,from_type const&>(&derived());                
+                return new address_of_wrapper<wrapper_type,from_type const&>(&this->derived());
             default:
                 return nullptr;
             }
@@ -156,7 +156,7 @@ struct wrapper_base_selector<reference_,cv_unqualified>
             typedef typename wrapper_type::from_type  from_type;
             switch(d) {
             case d_pointer:
-                return new dereference_wrapper<wrapper_type,from_type*>(&derived());
+                return new dereference_wrapper<wrapper_type,from_type*>(&this->derived());
             case d_reference:
                 return this;
             default:
@@ -176,15 +176,15 @@ struct wrapper_base_selector<reference_,const_>
             typedef typename wrapper_type::from_type  from_type;
             switch(d) {
 /*            case decoration::direct:
-                return new redecorate_wrapper<wrapper_type,from_type>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type>(&this->derived());
             case decoration::const_direct:
-                return new redecorate_wrapper<wrapper_type,from_type const>(&derived());*/
+                return new redecorate_wrapper<wrapper_type,from_type const>(&this->derived());*/
             case decoration::pointer:
-                return new dereference_wrapper<wrapper_type,from_type*>(&derived());
+                return new dereference_wrapper<wrapper_type,from_type*>(&this->derived());
             case decoration::const_pointer:
-                return new dereference_wrapper<wrapper_type,from_type const*>(&derived());
+                return new dereference_wrapper<wrapper_type,from_type const*>(&this->derived());
             case decoration::reference:
-                return new redecorate_wrapper<wrapper_type,from_type&>(&derived());
+                return new redecorate_wrapper<wrapper_type,from_type&>(&this->derived());
             case decoration::const_reference:
                 return this;            
             default:

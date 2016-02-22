@@ -24,7 +24,7 @@ struct register_types {
         Args && ...
     ) const
     {
-        register_all(c, BOOST_CLIPP_UNWRAP_TYPE(R), BOOST_CLIPP_UNWRAP_TYPE(Args::result_type)...);
+        register_all(c, BOOST_CLIPP_UNWRAP_TYPE(R), BOOST_CLIPP_UNWRAP_TYPE(typename Args::result_type)...);
         return true;
     }
     //Void traits
@@ -38,7 +38,7 @@ struct register_types {
         Args && ...
     ) const
     {
-        register_all(c, BOOST_CLIPP_UNWRAP_TYPE(Args::result_type)...);
+        register_all(c, BOOST_CLIPP_UNWRAP_TYPE(typename Args::result_type)...);
         return true;
     }
 private:

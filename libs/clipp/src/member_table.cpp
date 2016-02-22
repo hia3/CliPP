@@ -19,16 +19,16 @@ class member_property_base;
 }}//namespace boost::clipp
 
 member_table::member_table(const type_detail& info,const std::string& name)
-:   info_(info)
+:   base_(nullptr)
+,   info_(info)
 ,   name_(name)
-,   base_(nullptr)
 {
 
 }
 
 member_table::member_table(const type_detail& info)
-:   info_(info)
-,   base_(nullptr)
+:   base_(nullptr)
+,   info_(info)
 {
 
 }

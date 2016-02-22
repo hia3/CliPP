@@ -180,7 +180,7 @@ std::string number::toString(int radix) const
         }
     }
     std::string number;
-    unsigned long generic_number=fabs(value_);
+    auto generic_number=static_cast<unsigned long>(fabs(value_));
     if(generic_number==0) return boost::lexical_cast<std::string>(0);
     while(generic_number!=0) {
         number=get_digit(generic_number%radix)+number;

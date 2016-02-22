@@ -251,7 +251,7 @@ struct unwrap_type<T const&>
 };
 
 #define BOOST_CLIPP_UNWRAP_TYPE(T) \
-boost::clipp::detail::unwrap_type<T>::traits()
+typename boost::clipp::detail::unwrap_type<T>::traits()
 
 template<typename indirection_tagT,typename cv_tagT>
 struct wrap_decoration {
