@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="clang - debug|Win32">
+      <Configuration>clang - debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="clang - debug|x64">
+      <Configuration>clang - debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="clang - release|Win32">
+      <Configuration>clang - release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="clang - release|x64">
+      <Configuration>clang - release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="vc - debug|Win32">
+      <Configuration>vc - debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="vc - release|Win32">
+      <Configuration>vc - release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="vc - debug|x64">
+      <Configuration>vc - debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="vc - release|x64">
+      <Configuration>vc - release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{72E4B323-69ED-4F74-A668-AC89C40DF78D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>boost_clipp</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='vc - debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>LLVM-vs2014</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='vc - release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>LLVM-vs2014</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='vc - debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>LLVM-vs2014</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='vc - release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>LLVM-vs2014</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='vc - debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='vc - release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='vc - debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='vc - release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='vc - debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='vc - debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='vc - release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='vc - release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\boost\clipp\argument.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\arguments.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\argument_lists.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\arithmetic_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\back_reference.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\class.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\class_builder.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\class_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\clipp_ptr.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\clipp_stream.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\config.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\container_base.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\container_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\context.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\decoration.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\define_constructor.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\define_converter.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\define_free_members.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\define_function.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\define_operator.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\define_read.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\define_write.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\argument_validator.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\call_generator.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\constructor_generator.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\converter.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\converter_definer.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\cv_category.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\decorated_converter.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\decorated_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\indirection_category.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\list.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\make_value_type.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\not_specified.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\operators.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\operators_base.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\operator_id.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\operator_invoker.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\pre_wrap_value.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\read_generator.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\register_type.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\register_types.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\signature.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\signature_extracter.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\tuple.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\unwrap_type.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\detail\write_generator.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\enum.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\enum_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\error_messages.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\invalid_conversion.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\is_check_helper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\is_container.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\is_function_pointer.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\is_valarray.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_base.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_constructor.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_function.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_overloader.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_property.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_property_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_table.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_with_arguments.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\member_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\object.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\other.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\policy_tag.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\ref_base.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\scope.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\self.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\static_with_arguments.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\type_id.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\unwrap.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\value.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\value_iterator.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\value_wrapper.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\wrap.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\clipp\wrap_parent.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\boost\clipp\container_wrapper.ipp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\clipp\src\class.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\container_wrapper.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\context.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\decorated_wrapper.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\error_messages.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\from_value.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\member.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\member_constructor.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\member_function.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\member_overloader.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\member_property.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\member_property_wrapper.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\member_table.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\member_wrapper.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\object.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\scope.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\self.cpp" />
+    <ClCompile Include="..\..\..\..\clipp\src\type_id.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='clang - release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='vc - debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='clang - debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='vc - release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='clang - release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='vc - debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='clang - debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='vc - release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\clipp\src\value.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

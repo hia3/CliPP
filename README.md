@@ -6,8 +6,6 @@ The CliPP package also contains a complete Javascript Parser written using the S
 
 A lot of the interface design, and many template-solutions inherits from the design in boost::python.
 
-CliPP as a whole relies heavily on the Boost 1.32 library.
-
 Originally developed by Peder Holt.
 
 This is fork from http://clipp.sourceforge.net/

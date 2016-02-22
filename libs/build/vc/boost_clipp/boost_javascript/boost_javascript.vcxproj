@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="clang - debug|Win32">
+      <Configuration>clang - debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="clang - debug|x64">
+      <Configuration>clang - debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="clang - release|Win32">
+      <Configuration>clang - release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="clang - release|x64">
+      <Configuration>clang - release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="vc - debug|Win32">
+      <Configuration>vc - debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="vc - release|Win32">
+      <Configuration>vc - release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="vc - debug|x64">
+      <Configuration>vc - debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="vc - release|x64">
+      <Configuration>vc - release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{013C4B62-6542-45DC-9A55-4B7F8FBC430A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>boost_javascript</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='vc - debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>LLVM-vs2014</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='vc - release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>LLVM-vs2014</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='vc - debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>LLVM-vs2014</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='vc - release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>LLVM-vs2014</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='vc - debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='vc - release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='vc - debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='vc - release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\nl\nl.props" />
+    <Import Project="..\..\..\..\..\common.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='vc - debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='vc - debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='clang - debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='vc - release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='vc - release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='clang - release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\boost\javascript\array.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\boolean.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\callback_handler.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\complex.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\config.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\date.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\date_impl.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\error_handler.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\expression_types.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\global.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\javascript_grammar.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\javascript_parser.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\js_function.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\js_object.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\js_string.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\literal_directive.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\math.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\message_handler.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\no_eol_directive.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\null.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\number.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\parser_position.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\parse_guard.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\precedence.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\primitive.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\reference.hpp" />
+    <ClInclude Include="..\..\..\..\..\boost\javascript\undefined.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\javascript\src\array.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\boolean.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\callback_handler.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='clang - release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='vc - debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='clang - debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='vc - release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='clang - release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='vc - debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='clang - debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='vc - release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\javascript\src\compiler\date_impl.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\complex.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\date.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\deterministic_parser.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\global.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\javascript_parser.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\js_function.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\js_function_init.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\js_object.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\js_string.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\math.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\null.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\number.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_expressions.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar1.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar2.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar3.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar4.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar5.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar6.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar7.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar8.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_grammar9.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_literals.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_main.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_position.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_statements.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\parser_symbols.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\primitive.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\reference.cpp" />
+    <ClCompile Include="..\..\..\..\javascript\src\undefined.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\boost_clipp\boost_clipp.vcxproj">
+      <Project>{72e4b323-69ed-4f74-a668-ac89c40df78d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

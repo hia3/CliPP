@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <CliPPRoot>$(MSBuildThisFileDirectory)</CliPPRoot>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <OutDir>$(CliPPRoot)out\$(SolutionName)\$(Configuration)\$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(CliPPRoot)out\$(SolutionName)\$(Configuration)_tmp\$(Platform)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(CliPPRoot);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>off_BOOST_SPIRIT_DEBUG;off_BOOST_SPIRIT_DEBUG_FLAGS=0xFFFB;BOOST_USE_WINFIBERS;WIN32_LEAN_AND_MEAN;_SCL_SECURE_NO_WARNINGS;_ATL_ATTRIBUTES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level4</WarningLevel>
+      <AdditionalOptions Condition="'$(PlatformToolset)' == 'LLVM-vs2014'">-Wno-multichar %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary Condition="'$(UseDebugLibraries)'=='true'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(UseDebugLibraries)'=='false'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="CliPPRoot">
+      <Value>$(CliPPRoot)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

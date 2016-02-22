@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\main.cpp">
+    <ClCompile Include="..\..\..\..\chakra_tests\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
